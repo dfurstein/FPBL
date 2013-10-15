@@ -1,17 +1,29 @@
 <header class="navbar navbar-fixed-top">
 	<div class="container">
 	    <div class="row-fluid">
-	        <div class="span3"> <a href="http://www.fp-baseball.com">
-	          <img src="http://www.fp-baseball.com/logo.png" width="200" alt="Favorite Pastime Baseball League Logo" border="0" />
-	        </a>
-
+	        <div class="span3"> 
+	        	<a href="http://www.fp-baseball.com">
+	          		<img src="http://www.fp-baseball.com/logo.png" width="200" alt="Favorite Pastime Baseball League Logo" border="0" />
+				</a>
 	        </div>
 	        <div class="span9">
 	            <div class="navbar">
 	                <div class="navbar-inner">
 	                    <div class="container">
 	                        <ul class="nav">
-	                            <li class="active"><a href="#">Teams</a>
+	                            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams<b class="caret"></b></a>
+	                            	<ul class="dropdown-menu">
+
+	                            		<% teams = []
+
+	                            			Season.where("year = 2013").find_each do |franchise| 
+	                            				teams.push(franchise.team.location + " " + franchise.team.nickname) 
+	                            			end
+
+	                            			teams.sort.each do |team| %>
+	                            				<li><a href="#"><%= team %></a></li>
+	                            				<% end %>
+	                            	</ul>
 	                            </li>
 	                            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transactions<b class="caret"></b></a>
 
