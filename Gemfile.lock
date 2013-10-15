@@ -29,7 +29,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
-    bootstrap-sass (2.3.2.1)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.0.4)
     coffee-rails (3.2.2)
@@ -40,7 +40,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     erubis (2.7.0)
-    execjs (2.0.0)
+    execjs (2.0.1)
     hike (1.2.3)
     i18n (0.6.5)
     journey (1.0.4)
@@ -52,8 +52,8 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mime-types (1.24)
-    multi_json (1.7.9)
+    mime-types (1.25)
+    multi_json (1.8.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -96,7 +96,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
-    uglifier (2.1.2)
+    uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
 
