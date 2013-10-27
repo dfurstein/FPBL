@@ -1,57 +1,55 @@
-<header class="navbar navbar-fixed-top">
-	<div class="container">
-	    <div class="row-fluid">
-	        <div class="span3"> 
-	        	<a href="http://www.fp-baseball.com">
-	          		<img src="http://www.fp-baseball.com/logo.png" width="200" alt="Favorite Pastime Baseball League Logo" border="0" />
-				</a>
-	        </div>
-	        <div class="span9">
-	            <div class="navbar">
-	                <div class="navbar-inner">
-	                    <div class="container">
-	                        <ul class="nav">
-	                            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams<b class="caret"></b></a>
-	                            	<ul class="dropdown-menu">
+<header class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="#">FPBL</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+            
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams<b class="caret"></b></a>
+            	<ul class="dropdown-menu">
+            		<% Season.get_current_teams.each { |team| %>
+					<li><!-- <a href="#"><%= team.full_name %></a> --> <%= link_to team.full_name, team_path(id: team.get_current_franchise_id) %> </li>
+            		<% } %>
+            	</ul>
+            </li>
+            
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transactions<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Log</a>
+                    </li>
+                    <li><a href="#">Free Agents</a>
+                    </li>
+                    <li><a href="#">Rookie Draft</a>
+                    </li>
+                    <li><a href="#">Draft Room</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li><a href="#">League Data</a>
+            </li>
+            
+            <li><a href="#">Message Boards</a>
+            </li>
+            
+            <li><a href="#">About</a>
+            </li>
+            
+            <li><a href="#">Season Disk</a>
+            </li>
+        </ul>
 
-	                            		<% teams = []
-
-	                            			Season.where("year = 2013").find_each do |franchise| 
-	                            				teams.push(franchise.team.location + " " + franchise.team.nickname) 
-	                            			end
-
-	                            			teams.sort.each do |team| %>
-	                            				<li><a href="#"><%= team %></a></li>
-	                            				<% end %>
-	                            	</ul>
-	                            </li>
-	                            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transactions<b class="caret"></b></a>
-
-	                                <ul class="dropdown-menu">
-	                                    <li><a href="#">Log</a>
-	                                    </li>
-	                                    <li><a href="#">Free Agents</a>
-	                                    </li>
-	                                    <li><a href="#">Rookie Draft</a>
-	                                    </li>
-	                                    <li><a href="#">Draft Room</a>
-	                                    </li>
-	                                </ul>
-
-	                            </li>
-	                            <li><a href="#">League Data</a>
-	                            </li>
-	                            <li><a href="#">Message Boards</a>
-	                            </li>
-	                            <li><a href="#">About</a>
-	                            </li>
-	                            <li><a href="#">Season Disk</a>
-	                            </li>
-	                        </ul>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
+        <!-- <form class="navbar-form pull-right">
+          <input class="span2" type="text" placeholder="Email">
+          <input class="span2" type="password" placeholder="Password">
+          <button type="submit" class="btn">Sign in</button>
+        </form> -->
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 </header>

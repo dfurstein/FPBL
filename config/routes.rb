@@ -1,5 +1,8 @@
 FPBL::Application.routes.draw do
   get "fpbl_pages/index"
+
+  match '/team/:id' => 'fpbl_pages#team', as: 'team'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
