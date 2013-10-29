@@ -1,11 +1,15 @@
+require 'composite_primary_keys'
+
 class Season < ActiveRecord::Base
+  self.primary_keys = :year, :franchise_id
+
   attr_accessible :franchise_id, :owner_id, :team_id, :year
 
   belongs_to :team
   belongs_to :owner
 
   def self.get_current_team(franchise_id)
-    self.find_by_year_and_franchise_id(self.last.year, franchise_id).team
+    self.find(self.last.year, franchise_id).team
   end
 
   def self.get_current_teams
