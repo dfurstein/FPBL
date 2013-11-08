@@ -7,7 +7,7 @@ class Team < ActiveRecord::Base
     self.location + " " + self.nickname
   end
 
-  def get_franchise_id
+  def franchise_id
     self.seasons.last.franchise_id
   end
 

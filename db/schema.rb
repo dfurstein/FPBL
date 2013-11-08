@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027220646) do
+ActiveRecord::Schema.define(:version => 20131029191158) do
 
   create_table "owners", :force => true do |t|
     t.string   "first_name"
@@ -21,18 +21,21 @@ ActiveRecord::Schema.define(:version => 20131027220646) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "records", :force => true do |t|
-    t.integer  "season_id"
+  create_table "performances", :force => true do |t|
+    t.integer  "year"
+    t.integer  "franchise_id"
     t.string   "league"
     t.string   "division"
     t.integer  "wins"
     t.integer  "losses"
     t.integer  "streak"
     t.string   "playoff_berth"
-    t.integer  "playoff_depth"
+    t.string   "playoff_depth"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "performances", ["year", "franchise_id"], :name => "index_performances_on_year_and_franchise_id", :unique => true
 
   create_table "seasons", :force => true do |t|
     t.integer  "year"
@@ -42,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20131027220646) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  add_index "seasons", ["year", "franchise_id"], :name => "index_seasons_on_year_and_franchise_id", :unique => true
 
   create_table "teams", :force => true do |t|
     t.string   "location"

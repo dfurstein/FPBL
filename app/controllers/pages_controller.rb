@@ -1,5 +1,6 @@
-class FpblPagesController < ApplicationController
+class PagesController < ApplicationController
   def index
+    @year = 2003
   end
 
   def team
