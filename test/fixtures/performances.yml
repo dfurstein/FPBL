@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  year: 
+  franchise_id: 
+  league: 
+  division: 
+  wins: 
+  losses: 
+  streak: 
+  playoff_berth: 
+  playoff_depth: MyString
+
+two:
+  year: 
+  franchise_id: 
+  league: 
+  division: 
+  wins: 
+  losses: 
+  streak: 
+  playoff_berth: 
+  playoff_depth: MyString

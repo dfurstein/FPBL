@@ -5,6 +5,7 @@ desc "Import initial data into database from CSV file"
 teams = "db/init/teams.csv"
 owners = "db/init/owners.csv"
 seasons = "db/init/seasons.csv"
+performances = "db/init/performance.csv"
 
 namespace :import do
   task :teams => :environment do
@@ -22,6 +23,12 @@ namespace :import do
   task :seasons => :environment do
     CSV.foreach(seasons, :headers => true) do |row|
       Season.create!(row.to_hash)
+    end
+  end
+
+  task :performances => :environment do
+    CSV.foreach(performances, :headers => true) do |row|
+      Performance.create!(row.to_hash)
     end
   end
 end
