@@ -2,6 +2,7 @@ FPBL::Application.routes.draw do
   get 'pages/index'
 
   match '/team/:id' => 'pages#team', as: 'team'
+  match '/standings/(:year)' => 'pages#standings', as: 'standings'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,9 @@
+<div class='pagination pagination-small pagination-centered'>
+	<ul>
+		<% @years.each { |year| %>
+			<% if @year == year.to_s %><li class='active'><% else %><li><% end %><%= link_to year, standings_path(year: year) %></li>
+		<% } %>
+	</ul>
+</div>
+
+<%= render 'shared/standings', locals: {year: @year} %>

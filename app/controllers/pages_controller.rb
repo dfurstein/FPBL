@@ -1,9 +1,14 @@
 class PagesController < ApplicationController
   def index
-    @year = 2003
+    @year = Season.last.year
   end
 
   def team
-    @team = Season.get_current_team(params[:id])
+    @team = Season.current_team(params[:id])
+  end
+
+  def standings
+    @year = params[:year].nil? ? Season.last.year.to_s : params[:year]
+    @years = Season.all.collect { |season| season.year }.uniq.reverse    
   end
 end
