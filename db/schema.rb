@@ -11,24 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131029191158) do
+ActiveRecord::Schema.define(:version => 20131113043058) do
+
+  create_table "contracts", :force => true do |t|
+    t.integer  "player_id",                                  :null => false
+    t.integer  "franchise_id",                               :null => false
+    t.integer  "year",                                       :null => false
+    t.decimal  "salary",       :precision => 3, :scale => 1, :null => false
+    t.boolean  "release",                                    :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
 
   create_table "owners", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name", :null => false
+    t.string   "last_name",  :null => false
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "performances", :force => true do |t|
-    t.integer  "year"
-    t.integer  "franchise_id"
-    t.string   "league"
-    t.string   "division"
-    t.integer  "wins"
-    t.integer  "losses"
-    t.integer  "streak"
+    t.integer  "year",          :null => false
+    t.integer  "franchise_id",  :null => false
+    t.string   "league",        :null => false
+    t.string   "division",      :null => false
+    t.integer  "wins",          :null => false
+    t.integer  "losses",        :null => false
+    t.integer  "streak",        :null => false
     t.string   "playoff_berth"
     t.string   "playoff_depth"
     t.datetime "created_at",    :null => false
@@ -37,11 +47,20 @@ ActiveRecord::Schema.define(:version => 20131029191158) do
 
   add_index "performances", ["year", "franchise_id"], :name => "index_performances_on_year_and_franchise_id", :unique => true
 
+  create_table "players", :force => true do |t|
+    t.integer  "dmb_id",     :null => false
+    t.string   "first_name", :null => false
+    t.string   "last_name",  :null => false
+    t.string   "position",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "seasons", :force => true do |t|
-    t.integer  "year"
-    t.integer  "franchise_id"
-    t.integer  "team_id"
-    t.integer  "owner_id"
+    t.integer  "year",         :null => false
+    t.integer  "franchise_id", :null => false
+    t.integer  "team_id",      :null => false
+    t.integer  "owner_id",     :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -49,9 +68,9 @@ ActiveRecord::Schema.define(:version => 20131029191158) do
   add_index "seasons", ["year", "franchise_id"], :name => "index_seasons_on_year_and_franchise_id", :unique => true
 
   create_table "teams", :force => true do |t|
-    t.string   "location"
-    t.string   "nickname"
-    t.string   "abbreviation"
+    t.string   "location",     :null => false
+    t.string   "nickname",     :null => false
+    t.string   "abbreviation", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  player_id: 1
+  franchise_id: 1
+  year: 1
+  salary: 
+  salary: 
+  release: false
+
+two:
+  player_id: 1
+  franchise_id: 1
+  year: 1
+  salary: 
+  salary: 
+  release: false
