@@ -4,7 +4,7 @@ gem 'rails', '3.2.3'
 gem 'bootstrap-sass'
 
 gem 'composite_primary_keys', '~> 5.0.8'
-#gem 'simple_form'
+gem 'simple_form'
 
 gem 'sqlite3'
 #gem 'mysql2'
