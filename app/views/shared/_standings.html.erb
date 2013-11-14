@@ -1,30 +1,41 @@
-<table class='table table-bordered table-condensed'>
+ <!-- Default panel contents -->
 <% standings(@year).each_with_index { |team, index| %>
 	<% if index % 12 == 0 %>
-		<tr>
-			<th colspan='6'><%= team.seasons.find_by_year(@year).performance.league %> League</th>
-		</tr>
+		<% if index / 12 > 0 %>
+			</table>
+			</div>
+			</div>
+		<% end %>
+		<div class="panel panel-default league">
+			<div class="panel-heading"><%= team.seasons.find_by_year(@year).performance.league %> League</div>
 	<% end %>
+
 	<% if index % 4 == 0 %>
-		<tr>
-			<th colspan='6'><%= team.seasons.find_by_year(@year).performance.division %> Division</th>
-		</tr>
-		<tr>
-			<th>Team</th>
-			<th>W</th>
-			<th>L</th>
-			<th>Pct</th>
-			<th>GB</th>
-			<th>Strk</th>
-		</tr>
+		<% if index / 4 > 0 && index % 12 != 0 %>
+			</table>
+			</div>
+		<% end %>
+		<div class="panel panel-default division">
+			<div class="panel-heading"><%= team.seasons.find_by_year(@year).performance.division %> Division</div>
+			<table class='table table-bordered table-condensed'>
+				<tr>
+					<th>Team</th>
+					<th>W</th>
+					<th>L</th>
+					<th>Pct</th>
+					<th>GB</th>
+					<th>Strk</th>
+				</tr>
 	<% end %>	
-	<tr>
-		<td><%= team.full_name %></td>
-		<td><%= team.seasons.find_by_year(@year).performance.wins %></td>
-		<td><%= team.seasons.find_by_year(@year).performance.losses %></td>
-		<td><%= number_with_precision(team.seasons.find_by_year(@year).performance.win_percentage) %></td>
-		<td><%= team.seasons.find_by_year(@year).performance.games_back_division %></td>
-		<td><%= team.seasons.find_by_year(@year).performance.game_streak %></td>
-	</tr>
+				<tr>
+					<td><%= team.full_name %></td>
+					<td><%= team.seasons.find_by_year(@year).performance.wins %></td>
+					<td><%= team.seasons.find_by_year(@year).performance.losses %></td>
+					<td><%= number_with_precision(team.seasons.find_by_year(@year).performance.win_percentage) %></td>
+					<td><%= team.seasons.find_by_year(@year).performance.games_back_division %></td>
+					<td><%= team.seasons.find_by_year(@year).performance.game_streak %></td>
+				</tr>
 <% } %>
-</table>
+			</table>
+		</div>
+	</div>

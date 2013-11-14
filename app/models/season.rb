@@ -8,11 +8,11 @@ class Season < ActiveRecord::Base
   has_one :performance, :foreign_key => [:year, :franchise_id]
   has_many :contracts, :foreign_key => [:year, :franchise_id]
 
-  def current_team(franchise_id)
+  def self.current_team(franchise_id)
     self.find(self.last.year, franchise_id).team
   end
 
-  def current_teams
+  def self.current_teams
     self.where("year = #{self.last.year}").collect { 
       |franchise| franchise.team
     }.sort_by { 

@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
-gem 'bootstrap-sass'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
+#gem 'bootstrap-sass'
 
 gem 'composite_primary_keys', '~> 5.0.8'
 gem 'simple_form'
