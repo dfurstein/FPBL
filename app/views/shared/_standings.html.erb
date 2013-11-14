@@ -6,7 +6,7 @@
 			</div>
 			</div>
 		<% end %>
-		<div class="panel panel-default league">
+		<div class="panel panel-primary league">
 			<div class="panel-heading"><%= team.seasons.find_by_year(@year).performance.league %> League</div>
 	<% end %>
 
@@ -15,16 +15,16 @@
 			</table>
 			</div>
 		<% end %>
-		<div class="panel panel-default division">
+		<div class="panel panel-info division">
 			<div class="panel-heading"><%= team.seasons.find_by_year(@year).performance.division %> Division</div>
 			<table class='table table-bordered table-condensed'>
 				<tr>
-					<th>Team</th>
-					<th>W</th>
-					<th>L</th>
-					<th>Pct</th>
-					<th>GB</th>
-					<th>Strk</th>
+					<th class="col-sm-4 col-sm-offset-3">Team</th>
+					<th class="col-sm-1">W</th>
+					<th class="col-sm-1">L</th>
+					<th class="col-sm-1">Pct</th>
+					<th class="col-sm-1">GB</th>
+					<th class="col-sm-1">Strk</th>
 				</tr>
 	<% end %>	
 				<tr>
