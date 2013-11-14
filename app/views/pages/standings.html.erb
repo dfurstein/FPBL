@@ -1,5 +1,5 @@
-<div class='pagination pagination-small pagination-centered'>
-	<ul>
+<div class='text-center'>
+	<ul class='pagination pagination-sm'>
 		<% @years.each { |year| %>
 			<% if @year == year.to_s %><li class='active'><% else %><li><% end %><%= link_to year, standings_path(year: year) %></li>
 		<% } %>
