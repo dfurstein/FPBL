@@ -1,21 +1,28 @@
- <!-- Default panel contents -->
-<% standings(@year).each_with_index { |team, index| %>
+ <% standings(@year).each_with_index { |team, index| %>
+	<%# Split the league into two conferences %>
 	<% if index % 12 == 0 %>
+		<%# Close elements when you move on to the next conference %>
 		<% if index / 12 > 0 %>
 			</table>
-			</div>
-			</div>
+		</div>
+	</div>
 		<% end %>
-		<div class="panel panel-primary league">
-			<div class="panel-heading"><%= team.seasons.find_by_year(@year).performance.league %> League</div>
+		
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+				<%= team.seasons.find_by_year(@year).performance.league %> League
+			</div>
 	<% end %>
 
+	<%# Split each conference into three divisions %>
 	<% if index % 4 == 0 %>
+		<%# Close elements when you move on to a new division, but not a new conference %>
 		<% if index / 4 > 0 && index % 12 != 0 %>
 			</table>
-			</div>
+		</div>
 		<% end %>
-		<div class="panel panel-info division">
+
+		<div class="panel panel-info">
 			<div class="panel-heading"><%= team.seasons.find_by_year(@year).performance.division %> Division</div>
 			<table class='table table-bordered table-condensed'>
 				<tr>
