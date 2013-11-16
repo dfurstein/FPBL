@@ -10,12 +10,4 @@ module ApplicationHelper
     end
   end
 
-  # Returns list of teams in the order they should be displayed on the standings page for a given year
-  def standings(year)
-    Performance.includes(:season => :team).where("year = #{year}").sort_by { 
-      |performance| [performance.league, performance.division, -performance.wins] 
-    }.collect { 
-      |performance| performance.season.team 
-    }
-  end
 end

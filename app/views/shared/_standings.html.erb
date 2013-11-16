@@ -1,48 +1,30 @@
- <% standings(@year).each_with_index { |team, index| %>
-	<%# Split the league into two conferences %>
-	<% if index % 12 == 0 %>
-		<%# Close elements when you move on to the next conference %>
-		<% if index / 12 > 0 %>
-			</table>
-		</div>
-	</div>
-		<% end %>
-		
+<% Performance.leagues(@year).sort.each { |league| %>
 	<div class="panel panel-primary">
-		<div class="panel-heading">
-				<%= team.seasons.find_by_year(@year).performance.league %> League
+		<div class="panel-heading"><%= league %> League</div>
+		<% Performance.divisions_per_league(@year, league).sort.each { |division| %>
+			<div class="panel panel-info">
+				<div class="panel-heading"><%= division %> Division</div>
+				<table class='table table-bordered table-condensed'>
+					<tr>
+						<th class="col-sm-4 col-sm-offset-3">Team</th>
+						<th class="col-sm-1">W</th>
+						<th class="col-sm-1">L</th>
+						<th class="col-sm-1">Pct</th>
+						<th class="col-sm-1">GB</th>
+						<th class="col-sm-1">Strk</th>
+					</tr>
+					<% Performance.includes(:season => :team).performances_per_division(@year, league, division).sort_by { |performance| -performance.wins }.each { |performance| %>
+						<tr>
+							<td><%= performance.season.team.full_name %></td>
+							<td><%= performance.wins %></td>
+							<td><%= performance.losses %></td>
+							<td><%= performance.win_percentage %></td>
+							<td><%= performance.games_back_division %></td>
+							<td><%= performance.game_streak %></td>
+						</tr>
+					<% } %>
+				</table>
 			</div>
-	<% end %>
-
-	<%# Split each conference into three divisions %>
-	<% if index % 4 == 0 %>
-		<%# Close elements when you move on to a new division, but not a new conference %>
-		<% if index / 4 > 0 && index % 12 != 0 %>
-			</table>
-		</div>
-		<% end %>
-
-		<div class="panel panel-info">
-			<div class="panel-heading"><%= team.seasons.find_by_year(@year).performance.division %> Division</div>
-			<table class='table table-bordered table-condensed'>
-				<tr>
-					<th class="col-sm-4 col-sm-offset-3">Team</th>
-					<th class="col-sm-1">W</th>
-					<th class="col-sm-1">L</th>
-					<th class="col-sm-1">Pct</th>
-					<th class="col-sm-1">GB</th>
-					<th class="col-sm-1">Strk</th>
-				</tr>
-	<% end %>	
-				<tr>
-					<td><%= team.full_name %></td>
-					<td><%= team.seasons.find_by_year(@year).performance.wins %></td>
-					<td><%= team.seasons.find_by_year(@year).performance.losses %></td>
-					<td><%= number_with_precision(team.seasons.find_by_year(@year).performance.win_percentage) %></td>
-					<td><%= team.seasons.find_by_year(@year).performance.games_back_division %></td>
-					<td><%= team.seasons.find_by_year(@year).performance.game_streak %></td>
-				</tr>
-<% } %>
-			</table>
-		</div>
+		<% } %>
 	</div>
+<% } %>
