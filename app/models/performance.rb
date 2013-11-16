@@ -5,6 +5,18 @@ class Performance < ActiveRecord::Base
 
   belongs_to :season, :foreign_key => [:year, :franchise_id]
 
+  def self.leagues(year)
+    Performance.where("year = #{year}").uniq.pluck(:league)
+  end
+
+  def self.divisions_per_league(year, league)
+    Performance.where("year = #{year} and league = '#{league}'").uniq.pluck(:division)
+  end
+
+  def self.performances_per_division(year, league, division)
+    Performance.where("year = #{year} and league = '#{league}' and division = '#{division}'")
+  end
+
   def win_percentage
     (self.wins / (self.wins + self.losses).to_f).round(3)
   end
