@@ -19,4 +19,8 @@ class Season < ActiveRecord::Base
       |team| team.full_name
     }
   end
+
+  def self.current_owner(franchise_id)
+    self.find(self.last.year, franchise_id).owner
+  end
 end

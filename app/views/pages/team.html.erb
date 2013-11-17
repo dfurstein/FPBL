@@ -1,17 +1,21 @@
-<div class="center">
-	<h1><%= @team.full_name %></h1>
+<div class="page-header">
+  <h1><%= @team.full_name %><small>&nbsp;&nbsp;&nbsp;<%= @owner.full_name %></small></h1>
+</div>
 
-	<div class="tabbable">
-	  <ul class="nav nav-tabs">
+<div class="tabbable">
+	<ul class="nav nav-tabs">
 	    <li class="active"><a href="#pane1" data-toggle="tab">Contracts</a></li>
 	    <li><a href="#pane2" data-toggle="tab">Schedule</a></li>
 	    <li><a href="#pane3" data-toggle="tab">History</a></li>
 	    <li><a href="#pane4" data-toggle="tab">Tab 4</a></li>
-	  </ul>
-	  <div class="tab-content">
+  	</ul>
+	<div class="tab-content">
 	    <div id="pane1" class="tab-pane active">
-	      <h4>The Markup</h4>
-	      <pre>Code here ...</pre>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<%= render 'shared/contracts', locals: {year: @year, franchise_id: @franchise_id} %>
+				</div>
+			</div>
 	    </div>
 	    <div id="pane2" class="tab-pane">
 	    <h4>Pane 2 Content</h4>
@@ -23,7 +27,5 @@
 	    <div id="pane4" class="tab-pane">
 	      <h4>Pane 4 Content</h4>s
 	    </div>
-	  </div><!-- /.tab-content -->
-	</div><!-- /.tabbable -->
-
-</div>
+	</div><!-- /.tab-content -->
+</div><!-- /.tabbable -->
