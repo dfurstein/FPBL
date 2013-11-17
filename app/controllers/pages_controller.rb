@@ -4,7 +4,11 @@ class PagesController < ApplicationController
   end
 
   def team
-    @team = Season.current_team(params[:id])
+    @franchise_id = params[:id]
+    @team = Season.current_team(@franchise_id)
+    @owner = Season.current_owner(@franchise_id)
+    @year = Season.last.year
+    @positions = ['SP', 'MR', 'CL', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH']
   end
 
   def standings

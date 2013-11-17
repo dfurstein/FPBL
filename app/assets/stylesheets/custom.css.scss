@@ -4,6 +4,16 @@ body {
   padding-top: 70px; 
 }
 
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+
 /*.division {
   #padding-right:  10px;
   padding-left:   10px;
