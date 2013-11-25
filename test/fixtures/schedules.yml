@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date: 2013-11-24
+  road_team: MyString
+  road_score: 1
+  home_team: MyString
+  home_score: 1
+  extra_innings: 1
+
+two:
+  date: 2013-11-24
+  road_team: MyString
+  road_score: 1
+  home_team: MyString
+  home_score: 1
+  extra_innings: 1
