@@ -16,4 +16,9 @@ class PagesController < ApplicationController
     @year = params[:year].nil? ? Season.last.year.to_s : params[:year]
     @years = Season.all.collect { |season| season.year }.uniq.reverse    
   end
+
+  def calendar
+    @from = params[:from]
+    @to = params[:to]
+  end
 end
