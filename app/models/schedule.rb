@@ -9,7 +9,7 @@ class Schedule < ActiveRecord::Base
   end
 
   def away
-    season = Season.where("year = #{self.date.year}").includes(:team).find{ 
+    season = Season.where("year = #{self.date.year}").includes(:team).find{
       |season| season.team.abbreviation.upcase == self.away_team.upcase }
 
     season.team
