@@ -1,18 +1,14 @@
 class Schedule < ActiveRecord::Base
   attr_accessible :away_score, :away_team, :date, :extra_innings, :home_score, :home_team
 
-  def home
-    season = Season.where("year = #{self.date.year}").includes(:team).find{ 
-      |season| season.team.abbreviation.upcase == self.home_team.upcase }
+  @@teams = Hash[Season.includes(:team).collect { |season| [[season.year, season.team.abbreviation.upcase], season.team] }]
 
-    season.team
+  def home
+    @@teams[[self.date.year, self.home_team.upcase]]
   end
 
   def away
-    season = Season.where("year = #{self.date.year}").includes(:team).find{
-      |season| season.team.abbreviation.upcase == self.away_team.upcase }
-
-    season.team
+    @@teams[[self.date.year, self.away_team.upcase]]
   end
 
   #Convert milliseconds to datetime
@@ -25,4 +21,25 @@ class Schedule < ActiveRecord::Base
     (date.to_time.to_f * 1000).to_i
   end
 
+  def self.json_for_games(from, to)
+    games = Schedule.where(:date => from..to).collect{ 
+      |game| {
+        id: game.id,
+        title: game.description,
+        url: "#",
+        class: "",
+        start: Schedule.date_to_milliseconds(game.date),
+        end: Schedule.date_to_milliseconds(game.date)
+      } 
+    }
+
+    "{\"success\": 1,\"result\":" + games.to_json + "}"
+  end
+
+  def description
+    if self.away.nil? or self.home.nil?
+      binding.pry
+    end
+    "#{self.away.full_name} @ #{self.home.full_name}"
+  end
 end
