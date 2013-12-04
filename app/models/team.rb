@@ -10,5 +10,4 @@ class Team < ActiveRecord::Base
   def franchise_id
     self.seasons.last.franchise_id
   end
-
 end
