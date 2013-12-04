@@ -18,11 +18,10 @@ class PagesController < ApplicationController
   end
 
   def calendar
-    from = params[:from].to_i
-    to = params[:to].to_i
+    month = params[:month].nil? ? Date.today.month : params[:month].to_i
+    year = params[:year].nil? ? Date.today.year : params[:year].to_i
 
-    if from > 0 and to > 0
-      render json: Schedule.json_for_games(Schedule.milliseconds_to_date(from), Schedule.milliseconds_to_date(to))
-    end
+    @date = Date.new(year, month, 1)
+    @games = Schedule.games(@date)
   end
 end

@@ -3,7 +3,7 @@ FPBL::Application.routes.draw do
 
   match '/team/:id' => 'pages#team', as: 'team'
   match '/standings/(:year)' => 'pages#standings', as: 'standings'
-  match '/calendar/(:from)/(:to)' => 'pages#calendar', as: 'calendar'
+  match '/calendar/(:month)/(:year)' => 'pages#calendar', as: 'calendar'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
