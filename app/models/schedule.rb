@@ -16,15 +16,27 @@ class Schedule < ActiveRecord::Base
   end
 
   def long_description
-    "#{self.away.full_name} at #{self.home.full_name}"
+    if self.away_score == 0 and self.home_score == 0
+      "#{self.away.full_name} at #{self.home.full_name}"
+    else
+      "#{self.away.full_name} #{self.away_score}, #{self.home.full_name} #{self.home_score}"
+    end
   end
 
-  def short_description
-    "#{self.away.nickname} at #{self.home.nickname}"
+  def short_description   
+    if self.away_score == 0 and self.home_score == 0
+      "#{self.away.nickname} at #{self.home.nickname}"
+    else
+      "#{self.away.nickname} #{self.away_score}, #{self.home.nickname} #{self.home_score}"
+    end
   end
 
   def abbreviated_description
-    "#{self.away.abbreviation.upcase} at #{self.home.abbreviation.upcase}"
+    if self.away_score == 0 and self.home_score == 0
+      "#{self.away.abbreviation.upcase} at #{self.home.abbreviation.upcase}"
+    else
+      "#{self.away.abbreviation.upcase} #{self.away_score}, #{self.home.abbreviation.upcase} #{self.home_score}"
+    end
   end
 
 end
