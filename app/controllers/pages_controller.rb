@@ -24,4 +24,7 @@ class PagesController < ApplicationController
     @date = Date.new(year, month, 1)
     @games = Schedule.games(@date)
   end
+
+  def boxscore
+  end
 end
