@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125032028) do
+ActiveRecord::Schema.define(:version => 20131208023923) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "player_id",                                  :null => false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20131125032028) do
     t.integer  "owner_id",     :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "dmb_id"
   end
 
   add_index "seasons", ["year", "franchise_id"], :name => "index_seasons_on_year_and_franchise_id", :unique => true
@@ -86,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20131125032028) do
     t.string   "abbreviation", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "dmb_id"
   end
 
 end

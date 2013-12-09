@@ -1,0 +1,8 @@
+<% boxscore = "" %>
+<% File.open(@file).readlines.each { |line| %>
+	<% sanitized = strip_tags(line) %>
+	<% boxscore << ((sanitized == line) ? line : "") %>
+<% } %>
+<pre>
+	<%= boxscore %>
+</pre>

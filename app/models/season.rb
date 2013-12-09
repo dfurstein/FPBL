@@ -1,7 +1,7 @@
 class Season < ActiveRecord::Base
   self.primary_keys = :year, :franchise_id
 
-  attr_accessible :franchise_id, :owner_id, :team_id, :year
+  attr_accessible :franchise_id, :owner_id, :team_id, :year, :dmb_id
 
   belongs_to :team
   belongs_to :owner

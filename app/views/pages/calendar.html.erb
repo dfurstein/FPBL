@@ -43,10 +43,10 @@
 								<div class="list-group">
 									<% games_for_day.each { |game| %>
 
-										<a class="list-group-item" data-toggle="modal" href="#boxscoreModal<%= game.id %>"><%= game.abbreviated_description %></a>
+										<a class="list-group-item" data-toggle="modal" href="#boxscore<%= game.id %>"><%= game.abbreviated_description %></a>
 
 										  <!-- Modal -->
-										  <div class="modal fade" id="boxscoreModal<%= game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										  <div class="modal fade" id="boxscore<%= game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										    <div class="modal-dialog">
 										      <div class="modal-content">
 										        <div class="modal-header">
@@ -54,7 +54,8 @@
 										          <h4 class="modal-title"><%= game.long_description %></h4>
 										        </div>
 										        <div class="modal-body">
-										          <p>Boxscore Here</p>
+										          <% @file = game.dmb_file %>
+										          <p><%= render "partials/boxscore", local: {file: @file} %></p>
 										        </div>
 										        <div class="modal-footer">
 										          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
