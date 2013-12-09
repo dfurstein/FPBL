@@ -39,4 +39,8 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def dmb_file
+    "#{Dir.pwd}/public/boxscores/#{self.date.year}#{'%02d' % self.date.month}#{'%02d' % self.date.day}#{'%04d' % Season.find(self.date.year, self.home.franchise_id).dmb_id}0.php"
+  end
+
 end
