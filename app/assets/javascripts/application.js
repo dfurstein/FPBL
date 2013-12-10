@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require_tree .
 //= require twitter/bootstrap
+
+$(document).ready(
+	function() {
+
+		$("[id*='boxscore-modal']").click(
+			function() {
+				var renderPartial = "<% @game = current_game %><%=j render 'partials/boxscore', local: {game: @game} %>";
+				$(renderPartial).insertAfter(this);
+			}
+		);
+
+	}
+)
