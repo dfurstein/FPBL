@@ -15,15 +15,12 @@
 //= require_tree .
 //= require twitter/bootstrap
 
-$(document).ready(
-	function() {
+$(document).ready(function() {
+	$("[id*='boxscore-modal']").click(
+		function(event) {
+			$.get('/boxscores/' + event.target.id.substring('boxscore-modal'.length) + '.php', function(data) {
+				$(event.target).parent().find('p').html('<pre>' + $(data).text().trim() + '</pre>');
+			}, 'text');
+	});
 
-		$("[id*='boxscore-modal']").click(
-			function() {
-				var renderPartial = "<% @game = current_game %><%=j render 'partials/boxscore', local: {game: @game} %>";
-				$(renderPartial).insertAfter(this);
-			}
-		);
-
-	}
-)
+});
