@@ -31,41 +31,51 @@
 			<% else %>
 				<td>
 					<div class="panel-group" id="accordion">
-						<div class="panel panel-info" >
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="accordion" href='#collapse<%= "%02d" % day.day %>'>
-										<%= "%02d" % day.day %>
-									</a>
-								</h4>
-							</div>
-							<div id="collapse<%= "%02d" % day.day %>" class="panel-collapse collapse">
-								<div class="list-group">
-									<% games_for_day.each { |current_game| %>
-										<a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
-											<%= current_game.abbreviated_description %>
+						<% if games_for_day.length > 0 %>
+							<div class="panel  panel-info" >
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="accordion" href='#collapse<%= "%02d" % day.day %>'>
+											<%= "%02d" % day.day %>
 										</a>
-										<div class="modal fade" id="boxscore<%= current_game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-											<div class="modal-dialog">
-											  	<div class="modal-content">
-											    	<div class="modal-header">
-											      		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-											      		<h4 class="modal-title"><%= current_game.long_description %></h4>
-											    	</div>
-											    	<div class="modal-body">
-														<p>
-														</p>
-											    	</div>
-											    	<div class="modal-footer">
-											      		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-											    	</div>
-											  	</div>
+									</h4>
+								</div>
+								<div id="collapse<%= "%02d" % day.day %>" class="panel-collapse collapse">
+									<div class="list-group">
+										<% games_for_day.each { |current_game| %>
+											<a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
+												<%= current_game.abbreviated_description %>
+											</a>
+											<div class="modal fade" id="boxscore<%= current_game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="modal-dialog">
+												  	<div class="modal-content">
+												    	<div class="modal-header">
+												      		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												      		<h4 class="modal-title"><%= current_game.long_description %></h4>
+												    	</div>
+												    	<div class="modal-body">
+															<p>
+															</p>
+												    	</div>
+												    	<div class="modal-footer">
+												      		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+												    	</div>
+												  	</div>
+												</div>
 											</div>
-										</div>
-									<% } %>							
+										<% } %>							
+									</div>
 								</div>
 							</div>
-						</div>
+						<% else %>
+							<div class="panel  panel-default" >
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<%= "%02d" % day.day %>
+									</h4>
+								</div>
+							</div>
+						<% end %>
 					</div>
 				</td>
 			<% end %>
