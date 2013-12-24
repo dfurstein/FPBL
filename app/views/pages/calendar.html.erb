@@ -42,7 +42,26 @@
 							<div id="collapse<%= "%02d" % day.day %>" class="panel-collapse collapse">
 								<div class="list-group">
 									<% games_for_day.each { |current_game| %>
-										<a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.id %>"><%= current_game.abbreviated_description %></a>
+										<a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
+											<%= current_game.abbreviated_description %>
+										</a>
+										<div class="modal fade" id="boxscore<%= current_game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+											  	<div class="modal-content">
+											    	<div class="modal-header">
+											      		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											      		<h4 class="modal-title"><%= current_game.long_description %></h4>
+											    	</div>
+											    	<div class="modal-body">
+														<p>
+														</p>
+											    	</div>
+											    	<div class="modal-footer">
+											      		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+											    	</div>
+											  	</div>
+											</div>
+										</div>
 									<% } %>							
 								</div>
 							</div>

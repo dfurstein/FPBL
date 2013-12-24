@@ -15,6 +15,10 @@ class Schedule < ActiveRecord::Base
      self.where(date: date..date.end_of_month)
   end
 
+  #def self.games_json(date)
+  #  self.games(date).group_by { |h| h[:date] }.each {|_,v| v.map!{|h| {id:h.id, description:h.abbreviated_description, file:h.dmb_file }}}.to_json
+  #end
+
   def long_description
     if self.away_score == 0 and self.home_score == 0
       "#{self.away.full_name} at #{self.home.full_name}"
@@ -40,7 +44,7 @@ class Schedule < ActiveRecord::Base
   end
 
   def dmb_file
-    "#{Dir.pwd}/public/boxscores/#{self.date.year}#{'%02d' % self.date.month}#{'%02d' % self.date.day}#{'%04d' % Season.find(self.date.year, self.home.franchise_id).dmb_id}0.php"
+    "#{self.date.year}#{'%02d' % self.date.month}#{'%02d' % self.date.day}#{'%04d' % Season.find(self.date.year, self.home.franchise_id).dmb_id}0"
   end
 
 end
