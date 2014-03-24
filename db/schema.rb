@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131208023923) do
+ActiveRecord::Schema.define(:version => 20140324211205) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "player_id",                                  :null => false
@@ -22,6 +22,40 @@ ActiveRecord::Schema.define(:version => 20131208023923) do
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
   end
+
+  create_table "games", :force => true do |t|
+    t.date     "date",               :null => false
+    t.string   "dmb_id",             :null => false
+    t.string   "team",               :null => false
+    t.string   "position",           :null => false
+    t.integer  "at_bat"
+    t.integer  "run"
+    t.integer  "hit"
+    t.integer  "run_batted_in"
+    t.integer  "double"
+    t.integer  "triple"
+    t.integer  "homerun"
+    t.integer  "steal"
+    t.integer  "caught_stealing"
+    t.integer  "strike_out"
+    t.integer  "walk"
+    t.boolean  "win"
+    t.boolean  "loss"
+    t.boolean  "hold"
+    t.boolean  "save"
+    t.boolean  "blown_save"
+    t.decimal  "inning"
+    t.integer  "allowed_hit"
+    t.integer  "allowed_run"
+    t.integer  "allowed_earned_run"
+    t.integer  "allowed_walk"
+    t.integer  "allowed_strike_out"
+    t.integer  "error"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "games", ["date", "dmb_id"], :name => "index_games_on_date_and_dmb_id", :unique => true
 
   create_table "owners", :force => true do |t|
     t.string   "first_name", :null => false
