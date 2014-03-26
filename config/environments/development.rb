@@ -40,6 +40,8 @@ FPBL::Application.configure do
     begin
       require 'pry'
       IRB = Pry
+      module Pry::RailsCommands ;end
+      IRB::ExtendCommandBundle = Pry::RailsCommands
     rescue LoadError
     end
   end
