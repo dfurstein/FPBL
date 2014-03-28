@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140324211205) do
+ActiveRecord::Schema.define(:version => 20140327222927) do
 
   create_table "contracts", :force => true do |t|
     t.integer  "player_id",                                  :null => false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20140324211205) do
     t.boolean  "win"
     t.boolean  "loss"
     t.boolean  "hold"
-    t.boolean  "save"
+    t.boolean  "save_game"
     t.boolean  "blown_save"
     t.decimal  "inning"
     t.integer  "allowed_hit"
