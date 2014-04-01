@@ -1,6 +1,14 @@
 class Game < ActiveRecord::Base
   attr_accessible :allowed_earned_run, :allowed_hit, :allowed_run, :allowed_strike_out, :allowed_walk, :at_bat, :blown_save, :caught_stealing, :date, :double, :error, :hit, :hold, :homerun, :inning, :loss, :dmb_id, :position, :run, :run_batted_in, :save_game, :steal, :strike_out, :team, :triple, :walk, :win
 
+  def date=(val)
+    self[:date] = val
+  end
+
+  def team=(val)
+    self[:team] = val
+  end
+
   def dmb_id=(val)
     self[:dmb_id] = val
   end
