@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
-                              :github => 'anjlab/bootstrap-rails'
+  :github => 'anjlab/bootstrap-rails'
 #gem 'bootstrap-sass'
 
 gem 'composite_primary_keys', '~> 5.0.8'
@@ -16,6 +16,8 @@ group :development do
   gem 'binding_of_caller'
 
   gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-nav'
 end
 
 # Gems used only for assets and not required
@@ -32,4 +34,3 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-
