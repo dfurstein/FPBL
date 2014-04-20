@@ -71,9 +71,9 @@ namespace :import do
       @starter = true
       @pitching_counter += 1
       return 3
-    elsif (["E-", "2B-", "3B-", "HR-", "RBI-", "SB-", "CS-", "K-", "BB-", "SF-", "SH-", "HBP-", "HB-", "WP-", "PB-", "B-"].any? { |word| line.include?(word) })
+    elsif (["E-", "2B-", "3B-", "HR-", "RBI-", "SB-", "CS-", "K-", "BB-", "SF-", "SH-", "HBP-", "HB-", "WP-", "PB-", "BALK-"].any? { |word| line.include?(word) })
       return 4
-    elsif line.include? "GWRBI"
+    elsif line.include? "Temperature:"
       return 5
     else
       return 0
@@ -93,7 +93,7 @@ namespace :import do
   end
 
   def state_2(players, line)
-    regexp = /([a-zA-Z ,\.]*\s{3,})([\w\d]{1,2})\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\.\d]+)/
+    regexp = /([a-zA-Z][a-zA-Z ,'\.]*\s{3,})([\w\d]{1,2})\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\.\d]+)/
 
     teams = line.scan(regexp).length
 
@@ -128,7 +128,7 @@ namespace :import do
   end
 
   def state_3(players, line)
-    regexp = /([a-zA-Z ,\.]+)\s{3,}([a-zA-Z]*)(\s\d,*\s)*([a-zA-Z]*)(\s[\d]+-[\d]+)*\s+([\d\.]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d\.]+)/
+    regexp = /([a-zA-Z ,'\.]+)\s{3,}([a-zA-Z]*)(\s[\d]+,*\s)*([a-zA-Z]*)(\s[\d]+-[\d]+)*\s+([\d\.]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d\.]+)/
 
     line.scan(regexp).each do |stats|
 
@@ -150,7 +150,7 @@ namespace :import do
       player.save_game = stats[1] == 'S' ? 1 : stats[3] == 'S' ? 1 : 0
       player.blown_save = stats[1] == 'BS' ? 1 : stats[3] == 'BS' ? 1 : 0
 
-      player.inning = stats[5]
+      player.inning = BigDecimal(stats[5]).truncate + BigDecimal(stats[5]).frac * BigDecimal("10.0") / BigDecimal("3.0")
       player.allowed_hit = stats[6]
       player.allowed_run = stats[7]
       player.allowed_earned_run = stats[8]
@@ -241,7 +241,7 @@ namespace :import do
       player.wild_pitch = amount
     elsif stat == 'PB'
       player.passed_ball = amount
-    elsif stat == 'B'
+    elsif stat == 'BALK'
       player.balk = amount
     end
 
