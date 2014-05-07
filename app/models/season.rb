@@ -13,9 +13,9 @@ class Season < ActiveRecord::Base
   end
 
   def self.current_teams
-    self.where("year = #{self.last.year}").collect { 
+    self.where("year = #{self.last.year}").collect {
       |franchise| franchise.team
-    }.sort_by { 
+    }.sort_by {
       |team| team.full_name
     }
   end
