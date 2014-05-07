@@ -5,19 +5,26 @@ gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
   :github => 'anjlab/bootstrap-rails'
 #gem 'bootstrap-sass'
 
-gem 'composite_primary_keys', '~> 5.0.8'
+gem 'composite_primary_keys'#, '~> 5.0.8'
 gem 'simple_form'
 
 gem 'sqlite3'
 #gem 'mysql2'
 
-group :development do
+group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
 
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
+
+  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'capybara'
+  gem 'launchy', '~> 2.4.2'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec', require: false
 end
 
 # Gems used only for assets and not required
