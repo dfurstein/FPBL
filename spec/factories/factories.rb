@@ -32,4 +32,22 @@ FactoryGirl.define do
     year 2014
   end
 
+  factory :player do
+    sequence(:dmb_id) { |n| n }
+    sequence(:first_name) { |n| "first#{n}" }
+    sequence(:last_name) { |n| "last#{n}" }
+    position "1B"
+  end
+
+  factory :contract do
+    player
+
+    sequence(:franchise_id) { |n| n }
+    sequence(:player_id) { |n| n }
+
+    release false
+    salary 3.2
+    year 2014
+  end
+
 end
