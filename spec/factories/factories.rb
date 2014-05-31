@@ -50,4 +50,15 @@ FactoryGirl.define do
     year 2014
   end
 
+  factory :performance do
+    sequence(:franchise_id) { |n| n }
+
+    league "American"
+    division "Tinker"
+    year 2014
+
+    wins 100
+    losses 62
+    streak -2
+  end
 end
