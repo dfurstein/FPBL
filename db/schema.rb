@@ -11,25 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140403002603) do
+ActiveRecord::Schema.define(:version => 20140324211205) do
 
-  create_table "contracts", :force => true do |t|
-    t.integer  "player_id",                                  :null => false
-    t.integer  "franchise_id",                               :null => false
-    t.integer  "year",                                       :null => false
-    t.decimal  "salary",       :precision => 3, :scale => 1, :null => false
-    t.boolean  "release",                                    :null => false
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-  end
-
-  create_table "games", :force => true do |t|
+  create_table "boxscores", :id => false, :force => true do |t|
     t.date     "date",                                :null => false
-    t.string   "dmb_id",                              :null => false
+    t.string   "dmb_name",                            :null => false
     t.string   "team",                                :null => false
     t.string   "position",                            :null => false
     t.string   "played_against",                      :null => false
-    t.string   "home_or_away",                        :null => false
+    t.boolean  "is_home_team",                        :null => false
     t.integer  "at_bat",             :default => 0
     t.integer  "run",                :default => 0
     t.integer  "hit",                :default => 0
@@ -64,7 +54,19 @@ ActiveRecord::Schema.define(:version => 20140403002603) do
     t.datetime "updated_at",                          :null => false
   end
 
-  add_index "games", ["date", "dmb_id"], :name => "index_games_on_date_and_dmb_id", :unique => true
+  add_index "boxscores", ["date", "dmb_name"], :name => "index_boxscores_on_date_and_dmb_name", :unique => true
+
+  create_table "contracts", :force => true do |t|
+    t.integer  "player_id",                                                     :null => false
+    t.integer  "franchise_id",                                                  :null => false
+    t.integer  "year",                                                          :null => false
+    t.decimal  "salary",       :precision => 3, :scale => 1,                    :null => false
+    t.boolean  "released",                                   :default => false, :null => false
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+  end
+
+  add_index "contracts", ["year", "player_id", "franchise_id"], :name => "index_contracts_on_year_and_player_id_and_franchise_id", :unique => true
 
   create_table "owners", :force => true do |t|
     t.string   "first_name", :null => false
@@ -74,7 +76,34 @@ ActiveRecord::Schema.define(:version => 20140403002603) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "performances", :force => true do |t|
+  create_table "players", :id => false, :force => true do |t|
+    t.integer  "player_id",  :null => false
+    t.integer  "year",       :null => false
+    t.string   "dmb_name",   :null => false
+    t.string   "first_name", :null => false
+    t.string   "last_name",  :null => false
+    t.string   "position",   :null => false
+    t.string   "hand"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "players", ["year", "player_id"], :name => "index_players_on_year_and_player_id", :unique => true
+
+  create_table "schedules", :id => false, :force => true do |t|
+    t.date     "date",          :null => false
+    t.string   "away_team",     :null => false
+    t.integer  "away_score",    :null => false
+    t.string   "home_team",     :null => false
+    t.integer  "home_score",    :null => false
+    t.integer  "extra_innings"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "schedules", ["date", "home_team"], :name => "index_schedules_on_date_and_home_team", :unique => true
+
+  create_table "standings", :id => false, :force => true do |t|
     t.integer  "year",          :null => false
     t.integer  "franchise_id",  :null => false
     t.string   "league",        :null => false
@@ -88,49 +117,20 @@ ActiveRecord::Schema.define(:version => 20140403002603) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "performances", ["year", "franchise_id"], :name => "index_performances_on_year_and_franchise_id", :unique => true
+  add_index "standings", ["year", "franchise_id"], :name => "index_standings_on_year_and_franchise_id", :unique => true
 
-  create_table "players", :force => true do |t|
-    t.integer  "dmb_id",     :null => false
-    t.string   "first_name", :null => false
-    t.string   "last_name",  :null => false
-    t.string   "position",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "teams", :id => false, :force => true do |t|
+    t.integer "franchise_id",                               :null => false
+    t.integer "year",                                       :null => false
+    t.string  "city",                                       :null => false
+    t.string  "nickname",                                   :null => false
+    t.string  "abbreviation",                               :null => false
+    t.string  "stadium"
+    t.integer "owner_id",                                   :null => false
+    t.decimal "salary_cap",   :precision => 3, :scale => 1
+    t.integer "dmb_id"
   end
 
-  create_table "schedules", :force => true do |t|
-    t.date     "date",          :null => false
-    t.string   "away_team",     :null => false
-    t.integer  "away_score",    :null => false
-    t.string   "home_team",     :null => false
-    t.integer  "home_score",    :null => false
-    t.integer  "extra_innings"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "schedules", ["date", "home_team"], :name => "index_schedules_on_date_and_home_team", :unique => true
-
-  create_table "seasons", :force => true do |t|
-    t.integer  "year",         :null => false
-    t.integer  "franchise_id", :null => false
-    t.integer  "team_id",      :null => false
-    t.integer  "owner_id",     :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "dmb_id"
-  end
-
-  add_index "seasons", ["year", "franchise_id"], :name => "index_seasons_on_year_and_franchise_id", :unique => true
-
-  create_table "teams", :force => true do |t|
-    t.string   "location",     :null => false
-    t.string   "nickname",     :null => false
-    t.string   "abbreviation", :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "dmb_id"
-  end
+  add_index "teams", ["year", "franchise_id"], :name => "index_teams_on_year_and_franchise_id", :unique => true
 
 end
