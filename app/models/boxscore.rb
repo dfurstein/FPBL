@@ -1,4 +1,4 @@
-class Game < ActiveRecord::Base
+class Boxscore < ActiveRecord::Base
   attr_accessible :allowed_earned_run, :allowed_hit, :allowed_run, :allowed_strike_out, :allowed_walk, :at_bat, :blown_save, :caught_stealing, :date, :double, :error, :hit, :hold, :homerun, :inning, :loss, :dmb_id, :position, :run, :run_batted_in, :save_game, :steal, :strike_out, :team, :triple, :walk, :win, :played_against, :sacrifice_fly, :sacrifice, :hit_by_pitch, :hit_batter, :wild_pitch, :passed_ball, :balk, :home_or_away
 
   def date=(val)

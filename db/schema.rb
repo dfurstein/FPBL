@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20140324211205) do
 
   add_index "boxscores", ["date", "dmb_name"], :name => "index_boxscores_on_date_and_dmb_name", :unique => true
 
-  create_table "contracts", :force => true do |t|
+  create_table "contracts", :id => false, :force => true do |t|
     t.integer  "player_id",                                                     :null => false
     t.integer  "franchise_id",                                                  :null => false
     t.integer  "year",                                                          :null => false
