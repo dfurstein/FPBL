@@ -1,9 +1,11 @@
 # Describes a player's contract for a given franchise and year
 class Contract < ActiveRecord::Base
+  self.primary_keys = :year, :franchise_id, :player_id
+
   attr_accessible :player_id, :franchise_id, :year, :salary, :released
 
   belongs_to :team, foreign_key: [:year, :franchise_id]
-  belongs_to :player
+  belongs_to :player,  foreign_key: [:year, :player_id]
 
   def self.under_contract(year, franchise_id)
     Contract.where("year = #{year} and franchise_id = #{franchise_id}")

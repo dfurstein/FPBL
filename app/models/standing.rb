@@ -1,23 +1,22 @@
 # Describes the standings for a given year
-class Record < ActiveRecord::Base
+class Standing < ActiveRecord::Base
   self.primary_keys = :year, :franchise_id
 
   attr_accessible :division, :franchise_id, :league, :losses, :playoff_berth,
                   :playoff_depth, :streak, :wins, :year
 
-  belongs_to :season, foreign_key: [:year, :franchise_id]
+  belongs_to :teams, foreign_key: [:year, :franchise_id]
 
   def self.leagues(year)
-    Record.where("year = #{year}").uniq.pluck(:league)
+    Standing.where("year = #{year}").uniq.pluck(:league)
   end
 
-  def self.divisions_per_league(year, league)
-    Record.where("year = #{year} and league = '#{league}'").uniq
-      .pluck(:division)
+  def self.divisions_by_league(year, league)
+    Standing.where("year = #{year} and league = '#{league}'").uniq.pluck(:division)
   end
 
-  def self.performances_per_division(year, league, division)
-    Record.where("year = #{year} and league = '#{league}'
+  def self.records_by_divisions(year, league, division)
+    Standing.where("year = #{year} and league = '#{league}'
       and division = '#{division}'")
   end
 
@@ -34,9 +33,9 @@ class Record < ActiveRecord::Base
   end
 
   def games_back_division
-    games_back = Record.where(
+    games_back = Standing.where(
         "year = #{year} and league = '#{league}' and division = '#{division}'"
-      ).max_by { |record| record.wins }.wins - wins
+      ).max_by { |standing| standing.wins }.wins - wins
 
     if games_back == 0
       '-'
