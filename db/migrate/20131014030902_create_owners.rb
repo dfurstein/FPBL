@@ -1,3 +1,4 @@
+# Migration script to create owners
 class CreateOwners < ActiveRecord::Migration
   def change
     create_table :owners do |t|

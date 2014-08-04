@@ -1,82 +1,385 @@
-id,location,nickname,abbreviation
-1,Boston,Tycoons,BOS
-2,Flushing,Fury,FLU
-3,Lynchburg,Hellcats,LYN
-4,Washington,Senators,HAR
-5,Sioux Falls,Cereal Killers,SF
-6,Toronto,Blizzard,TOB
-7,Trenton,Revolution,TRE
-8,Upstate,Ying Yangs,UPS
-9,Cheyenne,ShadowRiders,CHE
-10,Las Vegas,DiamondBucks,LV
-11,Long Island,Paladins,LI
-12,Seattle,Sphere Crushers,SEA
-13,Rockhill,Shuttlecocks,ROC
-14,Rock Creek,Disco Dancers,RC
-15,Sioux City,Soos,SIO
-16,Starved Rock,Magi,SR
-17,Buffalo,Mercenaries,BUF
-18,Redlands,Smog Storm,RED
-19,Syracuse,Comets,SYR
-20,Toronto,Storm,TOS
-21,Cincinnati,Silver Sox,CIN
-22,Greenville,Bats,GRN
-23,Key Largo,Hurricanes,KL
-24,Omaha,Red Birds,OMA
-25,Yucaipa,Yahoos,YUC
-26,L.A-Yuma,Hogheads,LA
-27,Seattle,Pilots,SEP
-28,Charlotte,Skemp Klubbers,CHA
-29,O'Fallon River,Otters,OTT
-30,New York,Sweepers,NY
-31,Mentone Beach,Maulers,MEN
-32,Bourbonnais,Blackbirds,BOU
-33,Muskegan,Mallards,MUS
-34,Boston,Bulldogs,BOS
-35,Los Angeles,Hogheads,LA
-36,Scottsdale,Cactus Riders,SCO
-37,Harrisburg,Senators,HAR
-38,Atlanta,Arrogants,ATL
-39,Olympia,Muscle,OLY
-40,Virginia,Cannons,VIR
-41,Miami,Mercenaries,MIA
-42,Braidwood,Blast,BRA
-43,Phoenix,Monsoon,PHO
-44,Charleston,Chiefs,CHA
-45,Baldwin,Bombers,BAL
-46,Rapid City,Mudhens,RAP
-47,Castle Rock,Fjords,CR
-48,New York,Jaywalkers,NY
-49,Kansas City,Revenants,KC
-50,Arrowhead,Griffins,ARR
-51,Santa Monica,Beach Bums,SM
-52,Riverside,Ramblers,RIV
-53,Camden,Evolution,CAM
-54,Kansas City,Crown Royals,KC
-55,Brooklyn,Brawlers,Bro
-56,Amboy,Dukes,AD
-57,Atlantic City,High Rollers,AC
-58,Charleston,Chiefs,CC
-59,Santa Fe,Gamblers,SF
-60,Huntington,Headshrinkers,Hun
-61,New York,Amazins,NYA
-62,Fog City,Liberals,FC
-63,Long Beach,Sea Sides,LB
-64,Cuyahoga,Riverfire,CUY
-65,Montreal,Royals,MON
-66,Hoboken,Heartbreakers,HOB
-67,Mahoning Valley,Monsters,MVM
-68,Kansas City,Revenants,KC
-69,Milwaukee,Beers,MIL
-70,Maine,Black Bears,MBB
-71,Castle Rock,Fjords,CR
-72,Schenectady,Massacre,SCH
-73,Staten Island,Ferries,SI
-74,Los Angeles,Isotopes,LA
-75,Schaumburg,Sparrows,SS
-76,Ann Arbor,Airmax,AA
-77,Charlotte,Bashers,CB
-78,Long Beach,Slammers,LB
-79,Portsmouth,Harbor Seals,PHS
-80,Astoria,Amazins,Ast
-81,Oakland,Agitators,Oak
+franchise_id,year,city,nickname,abbreviation,stadium,owner_id,salary_cap,dmb_id
+1,1999,Boston,Tycoons,BOS,,1,,
+2,1999,Flushing,Fury,FLU,,2,,
+3,1999,Lynchburg,Hellcats,LYN,,3,,
+4,1999,Washington,Senators,HAR,,4,,
+5,1999,Sioux Falls,Cereal Killers,SF,,5,,
+6,1999,Toronto,Blizzard,TOB,,6,,
+7,1999,Trenton,Revolution,TRE,,7,,
+8,1999,Upstate,Ying Yangs,UPS,,8,,
+9,1999,Cheyenne,ShadowRiders,CHE,,9,,
+10,1999,Las Vegas,DiamondBucks,LV,,10,,
+11,1999,Long Island,Paladins,LI,,11,,
+12,1999,Seattle,Sphere Crushers,SEA,,12,,
+13,1999,Rockhill,Shuttlecocks,ROC,,13,,
+14,1999,Rock Creek,Disco Dancers,RC,,14,,
+15,1999,Sioux City,Soos,SC,,15,,
+16,1999,Starved Rock,Magi,SR,,16,,
+17,1999,Buffalo,Mercenaries,BUF,,17,,
+18,1999,Redlands,Smog Storm,RED,,18,,
+19,1999,Syracuse,Comets,SYR,,19,,
+20,1999,Toronto,Storm,TOS,,20,,
+21,1999,Cincinnati,Silver Sox,CIN,,21,,
+22,1999,Greenville,Bats,GRN,,22,,
+23,1999,Key Largo,Hurricanes,KL,,23,,
+24,1999,Omaha,Red Birds,OMA,,24,,
+1,2000,Boston,Tycoons,BOS,,1,,
+2,2000,Yucaipa,Yahoos,YUC,,25,,
+3,2000,L.A-Yuma,Hogheads,LA,,26,,
+4,2000,Seattle,Pilots,SEP,,27,,
+5,2000,Charlotte,Skemp Klubbers,CHA,,28,,
+6,2000,Toronto,Blizzard,TOB,,6,,
+7,2000,OFallon River,Otters,OTT,,29,,
+8,2000,Upstate,Ying Yangs,UPS,,8,,
+9,2000,New York,Sweepers,NY,,30,,
+10,2000,Las Vegas,DiamondBucks,LV,,10,,
+11,2000,Mentone Beach,Maulers,MEN,,31,,
+12,2000,Seattle,Sphere Crushers,SSC,,12,,
+13,2000,Rockhill,Shuttlecocks,ROC,,13,,
+14,2000,Rock Creek,Disco Dancers,RC,,14,,
+15,2000,Sioux City,Soos,SC,,15,,
+16,2000,Starved Rock,Magi,SR,,16,,
+17,2000,Buffalo,Mercenaries,BUF,,32,,
+18,2000,Redlands,Smog Storm,RED,,18,,
+19,2000,Syracuse,Comets,SYR,,19,,
+20,2000,Toronto,Storm,TOS,,20,,
+21,2000,Bourbonnais,Blackbirds,BOU,,33,,
+22,2000,Greenville,Bats,GRN,,22,,
+23,2000,Key Largo,Hurricanes,KL,,34,,
+24,2000,Muskegan,Mallards,MUS,,35,,
+1,2001,Boston,Bulldogs,BOS,,36,,
+2,2001,Yucaipa,Yahoos,YUC,,25,,
+3,2001,Los Angeles,Hogheads,LA,,26,,
+4,2001,Seattle,Pilots,SEA,,27,,
+5,2001,Scottsdale,Cactus Riders,SCO,,28,,
+6,2001,Toronto,Blizzard,TOB,,6,,
+7,2001,Harrisburg,Senators,HAR,,37,,
+8,2001,Upstate,Ying Yangs,YUC,,8,,
+9,2001,Atlanta,Arrogants,ATL,,38,,
+10,2001,Las Vegas,DiamondBucks,LV,,10,,
+11,2001,Mentone Beach,Maulers,MEN,,31,,
+12,2001,Olympia,Muscle,OLY,,39,,
+13,2001,Virginia,Cannons,VIR,,40,,
+14,2001,Rock Creek,Disco Dancers,RC,,14,,
+15,2001,Sioux City,Soos,SC,,15,,
+16,2001,Starved Rock,Magi,SR,,16,,
+17,2001,Miami,Mercenaries,MIA,,32,,
+18,2001,Redlands,Smog Storm,RED,,18,,
+19,2001,Syracuse,Comets,SYR,,19,,
+20,2001,Toronto,Storm,TOS,,20,,
+21,2001,Bourbonnais,Blackbirds,BOU,,33,,
+22,2001,Braidwood,Blast,BRA,,41,,
+23,2001,Phoenix,Monsoon,PHO,,34,,
+24,2001,Charleston,Chiefs,CHA,,42,,
+1,2002,Boston,Bulldogs,BOS,,36,,
+2,2002,Rapid City,Mudhens,RAP,,25,,
+3,2002,Los Angeles,Hogheads,LA,,26,,
+4,2002,Castle Rock,Fjords,CR,,44,,
+5,2002,Scottsdale,Cactus Riders,SCO,,28,,
+6,2002,Toronto,Blizzard,TOB,,6,,
+7,2002,Harrisburg,Senators,HAR,,37,,
+8,2002,Upstate,Ying Yangs,UPS,,8,,
+9,2002,Atlanta,Arrogants,ATL,,38,,
+10,2002,Las Vegas,DiamondBucks,LV,,43,,
+11,2002,Mentone Beach,Maulers,MEN,,31,,
+12,2002,Olympia,Muscle,OLY,,39,,
+13,2002,Baldwin,Bombers,BAL,,40,,
+14,2002,Rock Creek,Disco Dancers,RC,,14,,
+15,2002,Sioux City,Soos,SC,,15,,
+16,2002,Starved Rock,Magi,SR,,16,,
+17,2002,Miami,Mercenaries,MIA,,32,,
+18,2002,Redlands,Smog Storm,RED,,18,,
+19,2002,Syracuse,Comets,SYR,,19,,
+20,2002,Toronto,Storm,TOS,,20,,
+21,2002,Bourbonnais,Blackbirds,BOU,,33,,
+22,2002,Braidwood,Blast,BRA,,41,,
+23,2002,Phoenix,Monsoon,PHO,,34,,
+24,2002,Charleston,Chiefs,CHA,,42,,
+1,2003,Kansas City,Revenants,KC,,46,,
+2,2003,Rapid City,Mudhens,RAP,,25,,
+3,2003,Los Angeles,Hogheads,LA,,26,,
+4,2003,Castle Rock,Fjords,CR,,44,,
+5,2003,Scottsdale,Cactus Riders,SCO,,28,,
+6,2003,Toronto,Blizzard,TOB,,6,,
+7,2003,Harrisburg,Senators,HAR,,37,,
+8,2003,New York,Jaywalkers,NY,,45,,
+9,2003,Atlanta,Arrogants,ATL,,38,,
+10,2003,Las Vegas,DiamondBucks,LV,,43,,
+11,2003,Mentone Beach,Maulers,MEN,,31,,
+12,2003,Olympia,Muscle,OLY,,39,,
+13,2003,Baldwin,Bombers,BAL,,40,,
+14,2003,Rock Creek,Disco Dancers,RC,,14,,
+15,2003,Sioux City,Soos,SC,,15,,
+16,2003,Starved Rock,Magi,SR,,16,,
+17,2003,Miami,Mercenaries,MIA,,32,,
+18,2003,Arrowhead,Griffins,RED,,18,,
+19,2003,Syracuse,Comets,SYR,,19,,
+20,2003,Toronto,Storm,TOS,,20,,
+21,2003,Bourbonnais,Blackbirds,BOU,,33,,
+22,2003,Braidwood,Blast,BRA,,41,,
+23,2003,Phoenix,Monsoon,PHO,,34,,
+24,2003,Charleston,Chiefs,CHA,,42,,
+1,2004,Kansas City,Revenants,KC,,46,,
+2,2004,Rapid City,Mudhens,RAP,,25,,
+3,2004,Los Angeles,Hogheads,LA,,26,,
+4,2004,Castle Rock,Fjords,CR,,44,,
+5,2004,Scottsdale,Cactus Riders,SCO,,28,,
+6,2004,Toronto,Blizzard,TOB,,6,,
+7,2004,Santa Monica,Beach Bums,SM,,47,,
+8,2004,New York,Jaywalkers,NY,,45,,
+9,2004,Atlanta,Arrogants,ATL,,38,,
+10,2004,Las Vegas,DiamondBucks,LV,,43,,
+11,2004,Mentone Beach,Maulers,MEN,,31,,
+12,2004,Olympia,Muscle,OLY,,39,,
+13,2004,Baldwin,Bombers,BAL,,40,,
+14,2004,Rock Creek,Disco Dancers,RC,,14,,
+15,2004,Sioux City,Soos,SC,,15,,
+16,2004,Starved Rock,Magi,SR,,16,,
+17,2004,Miami,Mercenaries,MIA,,32,,
+18,2004,Arrowhead,Griffins,ARR,,18,,
+19,2004,Syracuse,Comets,SYR,,19,,
+20,2004,Toronto,Storm,TOS,,20,,
+21,2004,Bourbonnais,Blackbirds,BOU,,33,,
+22,2004,Braidwood,Blast,BRA,,41,,
+23,2004,Phoenix,Monsoon,PHO,,34,,
+24,2004,Charleston,Chiefs,CHA,,42,,
+1,2005,Kansas City,Revenants,KC,,46,,
+2,2005,Rapid City,Mudhens,RAP,,25,,
+3,2005,Los Angeles,Hogheads,LA,,26,,
+4,2005,Castle Rock,Fjords,CR,,44,,
+5,2005,Scottsdale,Cactus Riders,SCO,,28,,
+6,2005,Toronto,Blizzard,TOB,,6,,
+7,2005,Santa Monica,Beach Bums,SM,,47,,
+8,2005,New York,Jaywalkers,NY,,45,,
+9,2005,Atlanta,Arrogants,ATL,,38,,
+10,2005,Las Vegas,DiamondBucks,LV,,43,,
+11,2005,Mentone Beach,Maulers,MEN,,31,,
+12,2005,Olympia,Muscle,OLY,,39,,
+13,2005,Baldwin,Bombers,BAL,,40,,
+14,2005,Rock Creek,Disco Dancers,RC,,14,,
+15,2005,Sioux City,Soos,SC,,15,,
+16,2005,Starved Rock,Magi,SR,,16,,
+17,2005,Miami,Mercenaries,MIA,,32,,
+18,2005,Arrowhead,Griffins,ARR,,18,,
+19,2005,Syracuse,Comets,SYR,,19,,
+20,2005,Toronto,Storm,TOS,,20,,
+21,2005,Bourbonnais,Blackbirds,BOU,,33,,
+22,2005,Braidwood,Blast,BRA,,41,,
+23,2005,Camden,Evolution,CAM,,49,,
+24,2005,Riverside,Ramblers,RIV,,48,,
+1,2006,Kansas City,Crown Royals,KC,,46,,
+2,2006,Rapid City,Mudhens,RAP,,25,,
+3,2006,Los Angeles,Hogheads,LA,,26,,
+4,2006,Castle Rock,Fjords,CR,,44,,
+5,2006,Scottsdale,Cactus Riders,SCO,,28,,
+6,2006,Toronto,Blizzard,TOB,,6,,
+7,2006,Phoenix,Monsoon,PHO,,34,,
+8,2006,New York,Jaywalkers,NY,,45,,
+9,2006,Atlanta,Arrogants,ATL,,38,,
+10,2006,Las Vegas,DiamondBucks,LV,,43,,
+11,2006,Mentone Beach,Maulers,MEN,,31,,
+12,2006,Olympia,Muscle,OLY,,39,,
+13,2006,Baldwin,Bombers,BAL,,40,,
+14,2006,Rock Creek,Disco Dancers,RC,,14,,
+15,2006,Sioux City,Soos,SC,,15,,
+16,2006,Starved Rock,Magi,SR,,16,,
+17,2006,Miami,Mercenaries,MIA,,32,,
+18,2006,Arrowhead,Griffins,ARR,,18,,
+19,2006,Syracuse,Comets,SYR,,19,,
+20,2006,Toronto,Storm,TOS,,20,,
+21,2006,Bourbonnais,Blackbirds,BOU,,33,,
+22,2006,Braidwood,Blast,BRA,,41,,
+23,2006,Camden,Evolution,CAM,,49,,
+24,2006,Riverside,Ramblers,RIV,,48,,
+1,2007,Amboy,Dukes,AD,Kauffman Stadium,51,,9
+2,2007,Rapid City,Mudhens,RAP,Dodger Stadium,25,,16
+3,2007,Los Angeles,Hogheads,LA,Dodger Stadium,26,,11
+4,2007,Castle Rock,Fjords,CR,Safeco Field,44,,8
+5,2007,Scottsdale,Cactus Riders,SCO,Coors Field,28,,19
+6,2007,Toronto,Blizzard,TOB,Exhibition Stadium ('77),6,,23
+7,2007,Phoenix,Monsoon,PHO,Chase Field,34,,15
+8,2007,New York,Jaywalkers,NY,PNC Park,45,,14
+9,2007,Atlanta,Arrogants,ATL,Turner Field,38,,2
+10,2007,Las Vegas,Diamondbucks,LV,Coors Field,43,,10
+11,2007,Mentone Beach,Maulers,MEN,Yankee Stadium,31,,12
+12,2007,Brooklyn,Brawlers,BRO,Miller Park,50,,6
+13,2007,Baldwin,Bombers,BAL,Dolphin Stadium,40,,3
+14,2007,Rock Creek,Disco Dancers,RC,Angel Stadium,14,,18
+15,2007,Sioux City,Soos,SIO,Comerica Park,15,,20
+16,2007,Starved Rock,Magi,SR,Griffith Stadium ('11),16,,21
+17,2007,Miami,Mercenaries,MIA,AT&T Park,32,,13
+18,2007,Arrowhead,Griffins,ARR,PNC Park,18,,1
+19,2007,Syracuse,Comets,SYR,Dodger Stadium,19,,22
+20,2007,Toronto,Storm,TOS,Fenway Park,20,,24
+21,2007,Bourbonnais,Blackbirds,BOU,Wrigley Field,33,,4
+22,2007,Braidwood,Blast,BRA,Chase Field,41,,5
+23,2007,Camden,Evolution,CAM,Citizens Bank Park,49,,7
+24,2007,Riverside,Ramblers,RIV,Angel Stadium,48,,17
+1,2008,Amboy,Dukes,AD,PETCO Park,51,,9
+2,2008,Rapid City,Mudhens,RAP,Dodger Stadium,25,,16
+3,2008,Los Angeles,Hogheads,LA,Dodger Stadium,26,,11
+4,2008,Atlantic City,High Rollers,AC,Comerica Park,52,,8
+5,2008,Scottsdale,Cactus Riders,SCO,Chase Field,28,,19
+6,2008,Toronto,Blizzard,TOB,Exhibition Stadium ('77),6,,23
+7,2008,Phoenix,Monsoon,PHO,Chase Field,34,,15
+8,2008,New York,Jaywalkers,NY,PNC Park,45,,14
+9,2008,Huntington,Headshrinkers,HUN,Turner Field,55,,2
+10,2008,Las Vegas,Diamondbucks,LV,Coors Field,43,,10
+11,2008,Mentone Beach,Maulers,MEN,Fenway Park,31,,12
+12,2008,Brooklyn,Brawlers,BRO,Miller Park,50,,6
+13,2008,Baldwin,Bombers,BAL,Comerica Park,40,,3
+14,2008,Santa Fe,Gamblers,SF,Tiger Stadium ('99),54,,18
+15,2008,Sioux City,Soos,SIO,Comerica Park,15,,20
+16,2008,Starved Rock,Magi,SR,Griffith Stadium ('11),16,,21
+17,2008,Miami,Mercenaries,MIA,AT&T Park,32,,13
+18,2008,Arrowhead,Griffins,ARR,PNC Park,18,,1
+19,2008,Syracuse,Comets,SYR,Dodger Stadium,19,,22
+20,2008,Toronto,Storm,TOS,Fenway Park,20,,24
+21,2008,Charleston,Chiefs,CC,U.S. Cellular Field,42,,4
+22,2008,Braidwood,Blast,BRA,Chase Field,41,,5
+23,2008,Camden,Evolution,CAM,Citizens Bank Park,49,,7
+24,2008,Riverside,Ramblers,RIV,Angel Stadium,48,,17
+1,2009,Amboy,Dukes,AD,PETCO Park,51,,9
+2,2009,Rapid City,Mudhens,RAP,Dodger Stadium,25,,16
+3,2009,Los Angeles,Hogheads,LA,Dodger Stadium,26,,11
+4,2009,Atlantic City,High Rollers,AC,Comerica Park,52,,8
+5,2009,Fog City,Liberals,FC,Chase Field,28,,19
+6,2009,Toronto,Blizzard,TOB,Exhibition Stadium ('77),6,,23
+7,2009,New York,Amazins,NYA,Shea Stadium,56,,15
+8,2009,New York,Jaywalkers,NY,PNC Park,45,,14
+9,2009,Huntington,Headshrinkers,HUN,Turner Field,55,,2
+10,2009,Las Vegas,Diamondbucks,LV,Coors Field,43,,10
+11,2009,Mentone Beach,Maulers,MEN,Fenway Park,31,,12
+12,2009,Brooklyn,Brawlers,BRO,Miller Park,50,,6
+13,2009,Baldwin,Bombers,BAL,Comerica Park,40,,3
+14,2009,Santa Fe,Gamblers,SF,Tiger Stadium ('99),54,,18
+15,2009,Sioux City,Soos,SIO,Comerica Park,15,,20
+16,2009,Starved Rock,Magi,SR,Griffith Stadium ('11),16,,21
+17,2009,Miami,Mercenaries,MIA,AT&T Park,32,,13
+18,2009,Arrowhead,Griffins,ARR,PNC Park,18,,1
+19,2009,Syracuse,Comets,SYR,Dodger Stadium,19,,22
+20,2009,Toronto,Storm,TOS,Fenway Park,20,,24
+21,2009,Long Beach,Sea Sides,LB,U.S. Cellular Field,57,,4
+22,2009,Braidwood,Blast,BRA,Chase Field,41,,5
+23,2009,Camden,Evolution,CAM,Citizens Bank Park,49,,7
+24,2009,Riverside,Ramblers,RIV,Angel Stadium,48,,17
+1,2010,Cuyahoga,Riverfire,CUY,Wrigley Field,58,,9
+2,2010,Rapid City,Mudhens,RAP,Dodger Stadium,25,,16
+3,2010,Los Angeles,Hogheads,LA,Dodger Stadium,26,,11
+4,2010,Atlantic City,High Rollers,AC,Yankee Stadium,52,,8
+5,2010,Fog City,Liberals,FC,Chase Field,28,,19
+6,2010,Hoboken,Heartbreakers,HOB,Citi Field,60,,23
+7,2010,New York,Amazins,NYA,Shea Stadium ('08),56,,15
+8,2010,New York,Jaywalkers,NY,PNC Park,45,,14
+9,2010,Huntington,Headshrinkers,HUN,Turner Field,55,,2
+10,2010,Las Vegas,Diamondbucks,LV,Coors Field,43,,10
+11,2010,Mentone Beach,Maulers,MEN,Fenway Park,31,,12
+12,2010,Brooklyn,Brawlers,BRO,Dodger Stadium,50,,6
+13,2010,Baldwin,Bombers,BAL,Fenway Park,40,,3
+14,2010,Montreal,Royals,MON,Parc Jarry ('76),59,,18
+15,2010,Sioux City,Soos,SIO,Comerica Park,15,,20
+16,2010,Starved Rock,Magi,SR,Griffith Stadium ('37),16,,21
+17,2010,Mahoning Valley,Monsters,MVM,Progressive Field,61,,13
+18,2010,Arrowhead,Griffins,ARR,PNC Park,18,,1
+19,2010,Syracuse,Comets,SYR,Dodger Stadium,19,,22
+20,2010,Toronto,Storm,TOS,Fenway Park,20,,24
+21,2010,Long Beach,Sea Sides,LB,U.S. Cellular Field,57,,4
+22,2010,Braidwood,Blast,BRA,Safeco Field,41,,5
+23,2010,Camden,Evolution,CAM,Citizens Bank Park,49,,7
+24,2010,Riverside,Ramblers,RIV,Angel Stadium,48,,17
+1,2011,Maine,Black Bears,MBB,Yankee Stadium ('04),63,,9
+2,2011,Rapid City,Mudhens,RAP,Dodger Stadium,25,,16
+3,2011,Kansas City,Revenants,KC,Kauffman Stadium,46,,11
+4,2011,Atlantic City,High Rollers,AC,Yankee Stadium,52,,8
+5,2011,Fog City,Liberals,FC,Chase Field,28,,19
+6,2011,Hoboken,Heartbreakers,HOB,Citi Field,60,,23
+7,2011,Milwaukee,Beers,MIL,Target Field,62,,15
+8,2011,New York,Jaywalkers,NY,South Side Park ('06),45,,14
+9,2011,Huntington,Headshrinkers,HUN,Turner Field,55,,2
+10,2011,Schenectady,Massacre,SCH,Fenway Park,65,,10
+11,2011,Mentone Beach,Maulers,MEN,Fenway Park,31,,12
+12,2011,Brooklyn,Brawlers,BRO,Dodger Stadium,50,,6
+13,2011,Baldwin,Bombers,BAL,Fenway Park,40,,3
+14,2011,Montreal,Royals,MON,Parc Jarry ('76),59,,18
+15,2011,Sioux City,Soos,SIO,Comerica Park,15,,20
+16,2011,Starved Rock,Magi,SR,Griffith Stadium ('37),16,,21
+17,2011,Mahoning Valley,Monsters,MVM,Progressive Field,61,,13
+18,2011,Arrowhead,Griffins,ARR,PNC Park,18,,1
+19,2011,Syracuse,Comets,SYR,Dodger Stadium,19,,22
+20,2011,Toronto,Storm,TOS,Fenway Park,20,,24
+21,2011,Long Beach,Sea Sides,LB,Citi Field,57,,4
+22,2011,Braidwood,Blast,BRA,Safeco Field,41,,5
+23,2011,Camden,Evolution,CAM,Citizens Bank Park,49,,7
+24,2011,Castle Rock,Fjords,CR,Target Field,44,,17
+1,2012,Ann Arbor,Airmax,AA,Yankee Stadium ('04),68,,9
+2,2012,Rapid City,Mudhens,RAP,Dodger Stadium,25,,16
+3,2012,Charlotte,Bashers,CB,Angel Stadium,69,,11
+4,2012,Atlantic City,High Rollers,AC,Miller Park,52,,8
+5,2012,Fog City,Liberals,FC,Chase Field,28,,19
+6,2012,Hoboken,Heartbreakers,HOB,Citi Field,60,,23
+7,2012,Milwaukee,Beers,MIL,Target Field,62,,15
+8,2012,New York,Jaywalkers,NY,South Side Park ('06),45,,14
+9,2012,Huntington,Headshrinkers,HUN,Turner Field,55,,2
+10,2012,Schenectady,Massacre,SCH,Fenway Park,65,,10
+11,2012,Mentone Beach,Maulers,MEN,Fenway Park,31,,12
+12,2012,Brooklyn,Brawlers,BRO,Angel Stadium,50,,6
+13,2012,Baldwin,Bombers,BAL,Fenway Park,40,,3
+14,2012,Montreal,Royals,MON,Parc Jarry ('76),59,,18
+15,2012,Sioux City,Soos,SIO,Comerica Park,15,,20
+16,2012,Starved Rock,Magi,SR,Rangers Ballpark in Arlington,16,,21
+17,2012,Mahoning Valley,Monsters,MVM,Progressive Field,61,,13
+18,2012,Arrowhead,Griffins,ARR,PNC Park,18,,1
+19,2012,Syracuse,Comets,SYR,Dodger Stadium,19,,22
+20,2012,Toronto,Storm,TOS,Fenway Park,20,,24
+21,2012,Staten Island,Ferries,SI,PETCO Park,66,,4
+22,2012,Braidwood,Blast,BRA,Nationals Park,41,,5
+23,2012,Camden,Evolution,CAM,Citizens Bank Park,49,,7
+24,2012,Schaumburg,Sparrows,SS,Progressive Field,33,,17
+1,2013,Ann Arbor,Airmax,AA,Yankee Stadium ('04),68,,9
+2,2013,Rapid City,Mudhens,RAP,Dodger Stadium,25,,16
+3,2013,Charlotte,Bashers,CB,Angel Stadium,69,,11
+4,2013,Atlantic City,High Rollers,AC,Miller Park,52,,8
+5,2013,Fog City,Liberals,FC,Chase Field,28,,19
+6,2013,Hoboken,Heartbreakers,HOB,Citi Field,60,,23
+7,2013,Milwaukee,Beers,MIL,Target Field,62,,15
+8,2013,New York,Jaywalkers,NY,South Side Park ('06),45,,14
+9,2013,Portsmouth,Harbor Seals,PHS,Turner Field,55,,2
+10,2013,Astoria,Amazins,AST,Shea Stadium ('04),71,,10
+11,2013,Mentone Beach,Maulers,MEN,Fenway Park,31,,12
+12,2013,Brooklyn,Brawlers,BRO,Angel Stadium,50,,6
+13,2013,Baldwin,Bombers,BAL,Fenway Park,40,,3
+14,2013,Montreal,Royals,MON,Le Stade Olympique ('77),59,,18
+15,2013,Sioux City,Soos,SIO,Target Field,15,,20
+16,2013,Starved Rock,Magi,SR,Rangers Ballpark in Arlington,16,,21
+17,2013,Mahoning Valley,Monsters,MVM,Progressive Field,61,,13
+18,2013,Arrowhead,Griffins,ARR,Progressive Field,18,,1
+19,2013,Oakland,Agitators,OAK,Oakland Coliseum ('72),72,,22
+20,2013,Toronto,Storm,TOS,Fenway Park,20,,24
+21,2013,Staten Island,Ferries,SI,PETCO Park,66,,4
+22,2013,Braidwood,Blast,BRA,Nationals Park,41,,5
+23,2013,Camden,Evolution,CAM,Citizens Bank Park,49,,7
+24,2013,Long Beach,Slammers,LB,Angel Stadium,70,,17
+1,2014,Ann Arbor,Airmax,AA,Yankee Stadium ('04),68,58.3,9
+2,2014,Rapid City,Mudhens,RAP,Dodger Stadium,25,60.9,16
+3,2014,Augusta,Green Jackets,AGJ,Seals Stadium ('58),74,60,11
+4,2014,Atlantic City,High Rollers,AC,Miller Park,52,59.6,8
+5,2014,Fog City,Liberals,FC,Chase Field,28,59.9,19
+6,2014,Hoboken,Heartbreakers,HOB,Citi Field,60,62.7,23
+7,2014,Milwaukee,Beers,MIL,Target Field,62,57.1,15
+8,2014,New York,Jaywalkers,NY,South Side Park ('06),45,62.5,14
+9,2014,Portsmouth,Harbor Seals,PHS,Turner Field,55,59.6,2
+10,2014,Astoria,Amazins,AST,Shea Stadium ('04),71,58.8,10
+11,2014,Mentone Beach,Maulers,MEN,Fenway Park,31,59.9,12
+12,2014,Brooklyn,Brawlers,BRO,Angel Stadium,50,62.9,6
+13,2014,Baldwin,Bombers,BAL,Fenway Park,40,62.8,3
+14,2014,Montreal,Royals,MON,Le Stade Olympique ('77),59,60,18
+15,2014,Grand Forks,Winter Wheats,GF,Target Field,15,57.8,20
+16,2014,Starved Rock,Magi,SR,PETCO Park,16,60.5,21
+17,2014,Mahoning Valley,Monsters,MVM,Progressive Field,61,58.1,13
+18,2014,Arrowhead,Griffins,ARR,Progressive Field,18,60.8,1
+19,2014,Oakland,Agitators,OAK,Oakland Coliseum ('72),72,57.9,22
+20,2014,Toronto,Storm,TOS,Fenway Park,20,60.4,24
+21,2014,Staten Island,Ferries,SI,PETCO Park,66,61.4,4
+22,2014,Braidwood,Blast,BRA,Nationals Park,41,60.4,5
+23,2014,Nevada,Owls,NO,Marlins Park,73,60,7
+24,2014,Long Beach,Slammers,LB,Angel Stadium,70,59.2,17

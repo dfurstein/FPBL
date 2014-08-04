@@ -1,9 +1,10 @@
+# Migration to create schedule
 class CreateSchedules < ActiveRecord::Migration
   def change
-    create_table :schedules do |t|
+    create_table :schedules, id: false do |t|
       t.date :date, null: false
-      t.string :road_team, null: false
-      t.integer :road_score, null: false
+      t.string :away_team, null: false
+      t.integer :away_score, null: false
       t.string :home_team, null: false
       t.integer :home_score, null: false
       t.integer :extra_innings
@@ -11,6 +12,6 @@ class CreateSchedules < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :schedules, [:date, :home_team], :unique => true
+    add_index :schedules, [:date, :home_team], unique: true
   end
 end
