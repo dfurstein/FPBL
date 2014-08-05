@@ -5,7 +5,7 @@ class Standing < ActiveRecord::Base
   attr_accessible :division, :franchise_id, :league, :losses, :playoff_berth,
                   :playoff_depth, :streak, :wins, :year
 
-  belongs_to :teams, foreign_key: [:year, :franchise_id]
+  belongs_to :team, foreign_key: [:year, :franchise_id]
 
   def self.leagues(year)
     Standing.where("year = #{year}").uniq.pluck(:league)

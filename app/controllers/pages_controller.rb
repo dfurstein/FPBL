@@ -13,8 +13,8 @@ class PagesController < ApplicationController
   end
 
   def standings
-    @year = params[:year].nil? ? Season.last.year.to_s : params[:year]
-    @years = Season.all.collect { |season| season.year }.uniq.reverse    
+    @year = params[:year].nil? ? Team.last.year.to_s : params[:year]
+    @years = Team.all.map { |season| season.year }.uniq.reverse
   end
 
   def calendar
@@ -24,5 +24,4 @@ class PagesController < ApplicationController
     @date = Date.new(year, month, 1)
     @games = Schedule.games(@date)
   end
-
 end
