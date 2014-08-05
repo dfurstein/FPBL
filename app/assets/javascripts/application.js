@@ -22,5 +22,4 @@ $(document).ready(function() {
 				$(event.target).parent().find('p').html('<pre>' + $(data).text().trim() + '</pre>');
 			}, 'text');
 	});
-
 });
