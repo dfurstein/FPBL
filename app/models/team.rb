@@ -8,7 +8,12 @@ class Team < ActiveRecord::Base
   has_many :contracts, foreign_key: [:year, :franchise_id]
   has_many :players,  foreign_key: [:year, :player_id], through: :contracts
 
-  def full_name
+  def name
     city + ' ' + nickname
+  end
+
+  def self.current_teams
+    where("year = #{last.year}").map { |team| team }
+      .sort_by { |team| team.name }
   end
 end

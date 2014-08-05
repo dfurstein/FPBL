@@ -1,7 +1,7 @@
-<% Performance.leagues(@year).sort.each { |league| %>
+<% Standing.leagues(@year).sort.each { |league| %>
 	<div class="panel panel-primary">
 		<div class="panel-heading"><%= league %> League</div>
-		<% Performance.divisions_per_league(@year, league).sort.each { |division| %>
+		<% Standing.divisions_by_league(@year, league).sort.each { |division| %>
 			<div class="panel panel-info">
 				<div class="panel-heading"><%= division %> Division</div>
 				<table class='table table-bordered table-condensed'>
@@ -13,14 +13,14 @@
 						<th class="col-sm-1">GB</th>
 						<th class="col-sm-1">Strk</th>
 					</tr>
-					<% Performance.includes(:season => :team).performances_per_division(@year, league, division).sort_by { |performance| -performance.wins }.each { |performance| %>
+					<% Standing.records_by_divisions(@year, league, division).sort_by { |record| - record.wins }.each { |record| %>
 						<tr>
-							<td><%= performance.season.team.full_name %></td>
-							<td><%= performance.wins %></td>
-							<td><%= performance.losses %></td>
-							<td><%= performance.win_percentage %></td>
-							<td><%= performance.games_back_division %></td>
-							<td><%= performance.game_streak %></td>
+							<td><%= record.team.name %></td>
+							<td><%= record.wins %></td>
+							<td><%= record.losses %></td>
+							<td><%= record.win_percentage %></td>
+							<td><%= record.games_back_division %></td>
+							<td><%= record.game_streak %></td>
 						</tr>
 					<% } %>
 				</table>

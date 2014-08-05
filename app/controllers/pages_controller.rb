@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @year = Season.last.year
+    @year = Team.last.year
   end
 
   def team
