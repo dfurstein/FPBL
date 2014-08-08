@@ -8,6 +8,7 @@ class Team < ActiveRecord::Base
   has_many :contracts, foreign_key: [:year, :franchise_id]
   has_many :players,  foreign_key: [:year, :player_id], through: :contracts
   has_one :standing, foreign_key: [:year, :franchise_id]
+  belongs_to :owner
 
   def name
     city + ' ' + nickname

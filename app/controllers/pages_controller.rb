@@ -1,3 +1,4 @@
+# Controller to pass values to the view
 class PagesController < ApplicationController
   def index
     @year = Team.last.year
@@ -5,11 +6,12 @@ class PagesController < ApplicationController
 
   def team
     @franchise_id = params[:id]
-    @team = Season.current_team(@franchise_id)
-    @owner = Season.current_owner(@franchise_id)
-    @year = Season.last.year
-    @pitchers = ['SP', 'MR', 'CL']
-    @hitters = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH']
+    @year = Team.last.year
+    @team = Team.find(@year, @franchise_id)
+    @owner = Team.find(@year, @franchise_id).owner
+
+    @pitchers = %w(SP MR CL)
+    @hitters = %w(C 1B 2B 3B SS LF CF RF DH)
   end
 
   def standings

@@ -77,15 +77,15 @@ ActiveRecord::Schema.define(:version => 20140324211205) do
   end
 
   create_table "players", :id => false, :force => true do |t|
-    t.integer  "player_id",  :null => false
-    t.integer  "year",       :null => false
-    t.string   "dmb_name",   :null => false
-    t.string   "first_name", :null => false
-    t.string   "last_name",  :null => false
-    t.string   "position",   :null => false
-    t.string   "hand"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "player_id",                    :null => false
+    t.integer  "year",                         :null => false
+    t.string   "dmb_name",                     :null => false
+    t.string   "first_name",                   :null => false
+    t.string   "last_name",                    :null => false
+    t.string   "position",                     :null => false
+    t.boolean  "active",     :default => true, :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "players", ["year", "player_id"], :name => "index_players_on_year_and_player_id", :unique => true

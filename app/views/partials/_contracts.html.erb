@@ -18,13 +18,13 @@
 						</tr>
 						<% contracts.each { |player| %>
 							<tr>
-								<td><%= player.full_name %></td>
+								<td><%= player.name %></td>
 								<% contract = player.current_contract(@year, @franchise_id) %>
 								<% 5.times { |idx| %>
 									<% if contract[idx].nil? %>
 										<td><!-- No Salary --></td>
 									<% else %>
-										<% if contract[idx].release %><td class="danger"><% else %><td><% end %>
+										<% if contract[idx].released %><td class="danger"><% else %><td><% end %>
 											<%= contract[idx].salary %>
 										</td>
 									<% end %>
@@ -56,13 +56,13 @@
 						</tr>
 						<% contracts.each { |player| %>
 							<tr>
-								<td><%= player.full_name %></td>
+								<td><%= player.name %></td>
 								<% contract = player.current_contract(@year, @franchise_id) %>
 								<% 5.times { |idx| %>
 									<% if contract[idx].nil? %>
 										<td><!-- No Salary --></td>
 									<% else %>
-										<% if contract[idx].release %><td class="danger"><% else %><td><% end %>
+										<% if contract[idx].released %><td class="danger"><% else %><td><% end %>
 											<%= contract[idx].salary %>
 										</td>
 									<% end %>

@@ -8,7 +8,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.string :first_name, null: false
       t.string :last_name, null: false
       t.string :position, null: false
-      t.string :hand
+      t.boolean :active, default: true, null: false
 
       t.timestamps
     end

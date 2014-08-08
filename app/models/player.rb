@@ -3,7 +3,7 @@ class Player < ActiveRecord::Base
   self.primary_keys = :year, :player_id
 
   attr_accessible :player_id, :year, :dmb_name, :first_name, :last_name,
-                  :position, :hand
+                  :position, :active
 
   has_many :contracts, foreign_key: [:year, :player_id]
   has_many :teams,  foreign_key: [:year, :franchise_id], through: :contracts
