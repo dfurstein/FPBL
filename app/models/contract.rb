@@ -8,7 +8,7 @@ class Contract < ActiveRecord::Base
   belongs_to :player,  foreign_key: [:year, :player_id]
 
   def self.under_contract(year, franchise_id)
-    Contract.where("year = #{year} and franchise_id = #{franchise_id}")
+    Contract.where(year: year, franchise_id: franchise_id)
       .map { |contract| contract.player }
       .sort_by { |player| [player.last_name, player.first_name] }
   end

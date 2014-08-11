@@ -15,7 +15,6 @@ class Team < ActiveRecord::Base
   end
 
   def self.current_teams
-    where("year = #{last.year}").map { |team| team }
-      .sort_by { |team| team.name }
+    where(year: last.year).map { |team| team }.sort_by { |team| team.name }
   end
 end

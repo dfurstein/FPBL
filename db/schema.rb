@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(:version => 20140324211205) do
 
   add_index "players", ["year", "player_id"], :name => "index_players_on_year_and_player_id", :unique => true
 
-  create_table "schedules", :id => false, :force => true do |t|
+  create_table "schedules", :force => true do |t|
     t.date     "date",          :null => false
     t.string   "away_team",     :null => false
     t.integer  "away_score",    :null => false

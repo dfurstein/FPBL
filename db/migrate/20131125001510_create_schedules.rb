@@ -1,7 +1,7 @@
 # Migration to create schedule
 class CreateSchedules < ActiveRecord::Migration
   def change
-    create_table :schedules, id: false do |t|
+    create_table :schedules do |t|
       t.date :date, null: false
       t.string :away_team, null: false
       t.integer :away_score, null: false

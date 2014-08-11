@@ -5,7 +5,7 @@ class Player < ActiveRecord::Base
   attr_accessible :player_id, :year, :dmb_name, :first_name, :last_name,
                   :position, :active
 
-  has_many :contracts, foreign_key: [:year, :player_id]
+  has_many :contracts, primary_key: :player_id
   has_many :teams,  foreign_key: [:year, :franchise_id], through: :contracts
 
   def name

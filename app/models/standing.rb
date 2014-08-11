@@ -8,16 +8,15 @@ class Standing < ActiveRecord::Base
   belongs_to :team, foreign_key: [:year, :franchise_id]
 
   def self.leagues(year)
-    Standing.where("year = #{year}").uniq.pluck(:league)
+    Standing.where(year: year).uniq.pluck(:league)
   end
 
   def self.divisions_by_league(year, league)
-    Standing.where("year = #{year} and league = '#{league}'").uniq.pluck(:division)
+    Standing.where(year: year, league: league).uniq.pluck(:division)
   end
 
   def self.records_by_divisions(year, league, division)
-    Standing.where("year = #{year} and league = '#{league}'
-      and division = '#{division}'")
+    Standing.where(year: year, league: league, division: division)
   end
 
   def win_percentage
