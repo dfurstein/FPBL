@@ -1,30 +1,31 @@
-<% contracts = Contract.under_contract_per_position(@year, @franchise_id, position) %>
-<% if contracts.size == 0 then next end%>
-<div class="panel panel-info">
-	<div class="panel-heading"><%= Player.position_name(position).pluralize %></div>
-	<table class='table table-condensed'>
-		<tr>
-			<th class="col-sm-4 col-sm-offset-3">Player</th>
-			<th class="col-sm-1"><%= @year %></th>
-			<th class="col-sm-1"><%= @year + 1 %></th>
-			<th class="col-sm-1"><%= @year + 2 %></th>
-			<th class="col-sm-1"><%= @year + 3 %></th>
-			<th class="col-sm-1"><%= @year + 4 %></th>
-		</tr>
-		<% contracts.each { |player| %>
-			<% if !player.active %><tr class="active"><% else %><tr><% end %>
-				<td><%= player.name %></td>
-				<% contract = player.current_contract(@year, @franchise_id) %>
-				<% 5.times { |idx| %>
-					<% if contract[idx].nil? %>
-						<td><!-- No Salary --></td>
-					<% else %>
-						<% if contract[idx].released %><td class="danger"><% else %><td><% end %>
-							<%= contract[idx].salary %>
-						</td>
-					<% end %>
-				<% } %>
+<% contracts = Contract.under_contract_per_position(@year, @franchise_id, @position) %>
+<% if contracts.size != 0 %>
+	<div class="panel panel-info">
+		<div class="panel-heading"><%= Player.position_name(@position).pluralize %></div>
+		<table class='table table-condensed'>
+			<tr>
+				<th class="col-sm-4 col-sm-offset-3">Player</th>
+				<th class="col-sm-1"><%= @year %></th>
+				<th class="col-sm-1"><%= @year + 1 %></th>
+				<th class="col-sm-1"><%= @year + 2 %></th>
+				<th class="col-sm-1"><%= @year + 3 %></th>
+				<th class="col-sm-1"><%= @year + 4 %></th>
 			</tr>
-		<% } %>
-	</table>
-</div>
+			<% contracts.each { |player| %>
+				<% if !player.active %><tr class="active"><% else %><tr><% end %>
+					<td><%= player.name %></td>
+					<% contract = player.current_contract(@year, @franchise_id) %>
+					<% 5.times { |idx| %>
+						<% if contract[idx].nil? %>
+							<td><!-- No Salary --></td>
+						<% else %>
+							<% if contract[idx].released %><td class="danger"><% else %><td><% end %>
+								<%= contract[idx].salary.round(1) %>
+							</td>
+						<% end %>
+					<% } %>
+				</tr>
+			<% } %>
+		</table>
+	</div>
+<% end %>
