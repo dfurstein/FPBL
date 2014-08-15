@@ -5,11 +5,9 @@
 		<table class='table table-condensed'>
 			<tr>
 				<th class="col-sm-4 col-sm-offset-3">Player</th>
-				<th class="col-sm-1"><%= @year %></th>
-				<th class="col-sm-1"><%= @year + 1 %></th>
-				<th class="col-sm-1"><%= @year + 2 %></th>
-				<th class="col-sm-1"><%= @year + 3 %></th>
-				<th class="col-sm-1"><%= @year + 4 %></th>
+				<% 5.times { |idx| %>
+					<th class="col-sm-1"><%= @year + idx %></th>
+				<% } %>
 			</tr>
 			<% contracts.each { |player| %>
 				<% if !player.active %><tr class="active"><% else %><tr><% end %>
