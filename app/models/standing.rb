@@ -36,10 +36,10 @@ class Standing < ActiveRecord::Base
         "year = #{year} and league = '#{league}' and division = '#{division}'"
       ).max_by { |standing| standing.wins }.wins - wins
 
-    if games_back == 0
-      '-'
-    else
-      games_back
-    end
+    games_back == 0 ? '-' : games_back
+  end
+
+  def record
+    "#{wins} - #{losses}"
   end
 end

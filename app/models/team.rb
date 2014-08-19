@@ -17,4 +17,18 @@ class Team < ActiveRecord::Base
   def self.current_teams
     where(year: last.year).map { |team| team }.sort_by { |team| team.name }
   end
+
+  def record
+    standing.nil? ? '' : standing.record
+  end
+
+  def games_back
+    if standing.nil?
+      ''
+    elsif standing.games_back_division == '-'
+      ''
+    else
+      ", #{standing.games_back_division} GB"
+    end
+  end
 end

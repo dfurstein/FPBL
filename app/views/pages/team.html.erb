@@ -22,7 +22,11 @@
 	     	<p> and so on ...</p>
 	    </div>
 	    <div id="pane3" class="tab-pane">
-	     	<h4>Pane 3 Content</h4>
+	     	<div class="row">
+				<div class="col-md-12">
+					<%= render 'partials/history', locals: {franchise_id: @franchise_id} %>
+				</div>
+			</div>
 	    </div>
 	    <div id="pane4" class="tab-pane">
 	    	<h4>Pane 4 Content</h4>s
