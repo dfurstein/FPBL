@@ -1,30 +1,30 @@
 <% Standing.leagues(@year).sort.each { |league| %>
-	<div class="panel panel-primary">
-		<div class="panel-heading"><%= league %> League</div>
-		<% Standing.divisions_by_league(@year, league).sort.each { |division| %>
-			<div class="panel panel-info">
-				<div class="panel-heading"><%= division %> Division</div>
-				<table class='table table-bordered table-condensed'>
-					<tr>
-						<th class="col-sm-4 col-sm-offset-3">Team</th>
-						<th class="col-sm-1">W</th>
-						<th class="col-sm-1">L</th>
-						<th class="col-sm-1">Pct</th>
-						<th class="col-sm-1">GB</th>
-						<th class="col-sm-1">Strk</th>
-					</tr>
-					<% Standing.records_by_divisions(@year, league, division).sort_by { |record| - record.wins }.each { |record| %>
-						<tr>
-							<td><%= record.team.name %></td>
-							<td><%= record.wins %></td>
-							<td><%= record.losses %></td>
-							<td><%= record.win_percentage %></td>
-							<td><%= record.games_back_division %></td>
-							<td><%= record.game_streak %></td>
-						</tr>
-					<% } %>
-				</table>
-			</div>
-		<% } %>
-	</div>
+  <div class="panel panel-primary">
+    <div class="panel-heading"><%= league %> League</div>
+    <% Standing.divisions_by_league(@year, league).sort.each { |division| %>
+      <div class="panel panel-info">
+        <div class="panel-heading"><%= division %> Division</div>
+        <table class='table table-bordered table-condensed'>
+          <tr>
+            <th class="col-sm-4 col-sm-offset-3">Team</th>
+            <th class="col-sm-1">W</th>
+            <th class="col-sm-1">L</th>
+            <th class="col-sm-1">Pct</th>
+            <th class="col-sm-1">GB</th>
+            <th class="col-sm-1">Strk</th>
+          </tr>
+          <% Standing.records_by_divisions(@year, league, division).sort_by { |record| - record.wins }.each { |record| %>
+            <tr>
+              <td><%= record.team.name %></td>
+              <td><%= record.wins %></td>
+              <td><%= record.losses %></td>
+              <td><%= record.win_percentage %></td>
+              <td><%= record.games_back_division %></td>
+              <td><%= record.game_streak %></td>
+            </tr>
+          <% } %>
+        </table>
+      </div>
+    <% } %>
+  </div>
 <% } %>

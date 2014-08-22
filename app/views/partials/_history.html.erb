@@ -1,20 +1,20 @@
 <div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Franchise History</div>
-			<% Team.pluck(:year).uniq.sort_by { |year| -year }.each { |year| year %>
-				<div class="panel panel-info">
-					<div class="panel-heading"><%= year %></div>
-					<dl class="dl-horizontal">
-  						<dt>Team:</dt>
-  						<dd><%= Team.find(year, @franchise_id).name %></dd>
-  						<dt>Owner:</dt>
-  						<dd><%= Team.find(year, @franchise_id).owner.name %></dd>
-  						<dt>Record:</dt>
-  						<dd><%= Team.find(year, @franchise_id).record %><%= Team.find(year, @franchise_id).games_back %></dd>
-					</dl>
-				</div>
-			<% } %>
-		</div>
-	</div>
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Franchise History</div>
+      <% Team.pluck(:year).uniq.sort_by { |year| -year }.each { |year| year %>
+        <div class="panel panel-info">
+          <div class="panel-heading"><%= year %></div>
+          <dl class="dl-horizontal">
+              <dt>Team:</dt>
+              <dd><%= Team.find(year, @franchise_id).name %></dd>
+              <dt>Owner:</dt>
+              <dd><%= Team.find(year, @franchise_id).owner.name %></dd>
+              <dt>Record:</dt>
+              <dd><%= Team.find(year, @franchise_id).record %><%= Team.find(year, @franchise_id).games_back %></dd>
+          </dl>
+        </div>
+      <% } %>
+    </div>
+  </div>
 </div>

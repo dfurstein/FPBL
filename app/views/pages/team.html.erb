@@ -2,34 +2,30 @@
   <h1><%= @team.name %><small>&nbsp;&nbsp;&nbsp;<%= @owner.name %></small></h1>
 </div>
 
-<div class="tabbable">
-	<ul class="nav nav-tabs">
-	    <li class="active"><a href="#pane1" data-toggle="tab">Contracts</a></li>
-	    <li><a href="#pane2" data-toggle="tab">Schedule</a></li>
-	    <li><a href="#pane3" data-toggle="tab">History</a></li>
-	    <li><a href="#pane4" data-toggle="tab">Tab 4</a></li>
-  	</ul>
-	<div class="tab-content">
-	    <div id="pane1" class="tab-pane active">
-			<div class="row">
-				<div class="col-md-12">
-					<%= render 'partials/contracts', locals: {year: @year, franchise_id: @franchise_id} %>
-				</div>
-			</div>
-	    </div>
-	    <div id="pane2" class="tab-pane">
-	    	<h4>Pane 2 Content</h4>
-	     	<p> and so on ...</p>
-	    </div>
-	    <div id="pane3" class="tab-pane">
-	     	<div class="row">
-				<div class="col-md-12">
-					<%= render 'partials/history', locals: {franchise_id: @franchise_id} %>
-				</div>
-			</div>
-	    </div>
-	    <div id="pane4" class="tab-pane">
-	    	<h4>Pane 4 Content</h4>s
-	    </div>
-	</div><!-- /.tab-content -->
+<div class="tabbable" id="team-tabs">
+  <ul class="nav nav-tabs">
+      <li class="active"><a href="#pane1" data-toggle="tab">Contracts</a></li>
+      <li><a href="#pane2" data-toggle="tab">Schedule</a></li>
+      <li><a href="#pane3" data-toggle="tab">History</a></li>
+    </ul>
+  <div class="tab-content">
+      <div id="pane1" class="tab-pane active">
+      <div class="row">
+        <div class="col-md-12">
+          <%= render 'partials/contracts', locals: {year: @year, franchise_id: @franchise_id} %>
+        </div>
+      </div>
+      </div>
+      <div id="pane2" class="tab-pane">
+        <h4>Pane 2 Content</h4>
+        <p> and so on ...</p>
+      </div>
+      <div id="pane3" class="tab-pane">
+        <div class="row">
+        <div class="col-md-12">
+          <%= render 'partials/history', locals: {franchise_id: @franchise_id} %>
+        </div>
+      </div>
+      </div>
+  </div><!-- /.tab-content -->
 </div><!-- /.tabbable -->

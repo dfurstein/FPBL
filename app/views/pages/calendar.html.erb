@@ -1,91 +1,91 @@
 <ul class="pager">
-	<li class="previous">
-		<%= link_to calendar_path(month: (@date << 1).month, year: (@date << 1).year) do %>
-		<span class="glyphicon glyphicon-chevron-left"></span>
-		<% end %>
-	</li>
-	<li class="next">
-		<%= link_to calendar_path(month: (@date >> 1).month, year: (@date >> 1).year) do %>
-		<span class="glyphicon glyphicon-chevron-right"></span>
-		<% end %>
-	</li>
+  <li class="previous">
+    <%= link_to calendar_path(month: (@date << 1).month, year: (@date << 1).year) do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <% end %>
+  </li>
+  <li class="next">
+    <%= link_to calendar_path(month: (@date >> 1).month, year: (@date >> 1).year) do %>
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <% end %>
+  </li>
 </ul>
 
 <div class="panel panel-primary">
-	<div class="panel-heading"><%= Date::MONTHNAMES[@date.month] %>&nbsp;<%= @date.year %></div>
-	<table class="table table-bordered table-condensed">
-		<tr>
-			<% Date::DAYNAMES.each { |day| %>
-			<th class="col-xs-1"><%= day %></th>
-			<% } %>	
-		</tr>
-		<% (@date.beginning_of_week..@date.end_of_month.end_of_week).each { |day| %>
-		<% games_for_day = @games.where("date = '#{day}'") %>
-		<% if day.wday == 1 %>
-		<!-- New Week -->
-		<tr>
-			<% end %>
-			
-			<% if day.month != @date.month %>
-			<td><!-- Not Current Month --></td>
-			<% else %>
-			<td>
-				<div class="panel-group" id="accordion">
-					<% if games_for_day.length > 0 %>
-					<div class="panel  panel-info" >
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="accordion" href='#collapse<%= "%02d" % day.day %>'>
-									<%= "%02d" % day.day %>
-								</a>
-							</h4>
-						</div>
-						<div id="collapse<%= "%02d" % day.day %>" class="panel-collapse collapse">
-							<div class="list-group">
-								<% games_for_day.each { |current_game| %>
-									<a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
-										<%= current_game.abbreviated_description %>
-									</a>
-									<div class="modal fade" id="boxscore<%= current_game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">
-														<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-													</button>
-													<h4 class="modal-title"><%= current_game.long_description %></h4>
-												</div>
-												<div class="modal-body">
-													<p>
-													</p>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								<% } %>							
-							</div>
-						</div>
-					</div>
-					<% else %>
-					<div class="panel  panel-default" >
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<%= "%02d" % day.day %>
-							</h4>
-						</div>
-					</div>
-					<% end %>
-				</div>
-			</td>
-			<% end %>
-			
-			<% if day.wday == 7 %>
-			<!-- End of Week -->
-		</tr>
-		<% end %>
-		<% } %>
-	</table>
+  <div class="panel-heading"><%= Date::MONTHNAMES[@date.month] %>&nbsp;<%= @date.year %></div>
+  <table class="table table-bordered table-condensed">
+    <tr>
+      <% Date::DAYNAMES.each { |day| %>
+      <th class="col-xs-1"><%= day %></th>
+      <% } %> 
+    </tr>
+    <% (@date.beginning_of_week..@date.end_of_month.end_of_week).each { |day| %>
+    <% games_for_day = @games.where("date = '#{day}'") %>
+    <% if day.wday == 1 %>
+    <!-- New Week -->
+    <tr>
+      <% end %>
+      
+      <% if day.month != @date.month %>
+      <td><!-- Not Current Month --></td>
+      <% else %>
+      <td>
+        <div class="panel-group" id="accordion">
+          <% if games_for_day.length > 0 %>
+          <div class="panel  panel-info" >
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="accordion" href='#collapse<%= "%02d" % day.day %>'>
+                  <%= "%02d" % day.day %>
+                </a>
+              </h4>
+            </div>
+            <div id="collapse<%= "%02d" % day.day %>" class="panel-collapse collapse">
+              <div class="list-group">
+                <% games_for_day.each { |current_game| %>
+                  <a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
+                    <%= current_game.abbreviated_description %>
+                  </a>
+                  <div class="modal fade" id="boxscore<%= current_game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                          </button>
+                          <h4 class="modal-title"><%= current_game.long_description %></h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>             
+              </div>
+            </div>
+          </div>
+          <% else %>
+          <div class="panel  panel-default" >
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <%= "%02d" % day.day %>
+              </h4>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </td>
+      <% end %>
+      
+      <% if day.wday == 7 %>
+      <!-- End of Week -->
+    </tr>
+    <% end %>
+    <% } %>
+  </table>
 </div>

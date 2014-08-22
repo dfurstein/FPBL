@@ -15,11 +15,13 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(document).ready(function() {
-	$("[id*='boxscore-modal']").click(
-		function(event) {
-			$.get('/boxscores/' + event.target.id.substring('boxscore-modal'.length) + '.php', function(data) {
-				$(event.target).parent().find('p').html('<pre>' + $(data).text().trim() + '</pre>');
-			}, 'text');
-	});
-});
+$(document).ready(
+	function() {
+		$("[id*='boxscore-modal']").click(
+			function(event) {
+				$.get('/boxscores/' + event.target.id.substring('boxscore-modal'.length) + '.php', function(data) {
+					$(event.target).parent().find('p').html('<pre>' + $(data).text().trim() + '</pre>');
+				}, 'text');
+		});
+	}
+);

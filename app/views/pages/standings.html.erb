@@ -1,14 +1,14 @@
 <div class='text-center'>
-	<ul class='pagination pagination-sm'>
-		<% @years.each { |year| %>
-			<% if @year == year.to_s %><li class='active'><% else %><li><% end %>
-				<%= link_to year, standings_path(year: year) %>
-			</li>
-		<% } %>
-	</ul>
+  <ul class='pagination pagination-sm'>
+    <% @years.each { |year| %>
+      <% if @year == year.to_s %><li class='active'><% else %><li><% end %>
+        <%= link_to year, standings_path(year: year) %>
+      </li>
+    <% } %>
+  </ul>
 </div>
 <div class="row">
-	<div class="col-md-10 col-md-offset-1">
-		<%= render 'partials/standings', locals: {year: @year} %>
-	</div>
+  <div class="col-md-10 col-md-offset-1">
+    <%= render 'partials/standings', locals: {year: @year} %>
+  </div>
 </div>
