@@ -1,4 +1,4 @@
-date,away_team,away_score,home_team,home_score,extra_innings
+date,away_team_abbreviation,away_score,home_team_abbreviation,home_score,extra_innings
 2008-04-02,Arr,3,Bal,9,
 2008-04-02,Bra,5,SR,3,10
 2008-04-02,Bro,8,LA,15,

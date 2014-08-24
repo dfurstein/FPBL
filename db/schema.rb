@@ -14,47 +14,46 @@
 ActiveRecord::Schema.define(:version => 20140324211205) do
 
   create_table "boxscores", :id => false, :force => true do |t|
-    t.date     "date",                                :null => false
-    t.string   "dmb_name",                            :null => false
-    t.string   "team",                                :null => false
-    t.string   "position",                            :null => false
-    t.string   "played_against",                      :null => false
-    t.boolean  "is_home_team",                        :null => false
-    t.integer  "at_bat",             :default => 0
-    t.integer  "run",                :default => 0
-    t.integer  "hit",                :default => 0
-    t.integer  "run_batted_in",      :default => 0
-    t.integer  "double",             :default => 0
-    t.integer  "triple",             :default => 0
-    t.integer  "homerun",            :default => 0
-    t.integer  "steal",              :default => 0
-    t.integer  "caught_stealing",    :default => 0
-    t.integer  "strike_out",         :default => 0
-    t.integer  "walk",               :default => 0
-    t.integer  "sacrifice_fly",      :default => 0
-    t.integer  "sacrifice",          :default => 0
-    t.integer  "hit_by_pitch",       :default => 0
-    t.integer  "win",                :default => 0
-    t.integer  "loss",               :default => 0
-    t.integer  "hold",               :default => 0
-    t.integer  "save_game",          :default => 0
-    t.integer  "blown_save",         :default => 0
-    t.decimal  "inning",             :default => 0.0
-    t.integer  "allowed_hit",        :default => 0
-    t.integer  "allowed_run",        :default => 0
-    t.integer  "allowed_earned_run", :default => 0
-    t.integer  "allowed_walk",       :default => 0
-    t.integer  "allowed_strike_out", :default => 0
-    t.integer  "hit_batter",         :default => 0
-    t.integer  "wild_pitch",         :default => 0
-    t.integer  "passed_ball",        :default => 0
-    t.integer  "balk",               :default => 0
-    t.integer  "error",              :default => 0
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.date     "date",                               :null => false
+    t.integer  "player_id",                          :null => false
+    t.integer  "franchise_id",                       :null => false
+    t.integer  "franchise_id_home",                  :null => false
+    t.integer  "franchise_id_away",                  :null => false
+    t.string   "position",                           :null => false
+    t.integer  "AB",                :default => 0
+    t.integer  "R",                 :default => 0
+    t.integer  "H",                 :default => 0
+    t.integer  "RBI",               :default => 0
+    t.integer  "D",                 :default => 0
+    t.integer  "T",                 :default => 0
+    t.integer  "HR",                :default => 0
+    t.integer  "SB",                :default => 0
+    t.integer  "CS",                :default => 0
+    t.integer  "K",                 :default => 0
+    t.integer  "BB",                :default => 0
+    t.integer  "SF",                :default => 0
+    t.integer  "SAC",               :default => 0
+    t.integer  "HBP",               :default => 0
+    t.integer  "W",                 :default => 0
+    t.integer  "L",                 :default => 0
+    t.integer  "S",                 :default => 0
+    t.integer  "BS",                :default => 0
+    t.decimal  "IP",                :default => 0.0
+    t.integer  "HA",                :default => 0
+    t.integer  "RA",                :default => 0
+    t.integer  "ER",                :default => 0
+    t.integer  "BBA",               :default => 0
+    t.integer  "KA",                :default => 0
+    t.integer  "HB",                :default => 0
+    t.integer  "WP",                :default => 0
+    t.integer  "PB",                :default => 0
+    t.integer  "BK",                :default => 0
+    t.integer  "E",                 :default => 0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
-  add_index "boxscores", ["date", "dmb_name"], :name => "index_boxscores_on_date_and_dmb_name", :unique => true
+  add_index "boxscores", ["date", "player_id"], :name => "index_boxscores_on_date_and_player_id", :unique => true
 
   create_table "contracts", :id => false, :force => true do |t|
     t.integer  "player_id",                                                     :null => false
@@ -91,17 +90,17 @@ ActiveRecord::Schema.define(:version => 20140324211205) do
   add_index "players", ["year", "player_id"], :name => "index_players_on_year_and_player_id", :unique => true
 
   create_table "schedules", :force => true do |t|
-    t.date     "date",          :null => false
-    t.string   "away_team",     :null => false
-    t.integer  "away_score",    :null => false
-    t.string   "home_team",     :null => false
-    t.integer  "home_score",    :null => false
+    t.date     "date",                   :null => false
+    t.string   "away_team_abbreviation", :null => false
+    t.integer  "away_score",             :null => false
+    t.string   "home_team_abbreviation", :null => false
+    t.integer  "home_score",             :null => false
     t.integer  "extra_innings"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
-  add_index "schedules", ["date", "home_team"], :name => "index_schedules_on_date_and_home_team", :unique => true
+  add_index "schedules", ["date", "home_team_abbreviation"], :name => "index_schedules_on_date_and_home_team_abbreviation", :unique => true
 
   create_table "standings", :id => false, :force => true do |t|
     t.integer  "year",          :null => false

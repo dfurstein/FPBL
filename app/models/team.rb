@@ -10,18 +10,24 @@ class Team < ActiveRecord::Base
   has_one :standing, foreign_key: [:year, :franchise_id]
   belongs_to :owner
 
-  def name
-    city + ' ' + nickname
+  def self.franchise_id_by_abbreviation(year, abbreviation)
+    where(year: year, abbreviation: abbreviation.upcase)
+      .pluck(:franchise_id).first
   end
 
   def self.current_teams
     where(year: last.year).map { |team| team }.sort_by { |team| team.name }
   end
 
+  def name
+    city + ' ' + nickname
+  end
+
   def record
     standing.nil? ? '' : standing.record
   end
 
+  # TODO: revist function and move it out of this model
   def games_back
     if standing.nil?
       ''

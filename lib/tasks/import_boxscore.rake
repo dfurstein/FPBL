@@ -1,4 +1,4 @@
-desc "Import boxscore into Game Log"
+desc 'Import boxscore into Game Log'
 
 namespace :import do
   task :boxscore, [:path] => :environment do |t, args|
@@ -6,74 +6,75 @@ namespace :import do
     puts args[:path]
 
     Dir.glob(args[:path]) do |file|
-      next if file == '.' or file == '..'
+      next if file == '.' || file == '..'
 
       puts file
 
       @date = Date.today
-      @home_team = ''
-      @away_team = ''
-      @current_team = ''
+      @franchise_id_home = -1
+      @franchise_id_away = -1
+      @current_franchise_id = -1
 
-      #0 = Do nothing
-      #1 = Load date and team names
-      #2 = Load hitter stats
-      #3 = Load pitchers stats
-      #4 = Store misc. stats
-      #5 = Load misc. stats
+      # 0 = Do nothing
+      # 1 = Load date and team names
+      # 2 = Load hitter stats
+      # 3 = Load pitchers stats
+      # 4 = Store misc. stats
+      # 5 = Load misc. stats
       @current_state = 0
 
       @starter = false
       @pitching_counter = 0
-      misc_stats = ""
+      additional_stats = ''
 
-      players = Hash.new
+      boxscores = Hash.new
 
       File.open(file).each do |line|
 
         state = state?(line)
-        if state != 0
-          @current_state = state
-        end
+        @current_state = state unless state == 0
 
         if @current_state == 1
           state_1(line)
         elsif @current_state == 2
-          state_2(players, line)
+          state_2(boxscores, line)
         elsif @current_state == 3
-          state_3(players, line)
+          state_3(boxscores, line)
         elsif @current_state == 4
-          misc_stats += state_4(line)
+          additional_stats += state_4(line)
         elsif @current_state == 5
-          state_5(players, misc_stats)
+          state_5(boxscores, additional_stats)
           break
         end
       end
 
-      players.each do |player, game|
+      boxscores.each do |player_id, boxscore|
         begin
-          game.save
+          puts "Importing boxscore on #{@date} for #{Player.find(@date.year, player_id).name}"
+          boxscore.save
         rescue ActiveRecord::RecordNotUnique
-        rescue => ex
-          puts game.inspect
-          puts ex
+          puts 'Boxscore already imported'
+        rescue => exception
+          puts boxscore.inspect
+          puts exception
         end
       end
     end
   end
 
   def state?(line)
-    if line.include? "<pre>"
+    if line.include? '<pre>'
       return 1
-    elsif line.include? "AB  R  H BI   AVG"
+    elsif line.include? 'AB  R  H BI   AVG'
       return 2
-    elsif line.include? "INN  H  R ER BB  K PCH STR   ERA"
+    elsif line.include? 'INN  H  R ER BB  K PCH STR   ERA'
       @starter = true
       @pitching_counter += 1
       return 3
-    elsif (["E-", "2B-", "3B-", "HR-", "RBI-", "SB-", "CS-", "K-", "BB-", "SF-", "SH-", "HBP-", "HB-", "WP-", "PB-", "BALK-"].any? { |word| line.include?(word) })
+    elsif %w(E- 2B- 3B- HR- RBI- SB- CS- K- BB- SF- SH- HBP- HB- WP- PB- BALK-)
+            .any? { |word| line.include?(word) }
       return 4
-    elsif line.include? "Temperature:"
+    elsif line.include? 'Temperature:'
       return 5
     else
       return 0
@@ -81,170 +82,183 @@ namespace :import do
   end
 
   def state_1(line)
-    stats = line.split(", ")
+    stats = line.split(', ')
+    return unless stats.length == 3
 
-    if stats.length == 3
-      @date = Date.strptime(stats[0], '%m/%d/%Y')
-      @away_team = stats[1].scan(/[a-zA-Z]+/)[0]
-      @home_team = stats[1].scan(/[a-zA-Z]+/)[1]
+    @date = Date.strptime(stats[0], '%m/%d/%Y')
 
-      @current_state = 0
-    end
+    @franchise_id_away = Team.franchise_id_by_abbreviation(
+      @date.year, stats[1].scan(/[a-zA-Z]+/)[0])
+
+    @franchise_id_home = Team.franchise_id_by_abbreviation(
+      @date.year, stats[1].scan(/[a-zA-Z]+/)[1])
+
+    @current_state = 0
   end
 
-  def state_2(players, line)
+  def state_2(boxscores, line)
     regexp = /([a-zA-Z][a-zA-Z ,'\.]*\s{3,})([\w\d]{1,2})\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\.\d]+)/
 
     teams = line.scan(regexp).length
 
-    if teams == 1 and @current_team.empty?
-      @current_team = line.strip[0,1].numeric? ? @home_team : @away_team
+    # Determine who is the current franchise
+    if teams == 1 && @current_franchise_id == -1
+      @current_franchise_id =
+        line.strip[0, 1].numeric? ? @franchise_id_home : @franchise_id_away
     end
 
     line.scan(regexp).each_with_index do |stats, index|
-      player = players.fetch(stats[0].strip, Game.new)
-      player.date = @date
+      player_id = Player.player_id_by_dmb_name(@date.year, stats[0].strip)
 
-      player.dmb_id = stats[0].strip
-      player.position = stats[1].strip
-      player.at_bat = stats[2]
-      player.run = stats[3]
-      player.hit = stats[4]
-      player.run_batted_in = stats[5]
+      boxscore = boxscores.fetch(player_id, Boxscore.new)
 
-      #Infer team information
+      boxscore.date = @date
+
+      # Infer team information
       if teams == 1
-        player.team = @current_team
-        player.home_or_away = @current_team == @home_team ? 'H' : 'A'
-        player.played_against = @current_team == @home_team ? @away_team : @home_team
+        boxscore.franchise_id = @current_franchise_id
       else
-        player.team = index == 0 ? @away_team : @home_team
-        player.home_or_away = index == 0 ? 'A' : 'H'
-        player.played_against = index == 0 ? @home_team : @away_team
+        boxscore.franchise_id =
+          index == 0 ? @franchise_id_away : @franchise_id_home
       end
 
-      players[stats[0].strip] = player
+      boxscore.franchise_id_home = @franchise_id_home
+      boxscore.franchise_id_away = @franchise_id_away
+
+      boxscore.player_id = player_id
+      boxscore.position = stats[1].strip
+      boxscore.AB = stats[2]
+      boxscore.R = stats[3]
+      boxscore.H = stats[4]
+      boxscore.RBI = stats[5]
+
+      boxscores[player_id] = boxscore
     end
   end
 
-  def state_3(players, line)
+  def state_3(boxscores, line)
     regexp = /([a-zA-Z ,'\.]+)\s{3,}([a-zA-Z]*)(\s[\d]+,*\s)*([a-zA-Z]*)(\s[\d]+-[\d]+)*\s+([\d\.]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d\.]+)/
 
     line.scan(regexp).each do |stats|
+      return if stats.nil?
 
-      if stats.nil?
-        return
-      end
+      player_id = Player.player_id_by_dmb_name(@date.year, stats[0].strip)
 
-      player = players.fetch(stats[0], Game.new)
-      player.date = @date
-      player.team = @pitching_counter == 1 ? @away_team : @home_team
-      player.played_against = @pitching_counter == 1 ? @home_team : @away_team
-      player.home_or_away = @pitching_counter == 1 ? "A" : "H"
-      player.dmb_id = stats[0].strip
-      player.position = @starter ? "SP" : "RP"
+      boxscore = boxscores.fetch(player_id, Boxscore.new)
+      boxscore.date = @date
 
-      player.win = stats[1] == 'W' ? 1 : stats[3] == 'W' ? 1 : 0
-      player.loss = stats[1] == 'L' ? 1 : stats[3] == 'L' ? 1 : 0
-      player.hold = stats[1] == 'H' ? 1 : stats[3] == 'H' ? 1 : 0
-      player.save_game = stats[1] == 'S' ? 1 : stats[3] == 'S' ? 1 : 0
-      player.blown_save = stats[1] == 'BS' ? 1 : stats[3] == 'BS' ? 1 : 0
+      boxscore.franchise_id =
+        @pitching_counter == 1 ? @franchise_id_away : @franchise_id_home
+      boxscore.franchise_id_home = @franchise_id_home
+      boxscore.franchise_id_away = @franchise_id_away
 
-      player.inning = BigDecimal(stats[5]).truncate + BigDecimal(stats[5]).frac * BigDecimal("10.0") / BigDecimal("3.0")
-      player.allowed_hit = stats[6]
-      player.allowed_run = stats[7]
-      player.allowed_earned_run = stats[8]
-      player.allowed_walk = stats[9]
-      player.allowed_strike_out = stats[10]
+      boxscore.player_id = player_id
+      boxscore.position = @starter ? 'SP' : 'RP'
 
-      players[stats[0].strip] = player
+      boxscore.W = (stats[1] == 'W' || stats[3] == 'W') ? 1 : 0
+      boxscore.L = (stats[1] == 'L' || stats[3] == 'L') ? 1 : 0
+      boxscore.H = (stats[1] == 'H' || stats[3] == 'H') ? 1 : 0
+      boxscore.S = (stats[1] == 'S' || stats[3] == 'S') ? 1 : 0
+      boxscore.BS = (stats[1] == 'BS' || stats[3] == 'BS') ? 1 : 0
+
+      boxscore.IP = BigDecimal(stats[5]).truncate + BigDecimal(stats[5]).frac *
+        BigDecimal('10.0') / BigDecimal('3.0')
+      boxscore.HA = stats[6]
+      boxscore.RA = stats[7]
+      boxscore.ER = stats[8]
+      boxscore.BBA = stats[9]
+      boxscore.KA = stats[10]
+
+      boxscores[player_id] = boxscore
 
       @starter = false
     end
   end
 
   def state_4(line)
-    return line.strip + " "
+    line.strip + ' '
   end
 
-  def state_5(players, line)
+  def state_5(boxscores, line)
     line.split("\.\s").each do |stat_line|
 
       stat = stat_line.partition('-').first.strip
 
-      stat_line.partition('-').last.split(", ").each do |name|
-        secondary_hitter_stats(players, stat, name)
+      stat_line.partition('-').last.split(', ').each do |name|
+        additional_stats(boxscores, stat, name)
       end
     end
   end
 
-  def strip_totals_from_secondary_stats(name_amount)
-    if name_amount.include? "("
-      return name_amount[0, name_amount.index("(")]
+  def strip_totals_from_additional_stats(name_amount)
+    if name_amount.include? '('
+      return name_amount[0, name_amount.index('(')]
     else
       return name_amount
     end
   end
 
-  def name_from_secondary_stats(name_amount)
+  def name_from_additional_stats(name_amount)
     if name_amount[-1, 1].numeric?
-      return name_amount[0, name_amount.rindex(" ")]
+      return name_amount[0, name_amount.rindex(' ')]
     else
       return name_amount
     end
   end
 
-  def amount_from_secondary_stats(name_amount)
+  def amount_from_additional_stats(name_amount)
     if name_amount[-1, 1].numeric?
-      index = name_amount.rindex(" ")
+      index = name_amount.rindex(' ')
       return name_amount[index + 1, name_amount.length - index]
     else
-      return "1"
+      return '1'
     end
   end
 
-  def secondary_hitter_stats(players, stat, name_amount)
-    name_amount = strip_totals_from_secondary_stats(name_amount)
-    name = name_from_secondary_stats(name_amount)
-    amount = amount_from_secondary_stats(name_amount)
+  def additional_stats(boxscores, stat, name_amount)
+    name_amount = strip_totals_from_additional_stats(name_amount)
+    name = name_from_additional_stats(name_amount)
+    amount = amount_from_additional_stats(name_amount)
 
-    player = players.fetch(name, Game.new)
-    player.dmb_id = name
+    player_id = Player.player_id_by_dmb_name(@date.year, name)
+
+    boxscore = boxscores.fetch(player_id, Boxscore.new)
+    boxscore.player_id = player_id
 
     if stat == 'E'
-      player.error = amount
+      boxscore.E = amount
     elsif stat == '2B'
-      player.double = amount
+      boxscore.D = amount
     elsif stat == '3B'
-      player.triple  = amount
+      boxscore.T  = amount
     elsif stat == 'HR'
-      player.homerun = amount
+      boxscore.HR = amount
     elsif stat == 'RBI'
-      player.run_batted_in = amount
+      boxscore.RBI = amount
     elsif stat == 'SB'
-      player.steal = amount
+      boxscore.S = amount
     elsif stat == 'CS'
-      player.caught_stealing = amount
+      boxscore.CS = amount
     elsif stat == 'K'
-      player.strike_out = amount
+      boxscore.K = amount
     elsif stat == 'BB'
-      player.walk = amount
+      boxscore.BB = amount
     elsif stat == 'SF'
-      player.sacrifice_fly = amount
+      boxscore.SF = amount
     elsif stat == 'SH'
-      player.sacrifice = amount
+      boxscore.SAC = amount
     elsif stat == 'HBP'
-      player.hit_by_pitch = amount
+      boxscore.HBP = amount
     elsif stat == 'HB'
-      player.hit_batter = amount
+      boxscore.HB = amount
     elsif stat == 'WP'
-      player.wild_pitch = amount
+      boxscore.WP = amount
     elsif stat == 'PB'
-      player.passed_ball = amount
+      boxscore.PB = amount
     elsif stat == 'BALK'
-      player.balk = amount
+      boxscore.BK = amount
     end
 
-    players[name] = player
+    boxscores[player_id] = boxscore
   end
 end

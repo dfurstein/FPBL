@@ -8,12 +8,8 @@ class Player < ActiveRecord::Base
   has_many :contracts, primary_key: :player_id
   has_many :teams,  foreign_key: [:year, :franchise_id], through: :contracts
 
-  def name
-    first_name + ' ' + last_name
-  end
-
-  def current_contract(year, franchise_id)
-    contracts.where("year >= #{year} and franchise_id = #{franchise_id}")
+  def self.player_id_by_dmb_name(year, dmb_name)
+    Player.where(year: year, dmb_name: dmb_name).pluck(:player_id).first
   end
 
   # ['SP', 'MR', 'CL', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH']
@@ -46,5 +42,13 @@ class Player < ActiveRecord::Base
     else
       'Unknown Position'
     end
+  end
+
+  def name
+    first_name + ' ' + last_name
+  end
+
+  def current_contract(year, franchise_id)
+    contracts.where("year >= #{year} and franchise_id = #{franchise_id}")
   end
 end
