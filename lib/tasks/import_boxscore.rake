@@ -52,6 +52,7 @@ namespace :import do
         begin
           puts "Importing boxscore on #{@date} for #{Player.find(@date.year, player_id).name}"
           boxscore.save
+          Statistic.update(boxscore)
         rescue ActiveRecord::RecordNotUnique
           puts 'Boxscore already imported'
         rescue => exception
@@ -157,7 +158,7 @@ namespace :import do
 
       boxscore.W = (stats[1] == 'W' || stats[3] == 'W') ? 1 : 0
       boxscore.L = (stats[1] == 'L' || stats[3] == 'L') ? 1 : 0
-      boxscore.H = (stats[1] == 'H' || stats[3] == 'H') ? 1 : 0
+      boxscore.HO = (stats[1] == 'H' || stats[3] == 'H') ? 1 : 0
       boxscore.S = (stats[1] == 'S' || stats[3] == 'S') ? 1 : 0
       boxscore.BS = (stats[1] == 'BS' || stats[3] == 'BS') ? 1 : 0
 
@@ -236,7 +237,7 @@ namespace :import do
     elsif stat == 'RBI'
       boxscore.RBI = amount
     elsif stat == 'SB'
-      boxscore.S = amount
+      boxscore.SB = amount
     elsif stat == 'CS'
       boxscore.CS = amount
     elsif stat == 'K'
@@ -257,6 +258,8 @@ namespace :import do
       boxscore.PB = amount
     elsif stat == 'BALK'
       boxscore.BK = amount
+    elsif stat == 'CI'
+      boxscore.CI = amount
     end
 
     boxscores[player_id] = boxscore

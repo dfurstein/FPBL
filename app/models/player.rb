@@ -48,6 +48,12 @@ class Player < ActiveRecord::Base
     first_name + ' ' + last_name
   end
 
+  def pitcher?
+    pitchers = %w(SP MR CL)
+
+    pitchers.include?(position.upcase)
+  end
+
   def current_contract(year, franchise_id)
     contracts.where("year >= #{year} and franchise_id = #{franchise_id}")
   end

@@ -4,26 +4,26 @@
     <div class="panel-heading"><%= Player.position_name(@position).pluralize %></div>
     <table class='table table-condensed'>
       <tr>
-          <th class="col-sm-4 col-sm-offset-3">Player</th>
-          <% 5.times { |idx| %>
-              <th class="col-sm-1"><%= @year + idx %></th>
-          <% } %>
+        <th class="col-sm-4 col-sm-offset-3">Player</th>
+        <% 5.times do |idx| %>
+            <th class="col-sm-1"><%= @year + idx %></th>
+        <% end %>
       </tr>
-      <% contracts.each { |player| %>
-          <% if !player.active %><tr class="active"><% else %><tr><% end %>
-              <td><%= player.name %></td>
-              <% contract = player.current_contract(@year, @franchise_id) %>
-              <% 5.times { |idx| %>
-                  <% if contract[idx].nil? %>
-                      <td><!-- No Salary --></td>
-                  <% else %>
-                      <% if contract[idx].released %><td class="danger"><% else %><td><% end %>
-                          <%= contract[idx].salary.round(1) %>
-                      </td>
-                  <% end %>
-              <% } %>
-          </tr>
-      <% } %>
+      <% contracts.each do |player| %>
+        <% if !player.active %><tr class="active"><% else %><tr><% end %>
+            <td><%= player.name %></td>
+            <% contract = player.current_contract(@year, @franchise_id) %>
+            <% 5.times do |idx| %>
+              <% if contract[idx].nil? %>
+                  <td><!-- No Salary --></td>
+              <% else %>
+                  <% if contract[idx].released %><td class="danger"><% else %><td><% end %>
+                      <%= contract[idx].salary.round(1) %>
+                  </td>
+              <% end %>
+          <% end %>
+        </tr>
+      <% end %>
     </table>
   </div>
 <% end %>

@@ -25,3 +25,14 @@ $(document).ready(
 		});
 	}
 );
+
+$(document).ready(
+	function() { 
+    $("#player-stats-by-team").tablesorter({
+      theme: "bootstrap",
+      widthFixed: true,
+      headerTemplate: '{content} {icon}',
+      widgets: ["uitheme"],
+    }); 
+  } 
+); 

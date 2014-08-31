@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Hitters</div>
+      <div class="table-responsive">
+        <table class='table table-condensed tablesorter' id="player-stats-by-team">
+          <thead>
+            <tr>
+              <th class="col-sm-2">Player</th>
+              <th class="col-sm-1">G</th>
+              <th class="col-sm-1">PA</th>
+              <th class="col-sm-1">HR</th>
+              <th class="col-sm-1">R</th>
+              <th class="col-sm-1">RBI</th>
+              <th class="col-sm-1">SB</th>
+              <th class="col-sm-1">BB%</th>
+              <th class="col-sm-1">K%</th>
+              <th class="col-sm-1">ISO</th>
+              <th class="col-sm-1">BABIP</th>
+              <th class="col-sm-1">AVG</th>
+              <th class="col-sm-1">OBP</th>
+              <th class="col-sm-1">SLG</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% Statistic.where(year: @year, franchise_id: @franchise_id).map { |stat| stat if (stat.PA > 0 && !stat.player.pitcher?) }.compact.each do |stat| %>
+            <tr>
+              <td><%= stat.player.name %></td>
+              <td><%= stat.G %></td>
+              <td><%= stat.PA %></td>
+              <td><%= stat.HR %></td>
+              <td><%= stat.R %></td>
+              <td><%= stat.RBI %></td>
+              <td><%= stat.SB %></td>
+              <td><%= '%.1f' % stat.BBPct.round(1) %></td>
+              <td><%= '%.1f' % stat.KPct.round(1) %></td>
+              <td><%= '%.3f' % stat.ISO.round(3) %></td>
+              <td><%= '%.3f' % stat.BABIP.round(3) %></td>
+              <td><%= '%.3f' % stat.AVG.round(3) %></td>
+              <td><%= '%.3f' % stat.OBP.round(3) %></td>
+              <td><%= '%.3f' % stat.SLG.round(3) %></td>
+            </tr>  
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

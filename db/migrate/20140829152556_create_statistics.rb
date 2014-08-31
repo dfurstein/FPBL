@@ -1,13 +1,11 @@
-# Migration to create boxscores
-class CreateBoxscores < ActiveRecord::Migration
+# Model representing the aggregate of the boxscores for each season
+class CreateStatistics < ActiveRecord::Migration
   def change
-    create_table :boxscores, id: false do |t|
-      t.date :date, null: false
+    create_table :statistics, id: false do |t|
+      t.date :year, null: false
       t.integer :player_id, null: false
       t.integer :franchise_id, null: false
-      t.integer :franchise_id_home, null: false
-      t.integer :franchise_id_away, null: false
-      t.string :position, null: false
+      t.integer :G, default: 0
       t.integer :AB, default: 0
       t.integer :R, default: 0
       t.integer :H, default: 0
@@ -43,6 +41,6 @@ class CreateBoxscores < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :boxscores, [:date, :player_id], unique: true
+    add_index :statistics, [:year, :player_id, :franchise_id], unique: true
   end
 end
