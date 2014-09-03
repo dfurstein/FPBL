@@ -47,6 +47,30 @@ class Statistic < ActiveRecord::Base
     stat.save
   end
 
+  def self.hitters(year, franchise_id)
+    where(year: year, franchise_id: franchise_id)
+      .select { |statistic| statistic.PA > 0 && !statistic.player.pitcher? }
+  end
+
+  def self.pitchers_as_hitters(year, franchise_id)
+    ignore = %w(year player_id franchise_id HO S BS IP HA RA ER BBA KA HB
+                WP PB BK created_at updated_at)
+
+    new(where(year: year, franchise_id: franchise_id)
+      .select { |statistic| statistic.PA > 0 && statistic.player.pitcher? }
+      .map(&:attributes)
+      .each_with_object({}) do |hash, result|
+        hash.each do |key, value|
+          (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
+        end; result
+      end)
+  end
+
+  def self.pitchers(year, franchise_id)
+    where(year: year, franchise_id: franchise_id)
+      .select { |statistic| statistic.IP > 0 && statistic.player.pitcher? }
+  end
+
   def PA
     self.AB + self.BB + self.HBP + self.SF + self.SAC + self.CI
   end
@@ -77,5 +101,13 @@ class Statistic < ActiveRecord::Base
 
   def BABIP
     (self.H - self.HR) /  (self.AB - self.K - self.HR + self.SF).to_f
+  end
+
+  def WHIP
+    (self.HA + self.BBA) / self.IP
+  end
+
+  def ERA
+    (self.ER / self.IP) * 9
   end
 end
