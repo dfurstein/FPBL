@@ -49,7 +49,7 @@ class Statistic < ActiveRecord::Base
 
   def self.hitters(year, franchise_id)
     where(year: year, franchise_id: franchise_id)
-      .select { |statistic| statistic.PA > 0 && !statistic.player.pitcher? }
+      .select { |statistic| statistic.PA > 0 && statistic.player.hitter? }
   end
 
   def self.pitchers_as_hitters(year, franchise_id)
@@ -57,9 +57,10 @@ class Statistic < ActiveRecord::Base
                 WP PB BK created_at updated_at)
 
     new(where(year: year, franchise_id: franchise_id)
-      .select { |statistic| statistic.PA > 0 && statistic.player.pitcher? }
+      .select { |statistic| statistic.player.pitcher? }
       .map(&:attributes)
       .each_with_object({}) do |hash, result|
+        puts hash['W']
         hash.each do |key, value|
           (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
         end; result
