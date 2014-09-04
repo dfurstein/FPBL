@@ -60,7 +60,19 @@ class Statistic < ActiveRecord::Base
       .select { |statistic| statistic.player.pitcher? }
       .map(&:attributes)
       .each_with_object({}) do |hash, result|
-        puts hash['W']
+        hash.each do |key, value|
+          (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
+        end; result
+      end)
+  end
+
+  def self.hitting_totals(year, franchise_id)
+    ignore = %w(year player_id franchise_id HO S BS IP HA RA ER BBA KA HB
+                WP PB BK created_at updated_at)
+
+    new(where(year: year, franchise_id: franchise_id)
+      .map(&:attributes)
+      .each_with_object({}) do |hash, result|
         hash.each do |key, value|
           (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
         end; result
@@ -70,6 +82,19 @@ class Statistic < ActiveRecord::Base
   def self.pitchers(year, franchise_id)
     where(year: year, franchise_id: franchise_id)
       .select { |statistic| statistic.IP > 0 && statistic.player.pitcher? }
+  end
+
+  def self.pitching_totals(year, franchise_id)
+    ignore = %w(year player_id franchise_id AB R H RBI D T HR SB CS K BB SF
+                SAC HBP CI created_at updated_at)
+
+    new(where(year: year, franchise_id: franchise_id)
+      .map(&:attributes)
+      .each_with_object({}) do |hash, result|
+        hash.each do |key, value|
+          (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
+        end; result
+      end)
   end
 
   def PA

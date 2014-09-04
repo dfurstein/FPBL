@@ -1,120 +1,168 @@
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-primary">
-      <div class="panel-heading">Hitters</div>
-      <div class="table-responsive">
-        <table class='table table-condensed'>
-          <thead>
-            <tr>
-              <th class="col-xs-2">Player</th>
-              <th class="col-xs-1">G</th>
-              <th class="col-xs-1">AB</th>
-              <th class="col-xs-1">R</th>
-              <th class="col-xs-1">H</th>
-              <th class="col-xs-1">2B</th>
-              <th class="col-xs-1">3B</th>
-              <th class="col-xs-1">HR</th>
-              <th class="col-xs-1">RBI</th>
-              <th class="col-xs-1">BB</th>
-              <th class="col-xs-1">SO</th>
-              <th class="col-xs-1">SB</th>
-              <th class="col-xs-1">CS</th>
-              <th class="col-xs-1">AVG</th>
-              <th class="col-xs-1">OBP</th>
-              <th class="col-xs-1">SLG</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% Statistic.hitters(@year, @franchise_id).each do |stat| %>
-            <tr>
-              <td><%= stat.player.name %></td>
-              <td><%= stat.G %></td>
-              <td><%= stat.AB %></td>
-              <td><%= stat.R %></td>
-              <td><%= stat.H %></td>
-              <td><%= stat.D %></td>
-              <td><%= stat.T %></td>
-              <td><%= stat.HR %></td>
-              <td><%= stat.RBI %></td>
-              <td><%= stat.BB %></td>
-              <td><%= stat.K %></td>
-              <td><%= stat.SB %></td>
-              <td><%= stat.CS %></td>              
-              <td><%= '%.3f' % stat.AVG.round(3) %></td>
-              <td><%= '%.3f' % stat.OBP.round(3) %></td>
-              <td><%= '%.3f' % stat.SLG.round(3) %></td>
-            </tr>  
-          <% end %>
-          <% stat = Statistic.pitchers_as_hitters(@year, @franchise_id) %>
-          <% if stat.G > 0 %>
-            <tr>
-              <td><%= 'All Pitchers' %></td>
-              <td><%= stat.W + stat.L %></td>
-              <td><%= stat.AB %></td>
-              <td><%= stat.R %></td>
-              <td><%= stat.H %></td>
-              <td><%= stat.D %></td>
-              <td><%= stat.T %></td>
-              <td><%= stat.HR %></td>
-              <td><%= stat.RBI %></td>
-              <td><%= stat.BB %></td>
-              <td><%= stat.K %></td>
-              <td><%= stat.SB %></td>
-              <td><%= stat.CS %></td>              
-              <td><%= '%.3f' % stat.AVG.round(3) %></td>
-              <td><%= '%.3f' % stat.OBP.round(3) %></td>
-              <td><%= '%.3f' % stat.SLG.round(3) %></td>
-            </tr>  
-          <% end %>
-          </tbody>
-        </table>
+      <div class="panel-heading">Statistics</div>
+      <div class="panel panel-info">
+        <div class="panel-heading">Hitters</div>
+        <div class="table-responsive">
+          <table class='table table-condensed tablesorter' id='hitting-stats'>
+            <thead>
+              <tr>
+                <th class="col-xs-2">Player</th>
+                <th class="col-xs-1">G</th>
+                <th class="col-xs-1">AB</th>
+                <th class="col-xs-1">R</th>
+                <th class="col-xs-1">H</th>
+                <th class="col-xs-1">2B</th>
+                <th class="col-xs-1">3B</th>
+                <th class="col-xs-1">HR</th>
+                <th class="col-xs-1">RBI</th>
+                <th class="col-xs-1">BB</th>
+                <th class="col-xs-1">SO</th>
+                <th class="col-xs-1">SB</th>
+                <th class="col-xs-1">CS</th>
+                <th class="col-xs-1">AVG</th>
+                <th class="col-xs-1">OBP</th>
+                <th class="col-xs-1">SLG</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% Statistic.hitters(@year, @franchise_id).each do |stat| %>
+              <tr>
+                <td><%= stat.player.name %></td>
+                <td><%= stat.G %></td>
+                <td><%= stat.AB %></td>
+                <td><%= stat.R %></td>
+                <td><%= stat.H %></td>
+                <td><%= stat.D %></td>
+                <td><%= stat.T %></td>
+                <td><%= stat.HR %></td>
+                <td><%= stat.RBI %></td>
+                <td><%= stat.BB %></td>
+                <td><%= stat.K %></td>
+                <td><%= stat.SB %></td>
+                <td><%= stat.CS %></td>              
+                <td><%= '%.3f' % stat.AVG.round(3) %></td>
+                <td><%= '%.3f' % stat.OBP.round(3) %></td>
+                <td><%= '%.3f' % stat.SLG.round(3) %></td>
+              </tr>  
+            <% end %>
+            <% stat = Statistic.pitchers_as_hitters(@year, @franchise_id) %>
+            <% if stat.PA > 0 %>
+              <tr>
+                <td><%= 'All Pitchers' %></td>
+                <td><%= stat.W + stat.L %></td>
+                <td><%= stat.AB %></td>
+                <td><%= stat.R %></td>
+                <td><%= stat.H %></td>
+                <td><%= stat.D %></td>
+                <td><%= stat.T %></td>
+                <td><%= stat.HR %></td>
+                <td><%= stat.RBI %></td>
+                <td><%= stat.BB %></td>
+                <td><%= stat.K %></td>
+                <td><%= stat.SB %></td>
+                <td><%= stat.CS %></td>              
+                <td><%= '%.3f' % stat.AVG.round(3) %></td>
+                <td><%= '%.3f' % stat.OBP.round(3) %></td>
+                <td><%= '%.3f' % stat.SLG.round(3) %></td>
+              </tr>  
+            <% end %>
+            </tbody>
+            <% stat = Statistic.hitting_totals(@year, @franchise_id) %>
+            <tfoot>
+              <tr>
+                <th><%= 'Totals' %></th>
+                <th><%= stat.W + stat.L %></th>
+                <th><%= stat.AB %></th>
+                <th><%= stat.R %></th>
+                <th><%= stat.H %></th>
+                <th><%= stat.D %></th>
+                <th><%= stat.T %></th>
+                <th><%= stat.HR %></th>
+                <th><%= stat.RBI %></th>
+                <th><%= stat.BB %></th>
+                <th><%= stat.K %></th>
+                <th><%= stat.SB %></th>
+                <th><%= stat.CS %></th>              
+                <th><%= '%.3f' % stat.AVG.round(3) %></th>
+                <th><%= '%.3f' % stat.OBP.round(3) %></th>
+                <th><%= '%.3f' % stat.SLG.round(3) %></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
-      <div class="panel-heading">Pitchers</div>
-      <div class="table-responsive">
-        <table class='table table-condensed'>
-          <thead>
-            <tr>
-              <th class="col-xs-2">Player</th>
-              <th class="col-xs-1">G</th>
-              <th class="col-xs-1">IP</th>
-              <th class="col-xs-1">R</th>
-              <th class="col-xs-1">H</th>
-              <th class="col-xs-1">ER</th>
-              <th class="col-xs-1">BB</th>
-              <th class="col-xs-1">SO</th>
-              <th class="col-xs-1">HBP</th>
-              <th class="col-xs-1">W</th>
-              <th class="col-xs-1">L</th>
-              <th class="col-xs-1">SV</th>
-              <th class="col-xs-1">HLD</th>
-              <th class="col-xs-1">BS</th>
-              <th class="col-xs-1">WHIP</th>
-              <th class="col-xs-1">ERA</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% Statistic.pitchers(@year, @franchise_id).each do |stat| %>
-            <tr>
-              <td><%= stat.player.name %></td>
-              <td><%= stat.G %></td>
-              <td><%= '%.1f' % (stat.IP.truncate + stat.IP.frac * BigDecimal('3.0') / BigDecimal('10.0')).round(1) %></td>
-              <td><%= stat.RA %></td>
-              <td><%= stat.HA %></td>
-              <td><%= stat.ER %></td>
-              <td><%= stat.BBA %></td>
-              <td><%= stat.KA %></td>
-              <td><%= stat.HB %></td>
-              <td><%= stat.W %></td>
-              <td><%= stat.L %></td>
-              <td><%= stat.S %></td>
-              <td><%= stat.HO %></td>
-              <td><%= stat.BS %></td>               
-              <td><%= '%.2f' % stat.WHIP.round(2) %></td>
-              <td><%= '%.2f' % stat.ERA.round(2) %></td>
-            </tr>  
-          <% end %>
-          </tbody>
-        </table>
+      <div class="panel panel-info">
+        <div class="panel-heading">Pitchers</div>
+        <div class="table-responsive">
+          <table class='table table-condensed tablesorter' id='pitching-stats'>
+            <thead>
+              <tr>
+                <th class="col-xs-2">Player</th>
+                <th class="col-xs-1">G</th>
+                <th class="col-xs-1">IP</th>
+                <th class="col-xs-1">R</th>
+                <th class="col-xs-1">H</th>
+                <th class="col-xs-1">ER</th>
+                <th class="col-xs-1">BB</th>
+                <th class="col-xs-1">SO</th>
+                <th class="col-xs-1">HBP</th>
+                <th class="col-xs-1">W</th>
+                <th class="col-xs-1">L</th>
+                <th class="col-xs-1">SV</th>
+                <th class="col-xs-1">HLD</th>
+                <th class="col-xs-1">BS</th>
+                <th class="col-xs-1">WHIP</th>
+                <th class="col-xs-1">ERA</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% Statistic.pitchers(@year, @franchise_id).each do |stat| %>
+              <tr>
+                <td><%= stat.player.name %></td>
+                <td><%= stat.G %></td>
+                <td><%= '%.1f' % (stat.IP.truncate + stat.IP.frac * BigDecimal('3.0') / BigDecimal('10.0')).round(1) %></td>
+                <td><%= stat.RA %></td>
+                <td><%= stat.HA %></td>
+                <td><%= stat.ER %></td>
+                <td><%= stat.BBA %></td>
+                <td><%= stat.KA %></td>
+                <td><%= stat.HB %></td>
+                <td><%= stat.W %></td>
+                <td><%= stat.L %></td>
+                <td><%= stat.S %></td>
+                <td><%= stat.HO %></td>
+                <td><%= stat.BS %></td>               
+                <td><%= '%.2f' % stat.WHIP.round(2) %></td>
+                <td><%= '%.2f' % stat.ERA.round(2) %></td>
+              </tr>  
+            <% end %>
+            </tbody>
+            <% stat = Statistic.pitching_totals(@year, @franchise_id) %>
+            <tfoot>
+              <tr>
+                <th><%= 'Totals' %></th>
+                <th><%= stat.W + stat.L %></th>
+                <th><%= '%.1f' % (stat.IP.truncate + stat.IP.frac * BigDecimal('3.0') / BigDecimal('10.0')).round(1) %></th>
+                <th><%= stat.RA %></th>
+                <th><%= stat.HA %></th>
+                <th><%= stat.ER %></th>
+                <th><%= stat.BBA %></th>
+                <th><%= stat.KA %></th>
+                <th><%= stat.HB %></th>
+                <th><%= stat.W %></th>
+                <th><%= stat.L %></th>
+                <th><%= stat.S %></th>
+                <th><%= stat.HO %></th>
+                <th><%= stat.BS %></th>               
+                <th><%= '%.2f' % stat.WHIP.round(2) %></th>
+                <th><%= '%.2f' % stat.ERA.round(2) %></th>
+              </tr>
+            </tfoot>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

@@ -23,16 +23,17 @@ $(document).ready(
 					$(event.target).parent().find('p').html('<pre>' + $(data).text().trim() + '</pre>');
 				}, 'text');
 		});
-	}
-);
 
-$(document).ready(
-	function() { 
-    $("#player-stats-by-team").tablesorter({
+    $("#hitting-stats").tablesorter({
       theme: "bootstrap",
       widthFixed: true,
-      headerTemplate: '{content} {icon}',
-      widgets: ["uitheme"],
+      sortList: [[13,1],[0,0]]
+    });
+
+    $("#pitching-stats").tablesorter({
+      theme: "bootstrap",
+      widthFixed: true,
+      sortList: [[15,0],[0,0]]
     }); 
   } 
 ); 
