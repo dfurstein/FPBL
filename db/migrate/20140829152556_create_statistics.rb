@@ -2,9 +2,10 @@
 class CreateStatistics < ActiveRecord::Migration
   def change
     create_table :statistics, id: false do |t|
-      t.date :year, null: false
+      t.integer :year, null: false
       t.integer :player_id, null: false
       t.integer :franchise_id, null: false
+      t.integer :playoff_round, default: 0
       t.integer :G, default: 0
       t.integer :AB, default: 0
       t.integer :R, default: 0
@@ -41,6 +42,7 @@ class CreateStatistics < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :statistics, [:year, :player_id, :franchise_id], unique: true
+    add_index :statistics, [:year, :player_id, :franchise_id, :playoff_round],
+              unique: true, name: 'index_statistics'
   end
 end

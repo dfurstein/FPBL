@@ -52,7 +52,10 @@ namespace :import do
         begin
           puts "Importing boxscore on #{@date} for #{Player.find(@date.year, player_id).name}"
           boxscore.save
-          Statistic.update(boxscore)
+
+          round = find_playoff_round(boxscore.date)
+
+          Statistic.update(boxscore, round)
         rescue ActiveRecord::RecordNotUnique
           puts 'Boxscore already imported'
         rescue => exception
@@ -263,5 +266,15 @@ namespace :import do
     end
 
     boxscores[player_id] = boxscore
+  end
+
+  def find_playoff_round(date)
+    case date
+    when Date.new(date.year, 4, 1)..Date.new(date.year, 9, 30) then 0
+    when Date.new(date.year, 10, 1)..Date.new(date.year, 10, 7) then 1
+    when Date.new(date.year, 10, 8)..Date.new(date.year, 10, 17) then 2
+    when Date.new(date.year, 10, 18)..Date.new(date.year, 10, 27) then 3
+    else -1
+    end
   end
 end

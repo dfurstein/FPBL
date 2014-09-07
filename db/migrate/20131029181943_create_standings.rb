@@ -10,7 +10,7 @@ class CreateStandings < ActiveRecord::Migration
       t.integer :losses, null: false
       t.integer :streak, null: false
       t.string :playoff_berth
-      t.string :playoff_depth
+      t.integer :playoff_round, default: 0
 
       t.timestamps
     end

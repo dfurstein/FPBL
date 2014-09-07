@@ -1,4 +1,4 @@
-year,franchise_id,league,division,wins,losses,streak,playoff_berth,playoff_depth
+year,franchise_id,league,division,wins,losses,streak,playoff_berth,playoff_round
 1999,1,American,East,99,63,1,D,4
 1999,2,American,East,72,90,-1,,
 1999,3,American,East,75,87,-4,,

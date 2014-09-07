@@ -54,7 +54,11 @@ class Player < ActiveRecord::Base
     pitchers.include?(position.upcase)
   end
 
+  def hitter?
+    !pitcher?
+  end
+
   def current_contract(year, franchise_id)
-    contracts.where("year >= #{year} and franchise_id = #{franchise_id}")
+    contracts.where(franchise_id: franchise_id).where('year >= ?', year)
   end
 end

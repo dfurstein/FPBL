@@ -27,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-            <% Statistic.hitters(@year, @franchise_id).each do |stat| %>
+            <% Statistic.hitters(@year, @franchise_id, 0).each do |stat| %>
               <tr>
                 <td><%= stat.player.name %></td>
                 <td><%= stat.G %></td>
@@ -47,7 +47,7 @@
                 <td><%= '%.3f' % stat.SLG.round(3) %></td>
               </tr>  
             <% end %>
-            <% stat = Statistic.pitchers_as_hitters(@year, @franchise_id) %>
+            <% stat = Statistic.pitchers_as_hitters(@year, @franchise_id, 0) %>
             <% if stat.PA > 0 %>
               <tr>
                 <td><%= 'All Pitchers' %></td>
@@ -69,7 +69,7 @@
               </tr>  
             <% end %>
             </tbody>
-            <% stat = Statistic.hitting_totals(@year, @franchise_id) %>
+            <% stat = Statistic.hitting_totals(@year, @franchise_id, 0) %>
             <tfoot>
               <tr>
                 <th><%= 'Totals' %></th>
@@ -118,7 +118,7 @@
               </tr>
             </thead>
             <tbody>
-            <% Statistic.pitchers(@year, @franchise_id).each do |stat| %>
+            <% Statistic.pitchers(@year, @franchise_id, 0).each do |stat| %>
               <tr>
                 <td><%= stat.player.name %></td>
                 <td><%= stat.G %></td>
@@ -139,7 +139,7 @@
               </tr>  
             <% end %>
             </tbody>
-            <% stat = Statistic.pitching_totals(@year, @franchise_id) %>
+            <% stat = Statistic.pitching_totals(@year, @franchise_id, 0) %>
             <tfoot>
               <tr>
                 <th><%= 'Totals' %></th>
