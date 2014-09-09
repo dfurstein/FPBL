@@ -65,7 +65,7 @@ class Statistic < ActiveRecord::Base
       .map(&:attributes)
       .each_with_object({}) do |hash, result|
         hash.each do |key, value|
-          (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
+          (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
         end; result
       end)
   end
@@ -79,7 +79,7 @@ class Statistic < ActiveRecord::Base
       .map(&:attributes)
       .each_with_object({}) do |hash, result|
         hash.each do |key, value|
-          (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
+          (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
         end; result
       end)
   end
@@ -98,7 +98,7 @@ class Statistic < ActiveRecord::Base
       .map(&:attributes)
       .each_with_object({}) do |hash, result|
         hash.each do |key, value|
-          (result[key] = (result[key] || 0) + value) unless ignore.include?(key)
+          (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
         end; result
       end)
   end
