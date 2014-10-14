@@ -26,4 +26,9 @@ class PagesController < ApplicationController
     @date = Date.new(year, month, 1)
     @games = Schedule.games(@date)
   end
+
+  def draft
+    @year = params[:year].nil? ? Draft.last.year.to_s : params[:year]
+    @years = Draft.all.map { |draft| draft.year }.uniq.reverse
+  end
 end
