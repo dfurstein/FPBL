@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141014032106) do
+ActiveRecord::Schema.define(:version => 20141014201233) do
 
   create_table "boxscores", :id => false, :force => true do |t|
     t.date     "date",                               :null => false
@@ -68,6 +68,17 @@ ActiveRecord::Schema.define(:version => 20141014032106) do
   end
 
   add_index "contracts", ["year", "player_id", "franchise_id"], :name => "index_contracts_on_year_and_player_id_and_franchise_id", :unique => true
+
+  create_table "draft_rights", :id => false, :force => true do |t|
+    t.integer  "year",                  :null => false
+    t.integer  "round",                 :null => false
+    t.integer  "franchise_id_original", :null => false
+    t.integer  "franchise_id_current",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "draft_rights", ["year", "round", "franchise_id_original"], :name => "index_draft_rights_on_year_and_round_and_franchise_id_original", :unique => true
 
   create_table "drafts", :id => false, :force => true do |t|
     t.integer  "year",                  :null => false
