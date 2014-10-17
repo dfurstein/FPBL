@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141014201233) do
+ActiveRecord::Schema.define(:version => 20141016011550) do
 
   create_table "boxscores", :id => false, :force => true do |t|
     t.date     "date",                               :null => false
@@ -200,5 +200,21 @@ ActiveRecord::Schema.define(:version => 20141014201233) do
   end
 
   add_index "teams", ["year", "franchise_id"], :name => "index_teams_on_year_and_franchise_id", :unique => true
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "transaction_group_id",        :null => false
+    t.string   "transaction_type",            :null => false
+    t.integer  "year"
+    t.integer  "franchise_id_to"
+    t.integer  "franchise_id_from"
+    t.integer  "player_id"
+    t.integer  "extension_year"
+    t.integer  "draft_year"
+    t.integer  "draft_round"
+    t.integer  "draft_franchise_id_original"
+    t.datetime "processed_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
 end

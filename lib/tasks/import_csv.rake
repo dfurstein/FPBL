@@ -10,6 +10,7 @@ contracts = 'db/init/contracts.csv'
 schedules = 'db/init/schedules.csv'
 drafts = 'db/init/drafts.csv'
 rights = 'db/init/draft_rights.csv'
+transactions = 'db/init/transactions.csv'
 
 namespace :import do
   task teams: :environment do
@@ -57,6 +58,12 @@ namespace :import do
   task draft_rights: :environment do
     CSV.foreach(rights, headers: true) do |row|
       DraftRight.create!(row.to_hash)
+    end
+  end
+
+  task transactions: :environment do
+    CSV.foreach(transactions, headers: true) do |row|
+      Transaction.create!(row.to_hash)
     end
   end
 end
