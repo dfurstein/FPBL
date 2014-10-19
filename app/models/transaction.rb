@@ -7,9 +7,8 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :player,  foreign_key: [:year, :player_id]
 
-  def self.trade_ids
-    Transaction.where(transaction_type: 'TRADE')
-               .pluck(:transaction_group_id).uniq
+  def self.all_ids
+    Transaction.pluck(:transaction_group_id).uniq
   end
 
   def to_team

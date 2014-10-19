@@ -1,0 +1,26 @@
+<div class="panel panel-info">
+  <% team = nil %>
+  <div class="panel-heading"><%= @transaction.processed_at.to_date.to_formatted_s(:long_ordinal) %> &mdash; Trade &mdash; <%= @transaction.to_team.name %>/<%= @transaction.from_team.name %></div>
+  <% Transaction.where(transaction_group_id: @id).each do |trade| %>
+    <% if team.nil? %>
+      <% team = trade.to_team %>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading"><%= team.name %></h4>
+    <% elsif team != trade.to_team %>
+      <% team = trade.to_team %>
+        </li>
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading"><%= team.name %></h4>
+    <% end %>
+          <p class="list-group-item-text">
+            <% if trade.player_id.nil? %>
+              Round <%= trade.draft_round %> - <%= trade.draft_team.name %> <% unless trade.draft.nil? %>(<%= trade.draft.player.name %>)<% end %>
+            <% else %>
+              <%= trade.player.name %>
+            <% end %> 
+          </p>
+    <% end %>
+        </li>
+      </ul>
+</div>
