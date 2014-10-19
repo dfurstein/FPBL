@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Transactions</div>
+      <% Transaction.trade_ids.each do |id| %>
+        <div class="panel panel-info">
+          <% trade = Transaction.where(transaction_group_id: id).first %>
+          <% team = nil %>
+          <div class="panel-heading"><%= trade.processed_at.to_date.to_formatted_s(:long_ordinal) %> &mdash; Trade &mdash; <%= trade.to_team.name %>/<%= trade.from_team.name %></div>
+          <% Transaction.where(transaction_group_id: id).each do |trade| %>
+            <% if team.nil? %>
+              <% team = trade.to_team %>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <h4 class="list-group-item-heading"><%= team.name %></h4>
+            <% elsif team != trade.to_team %>
+              <% team = trade.to_team %>
+                </li>
+                <li class="list-group-item">
+                  <h4 class="list-group-item-heading"><%= team.name %></h4>
+            <% end %>
+                  <p class="list-group-item-text">
+                    <% if trade.player_id.nil? %>
+                      Round <%= trade.draft_round %> - <%= trade.draft_team.name %> <% unless trade.draft.nil? %>(<%= trade.draft.player.name %>)<% end %>
+                    <% else %>
+                      <%= trade.player.name %>
+                    <% end %> 
+                  </p>
+            <% end %>
+                </li>
+              </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

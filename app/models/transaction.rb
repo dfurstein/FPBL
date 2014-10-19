@@ -6,4 +6,30 @@ class Transaction < ActiveRecord::Base
                   :draft_franchise_id_original, :processed_at
 
   belongs_to :player,  foreign_key: [:year, :player_id]
+
+  def self.trade_ids
+    Transaction.where(transaction_type: 'TRADE')
+               .pluck(:transaction_group_id).uniq
+  end
+
+  def to_team
+    Team.find(year, franchise_id_to)
+  end
+
+  def from_team
+    Team.find(year, franchise_id_from)
+  end
+
+  def draft
+    Draft.where(year: draft_year, round: draft_round,
+                franchise_id_original: draft_franchise_id_original).first
+  rescue
+    nil
+  end
+
+  def draft_team
+    Team.find(draft_year, draft_franchise_id_original)
+  rescue
+    Team.find(year, draft_franchise_id_original)
+  end
 end
