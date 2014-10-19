@@ -7,6 +7,13 @@
         <% @id = id %>
         <% if @transaction.transaction_type == 'TRADE' %>
           <%= render "partials/transaction_trade", local: {transaction: @transaction, id: @id} %>
+        <% elsif @transaction.transaction_type == 'SIGN' %>
+          <%= render "partials/transaction_sign", local: {transaction: @transaction, id: @id} %>
+        <% elsif @transaction.transaction_type == 'RELEASE' %>
+          <%= render "partials/transaction_release", local: {transaction: @transaction, id: @id} %>
+        <% elsif @transaction.transaction_type == 'EXTEND' %>
+          <%= render "partials/transaction_extend", local: {transaction: @transaction, id: @id} %>
+        <% elsif @transaction.transaction_type == 'DRAFT' %>
         <% end %>
       <% end %>
     </div>

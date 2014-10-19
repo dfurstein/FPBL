@@ -1,0 +1,17 @@
+<div class="panel panel-info">
+  <% team = nil %>
+  <div class="panel-heading"><%= @transaction.processed_at.to_date.to_formatted_s(:long_ordinal) %> &mdash; Player Release</div>
+  <% Transaction.where(transaction_group_id: @id).each do |release| %>
+    <% if team.nil? %>
+      <% team = release.from_team %>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h4 class="list-group-item-heading"><%= team.name %></h4>
+    <% end %>
+          <p class="list-group-item-text">
+              <%= release.player.name %>
+          </p>
+  <% end %>
+        </li>
+      </ul>
+</div>
