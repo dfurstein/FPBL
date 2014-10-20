@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "datepicker";
 
 body { 
   padding-top: 70px; 
@@ -17,4 +18,8 @@ body {
 
 .modal-dialog {
 	width: 700px;
+}
+
+.top-buffer { 
+	margin-top:20px;
 }

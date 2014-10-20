@@ -7,8 +7,19 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :player,  foreign_key: [:year, :player_id]
 
-  def self.all_ids
-    Transaction.pluck(:transaction_group_id).uniq
+  def self.all_ids(franchise_id, transaction_type, from_date, to_date)
+    Transaction.where(processed_at: from_date..to_date)
+    .where(from_franchise_id(franchise_id))
+    .where(from_transaction_type(transaction_type))
+    .pluck(:transaction_group_id).uniq
+  end
+
+  def self.from_franchise_id(franchise_id)
+    "franchise_id_to = #{franchise_id} OR franchise_id_from = #{franchise_id}" unless franchise_id == 0
+  end
+
+  def self.from_transaction_type(transaction_type)
+    "transaction_type = '#{transaction_type}'" unless transaction_type == 'ALL'
   end
 
   def to_team

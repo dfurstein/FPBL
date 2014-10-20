@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/datepicker
 //= require bootstrap-sprockets
 //= require_tree .
 
@@ -34,6 +35,9 @@ $(document).ready(
       theme: "bootstrap",
       widthFixed: true,
       sortList: [[15,0],[0,0]]
-    }); 
+    });
+    
+    $(".date-picker").datepicker();
+  
   } 
 ); 
