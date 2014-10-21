@@ -15,11 +15,11 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.from_franchise_id(franchise_id)
-    "franchise_id_to = #{franchise_id} OR franchise_id_from = #{franchise_id}" unless franchise_id == 0
+    "franchise_id_to = #{franchise_id} OR franchise_id_from = #{franchise_id}" unless franchise_id.nil?
   end
 
   def self.from_transaction_type(transaction_type)
-    "transaction_type = '#{transaction_type}'" unless transaction_type == 'ALL'
+    "transaction_type = '#{transaction_type}'" unless transaction_type.nil?
   end
 
   def to_team

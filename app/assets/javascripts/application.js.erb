@@ -37,7 +37,12 @@ $(document).ready(
       sortList: [[15,0],[0,0]]
     });
     
-    $(".date-picker").datepicker();
-  
+    $(".date-picker").datepicker({
+      format: "MM d, yyyy",
+      startDate: "<%= Transaction.first.processed_at.to_date.strftime('%m/%d/%Y') %>",
+      endDate: "<%= Transaction.last.processed_at.to_date.strftime('%m/%d/%Y') %>",
+      autoclose: true,
+      todayHighlight: true
+    });
   } 
 ); 

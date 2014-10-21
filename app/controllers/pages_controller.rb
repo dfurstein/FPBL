@@ -38,15 +38,16 @@ class PagesController < ApplicationController
         params[:search][:franchise_id].to_s.strip.length == 0
       @transaction_type = params[:search][:transaction_type] unless
         params[:search][:transaction_type].to_s.strip.length == 0
-      @from_date = Date.strptime(params[:search][:from_date], '%m/%d/%Y') unless
+      @from_date = params[:search][:from_date] unless
         params[:search][:from_date].to_s.strip.length == 0
-      @to_date = Date.strptime(params[:search][:to_date], '%m/%d/%Y') unless
+      @to_date = params[:search][:to_date] unless
         params[:search][:to_date].to_s.strip.length == 0
     end
 
-    @franchise_id ||= 0
-    @transaction_type ||= 'ALL'
-    @from_date ||= Transaction.last.processed_at.beginning_of_month.to_date
-    @to_date ||= Date.today
+    @franchise_id ||= nil
+    @transaction_type ||= nil
+    @from_date ||= Transaction.last.processed_at.prev_month.beginning_of_month
+      .to_date.to_formatted_s(:long)
+    @to_date ||= Transaction.last.processed_at.to_date.to_formatted_s(:long)
   end
 end

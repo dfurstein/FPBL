@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <%= simple_form_for :search,  url: transaction_path() do |f| %>
+    <%= simple_form_for :search do |f| %>
       <%= f.input :transaction_type,  
                     required: false,
                     label: 'Transaction Type',
@@ -20,13 +20,16 @@
                     required: false,
                     label: 'From', 
                     as: :string, 
-                    input_html: { class: "date-picker form-control" } %>
+                    input_html: { class: "date-picker form-control", 
+                                  value: @from_date
+                                } %>
       <%= f.input :to_date, 
                     required: false,
-                    default: @to_date,
                     label: 'To', 
                     as: :string, 
-                    input_html: { class: "date-picker form-control" } %>
+                    input_html: { class: "date-picker form-control", 
+                                  value: @to_date
+                                } %>
 
       <div class='text-center top-buffer'>
         <%= f.button :submit, 'Submit', class: "btn btn-primary" %>
@@ -39,7 +42,8 @@
   <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-primary">
       <div class="panel-heading">Transactions</div>
-      <% Transaction.all_ids(@franchise_id, @transaction_type, @from_date, @to_date).each do |id| %>
+      <% Transaction.all_ids(@franchise_id, @transaction_type, 
+                             @from_date.to_date, @to_date.to_date).each do |id| %>
         <% @transaction = Transaction.where(transaction_group_id: id).first %>
         <% @id = id %>
         <% if @transaction.transaction_type == 'TRADE' %>
