@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/datepicker
 //= require bootstrap-sprockets
 //= require_tree .
 
@@ -44,5 +43,8 @@ $(document).ready(
       autoclose: true,
       todayHighlight: true
     });
+
+    $(".from_date").datepicker("setDate", $(".from_date").val());
+    $(".to_date").datepicker("setDate", $(".to_date").val()); 
   } 
 ); 
