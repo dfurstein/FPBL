@@ -7,6 +7,34 @@ class Standing < ActiveRecord::Base
 
   belongs_to :team, foreign_key: [:year, :franchise_id]
 
+  def self.update(boxscore)
+    unless boxscore.W == 0 && boxscore.L == 0
+
+      divisions = %w(Tinker Evers Chance Reulbach Brown Pfeister)
+      leagues = %w(American National)
+
+      standing = find_or_create_by_year_and_franchise_id(
+        boxscore.year, boxscore.franchise_id)
+
+      standing.league = leagues[(boxscore.franchise_id - 1) / 12]
+      standing.division = divisions[(boxscore.franchise_id - 1) / 4]
+      standing.wins += boxscore.W
+      standing.losses += boxscore.L
+
+      if standing.streak >= 0 && !boxscore.W.zero?
+        standing.streak += boxscore.W
+      elsif standing.streak >= 0 && !boxscore.L.zero?
+        standing.streak = -1
+      elsif standing.streak <= 0 && !boxscore.L.zero?
+        standing.streak -= boxscore.L
+      else
+        standing.streak = 1
+      end
+
+      standing.save
+    end
+  end
+
   def self.leagues(year)
     where(year: year).uniq.pluck(:league)
   end

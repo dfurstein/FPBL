@@ -55,6 +55,9 @@ namespace :import do
 
           round = find_playoff_round(boxscore.date)
 
+          # Only update regular season
+          Standing.update(boxscore) if round == 0
+
           Statistic.update(boxscore, round)
         rescue ActiveRecord::RecordNotUnique
           puts 'Boxscore already imported'

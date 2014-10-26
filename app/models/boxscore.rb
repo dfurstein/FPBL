@@ -6,4 +6,8 @@ class Boxscore < ActiveRecord::Base
                   :franchise_id_away, :position, :AB, :R, :H, :RBI, :D, :T, :HR,
                   :SB, :CS, :K, :BB, :SF, :SAC, :HBP, :CI, :W, :L, :HO, :S, :BS,
                   :IP, :HA, :RA, :ER, :BBA, :KA, :HB, :WP, :PB, :BK, :E
+
+  def year
+    date.year
+  end
 end

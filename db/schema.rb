@@ -129,17 +129,17 @@ ActiveRecord::Schema.define(:version => 20141016011550) do
   add_index "schedules", ["date", "home_team_abbreviation"], :name => "index_schedules_on_date_and_home_team_abbreviation", :unique => true
 
   create_table "standings", :id => false, :force => true do |t|
-    t.integer  "year",                         :null => false
-    t.integer  "franchise_id",                 :null => false
-    t.string   "league",                       :null => false
-    t.string   "division",                     :null => false
-    t.integer  "wins",                         :null => false
-    t.integer  "losses",                       :null => false
-    t.integer  "streak",                       :null => false
+    t.integer  "year",                          :null => false
+    t.integer  "franchise_id",                  :null => false
+    t.string   "league",        :default => "", :null => false
+    t.string   "division",      :default => "", :null => false
+    t.integer  "wins",          :default => 0,  :null => false
+    t.integer  "losses",        :default => 0,  :null => false
+    t.integer  "streak",        :default => 0,  :null => false
     t.string   "playoff_berth"
     t.integer  "playoff_round", :default => 0
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "standings", ["year", "franchise_id"], :name => "index_standings_on_year_and_franchise_id", :unique => true
