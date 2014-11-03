@@ -1,23 +1,23 @@
 # Describes a schedule from DMB
 class Schedule < ActiveRecord::Base
-  attr_accessible :date, :home_team_id, :home_score,
-                  :away_team_id, :away_score,
+  attr_accessible :date, :franchise_id_home, :home_score,
+                  :franchise_id_away, :away_score,
                   :extra_innings
+
+  def self.games(date)
+    where(date: date..date.end_of_month)
+  end
 
   def year
     date.year
   end
 
   def home_team
-    Team.find(year, home_team_id)
+    Team.find(year, franchise_id_home)
   end
 
   def away_team
-    Team.find(year, away_team_id)
-  end
-
-  def self.games(date)
-    where(date: date..date.end_of_month)
+    Team.find(year, franchise_id_away)
   end
 
   def long_description
