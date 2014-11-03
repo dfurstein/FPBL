@@ -1,17 +1,19 @@
 # Describes a schedule from DMB
 class Schedule < ActiveRecord::Base
-  attr_accessible :date, :home_team_abbreviation, :home_score,
-                  :away_team_abbreviation, :away_score,
+  attr_accessible :date, :home_team_id, :home_score,
+                  :away_team_id, :away_score,
                   :extra_innings
 
-  @@teams = Hash[Team.all.map { |team| [[team.year, team.abbreviation.upcase], team] }]
+  def year
+    date.year
+  end
 
   def home_team
-    @@teams[[date.year, home_team_abbreviation.upcase]]
+    Team.find(year, home_team_id)
   end
 
   def away_team
-    @@teams[[date.year, away_team_abbreviation.upcase]]
+    Team.find(year, away_team_id)
   end
 
   def self.games(date)

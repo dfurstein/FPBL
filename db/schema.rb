@@ -116,17 +116,17 @@ ActiveRecord::Schema.define(:version => 20141016011550) do
   add_index "players", ["year", "player_id"], :name => "index_players_on_year_and_player_id", :unique => true
 
   create_table "schedules", :force => true do |t|
-    t.date     "date",                   :null => false
-    t.string   "away_team_abbreviation", :null => false
-    t.integer  "away_score",             :null => false
-    t.string   "home_team_abbreviation", :null => false
-    t.integer  "home_score",             :null => false
+    t.date     "date",          :null => false
+    t.string   "away_team_id",  :null => false
+    t.integer  "away_score",    :null => false
+    t.string   "home_team_id",  :null => false
+    t.integer  "home_score",    :null => false
     t.integer  "extra_innings"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
-  add_index "schedules", ["date", "home_team_abbreviation"], :name => "index_schedules_on_date_and_home_team_abbreviation", :unique => true
+  add_index "schedules", ["date", "home_team_id"], :name => "index_schedules_on_date_and_home_team_id", :unique => true
 
   create_table "standings", :id => false, :force => true do |t|
     t.integer  "year",                          :null => false
