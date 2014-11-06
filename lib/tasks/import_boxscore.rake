@@ -58,6 +58,8 @@ namespace :import do
           # Only update regular season
           Standing.update(boxscore) if round == 0
 
+          Schedule.update(boxscore)
+
           Statistic.update(boxscore, round)
         rescue ActiveRecord::RecordNotUnique
           puts 'Boxscore already imported'

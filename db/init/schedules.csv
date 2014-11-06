@@ -1,4 +1,4 @@
-date,away_team_id,away_score,home_team_id,home_score,extra_innings
+date,franchise_id_away,score_away,franchise_id_home,score_home,innings
 2008-04-02,18,3,13,9,
 2008-04-02,22,5,16,3,10
 2008-04-02,12,8,3,15,

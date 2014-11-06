@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141103025957) do
+ActiveRecord::Schema.define(:version => 20141105225900) do
 
   create_table "boxscores", :id => false, :force => true do |t|
     t.date     "date",                               :null => false
@@ -116,17 +116,17 @@ ActiveRecord::Schema.define(:version => 20141103025957) do
   add_index "players", ["year", "player_id"], :name => "index_players_on_year_and_player_id", :unique => true
 
   create_table "schedules", :force => true do |t|
-    t.date     "date",              :null => false
-    t.string   "franchise_id_away", :null => false
-    t.integer  "away_score",        :null => false
-    t.string   "franchise_id_home", :null => false
-    t.integer  "home_score",        :null => false
-    t.integer  "extra_innings"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.date     "date",                               :null => false
+    t.string   "franchise_id_away"
+    t.integer  "score_away",        :default => 0
+    t.string   "franchise_id_home",                  :null => false
+    t.integer  "score_home",        :default => 0
+    t.decimal  "innings",           :default => 0.0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
-  add_index "schedules", ["date", "franchise_id_home"], :name => "index_schedules_on_date_and_home_team_id", :unique => true
+  add_index "schedules", ["date", "franchise_id_home"], :name => "index_schedules_on_date_and_franchise_id_home", :unique => true
 
   create_table "standings", :id => false, :force => true do |t|
     t.integer  "year",                          :null => false

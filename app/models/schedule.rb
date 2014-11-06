@@ -1,8 +1,25 @@
 # Describes a schedule from DMB
 class Schedule < ActiveRecord::Base
-  attr_accessible :date, :franchise_id_home, :home_score,
-                  :franchise_id_away, :away_score,
-                  :extra_innings
+  attr_accessible :date, :franchise_id_home, :score_home,
+                  :franchise_id_away, :score_away,
+                  :innings
+
+  def self.update(boxscore)
+    schedule = find_or_create_by_date_and_franchise_id_home(
+      boxscore.date, boxscore.franchise_id_home)
+
+    schedule.franchise_id_away = boxscore.franchise_id_away
+
+    # The home team always pitches a full top of the inning
+    if boxscore.franchise_id == boxscore.franchise_id_home
+      schedule.score_away += boxscore.RA
+      schedule.innings += boxscore.IP
+    else
+      schedule.score_home += boxscore.RA
+    end
+
+    schedule.save
+  end
 
   def self.games(date)
     where(date: date..date.end_of_month)
@@ -21,26 +38,26 @@ class Schedule < ActiveRecord::Base
   end
 
   def long_description
-    if away_score == 0 && home_score == 0
+    if score_away == 0 && score_home == 0
       "#{away_team.name} at #{home_team.name}"
     else
-      "#{away_team.name} #{away_score}, #{home_team.name} #{home_score}"
+      "#{away_team.name} #{score_away}, #{home_team.name} #{score_home}"
     end
   end
 
   def short_description
-    if away_score == 0 && home_score == 0
+    if score_away == 0 && score_home == 0
       "#{away_team.nickname} at #{home_team.nickname}"
     else
-      "#{away_team.nickname} #{away_score}, #{home_team.nickname} #{home_score}"
+      "#{away_team.nickname} #{score_away}, #{home_team.nickname} #{score_home}"
     end
   end
 
   def abbreviated_description
-    if away_score == 0 && home_score == 0
+    if score_away == 0 && score_home == 0
       "#{away_team.abbreviation.upcase} at #{home_team.abbreviation.upcase}"
     else
-      "#{away_team.abbreviation.upcase} #{away_score}, #{home_team.abbreviation.upcase} #{home_score}"
+      "#{away_team.abbreviation.upcase} #{score_away}, #{home_team.abbreviation.upcase} #{score_home}"
     end
   end
 
