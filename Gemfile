@@ -9,10 +9,9 @@ gem 'autoprefixer-rails'
 gem 'composite_primary_keys' # , '~> 5.0.8'
 gem 'simple_form'
 
-gem 'sqlite3'
-# gem 'mysql2'
-
 group :development, :test do
+  gem 'sqlite3'
+
   gem 'better_errors'
   gem 'binding_of_caller'
 
@@ -26,6 +25,11 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'guard-rspec', require: false
+end
+
+group :production do
+  gem 'mysql2'
+  gem 'unicorn'
 end
 
 # Gems used only for assets and not required
