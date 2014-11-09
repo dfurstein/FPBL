@@ -24,7 +24,7 @@ class PagesController < ApplicationController
     year = params[:year].nil? ? Date.today.year : params[:year].to_i
 
     @date = Date.new(year, month, 1)
-    @games = Schedule.games(@date)
+    @games = Schedule.all_games_for_month(@date)
   end
 
   def draft

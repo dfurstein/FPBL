@@ -23,3 +23,10 @@ body {
 .top-buffer { 
 	margin-top:20px;
 }
+
+.scoreboard-badge {
+	float: right;
+	display: inline-block;
+	min-width: 10px;
+	line-height: 1;
+}

@@ -19,8 +19,9 @@ $(document).ready(
 	function() {
 		$("[id*='boxscore-modal']").click(
 			function(event) {
-				$.get('/boxscores/' + event.target.id.substring('boxscore-modal'.length) + '.php', function(data) {
-					$(event.target).parent().find('p').html('<pre>' + $(data).text().trim() + '</pre>');
+        var $dmb = $(event.target).closest('a')[0].id.substring('boxscore-modal'.length);
+				$.get('/boxscores/' + $dmb + '.php', function(data) {
+					$(event.target).closest('a').parent().find('#boxscore-results' + $dmb).html('<pre>' + $(data).text().trim() + '</pre>');
 				}, 'text');
 		});
 
