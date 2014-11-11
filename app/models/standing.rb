@@ -52,7 +52,7 @@ class Standing < ActiveRecord::Base
   end
 
   def win_percentage
-    sprintf('%.03f', (wins / (wins + losses).to_f).round(3))
+    format('%.03f', (wins / (wins + losses).to_f).round(3))
   end
 
   def game_streak

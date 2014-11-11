@@ -33,7 +33,7 @@ class PagesController < ApplicationController
 
     @leagues = Standing.leagues(@year).sort
     @divisions = @leagues.each_with_object({}) do |league, hash|
-      hash[league] = Standing.divisions_by_league(year, v).sort
+      hash[league] = Standing.divisions_by_league(@year, league).sort
     end
     @records = Standing.divisions(@year).each_with_object({}) do |division, hash|
       hash[division] = Standing.records_by_divisions(@year, division).sort_by do
