@@ -1,0 +1,51 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Scoreboard</div>
+  <div class="panel panel-info">
+    <div class="panel-heading"><%= @date.to_formatted_s(:long) %></div>
+    <div class="list-group">
+      <% if @games.count == 0 %>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <h5 class="list-group-item-heading">No Games Today</h5>
+          </li>
+        </ul>
+      <% else %>
+        <% @games.each { |current_game| %>
+
+          <a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
+            <h5 class="list-group-item-header text-center">James Huang Memorial Championship</h5>
+            <span class="scoreboard-badge"><%= current_game.score_away %></span>
+            <p class="list-group-item-text">
+              <%= current_game.away_team.name %>
+            </p>
+            <span class="scoreboard-badge"><%= current_game.score_home %></span>
+            <p class="list-group-item-text">
+              <%= current_game.home_team.name %>
+            </p>
+          </a>
+
+          <div class="modal fade" id="boxscore<%= current_game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                  </button>
+                  <h4 class="modal-title"><%= current_game.long_description %></h4>
+                </div>
+                <div class="modal-body">
+                  <p id="boxscore-results<%= current_game.dmb_file %>">
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <% } %>
+      <% end %>
+    </div>
+  </div>
+</div>

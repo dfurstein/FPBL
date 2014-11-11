@@ -1,7 +1,7 @@
-<% Standing.leagues(@year).sort.each { |league| %>
+<% @leagues.each { |league| %>
   <div class="panel panel-primary">
     <div class="panel-heading"><%= league %> League</div>
-    <% Standing.divisions_by_league(@year, league).sort.each { |division| %>
+    <% @divisions[league].each { |division| %>
       <div class="panel panel-info">
         <div class="panel-heading"><%= division %> Division</div>
         <table class='table table-bordered table-condensed'>
@@ -13,7 +13,7 @@
             <th class="col-sm-1">GB</th>
             <th class="col-sm-1">Strk</th>
           </tr>
-          <% Standing.records_by_divisions(@year, league, division).sort_by { |record| - record.wins }.each { |record| %>
+          <% @records[division].each { |record| %>
             <tr>
               <td><%= record.team.name %></td>
               <td><%= record.wins %></td>

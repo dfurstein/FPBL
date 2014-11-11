@@ -39,16 +39,20 @@ class Standing < ActiveRecord::Base
     where(year: year).uniq.pluck(:league)
   end
 
+  def self.divisions(year)
+    where(year: year).uniq.pluck(:division)
+  end
+
   def self.divisions_by_league(year, league)
     where(year: year, league: league).uniq.pluck(:division)
   end
 
-  def self.records_by_divisions(year, league, division)
-    where(year: year, league: league, division: division)
+  def self.records_by_divisions(year, division)
+    where(year: year, division: division)
   end
 
   def win_percentage
-    (wins / (wins + losses).to_f).round(3)
+    sprintf('%.03f', (wins / (wins + losses).to_f).round(3))
   end
 
   def game_streak
@@ -60,7 +64,7 @@ class Standing < ActiveRecord::Base
   end
 
   def games_back_division
-    games_back = Standing.records_by_divisions(year, league, division)
+    games_back = Standing.records_by_divisions(year, division)
       .max_by { |standing| standing.wins }.wins - wins
 
     games_back == 0 ? '-' : games_back

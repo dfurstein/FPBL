@@ -9,8 +9,6 @@ gem 'autoprefixer-rails'
 gem 'composite_primary_keys' # , '~> 5.0.8'
 gem 'simple_form'
 
-gem 'yaml_db'
-
 group :development, :test do
   gem 'sqlite3'
 

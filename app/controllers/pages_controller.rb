@@ -2,6 +2,19 @@
 class PagesController < ApplicationController
   def index
     @year = Team.last.year
+
+    @date = Schedule.last.date
+    @games = Schedule.all_games_for_day(@date)
+
+    @leagues = Standing.leagues(@year).sort
+    @divisions = @leagues.each_with_object({}) do |league, hash|
+      hash[league] = Standing.divisions_by_league(@year, league).sort
+    end
+    @records = Standing.divisions(@year).each_with_object({}) do |division, hash|
+      hash[division] = Standing.records_by_divisions(@year, division).sort_by do
+        |record| - record.wins
+      end
+    end
   end
 
   def team
@@ -17,6 +30,16 @@ class PagesController < ApplicationController
   def standings
     @year = params[:year].nil? ? Team.last.year.to_s : params[:year]
     @years = Team.all.map { |season| season.year }.uniq.reverse
+
+    @leagues = Standing.leagues(@year).sort
+    @divisions = @leagues.each_with_object({}) do |league, hash|
+      hash[league] = Standing.divisions_by_league(year, v).sort
+    end
+    @records = Standing.divisions(@year).each_with_object({}) do |division, hash|
+      hash[division] = Standing.records_by_divisions(@year, division).sort_by do
+        |record| - record.wins
+      end
+    end
   end
 
   def calendar
