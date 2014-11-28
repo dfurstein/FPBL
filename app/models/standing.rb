@@ -44,7 +44,11 @@ class Standing < ActiveRecord::Base
   end
 
   def self.divisions_by_league(year, league)
-    where(year: year, league: league).uniq.pluck(:division)
+    records_by_league(year, league).uniq.pluck(:division)
+  end
+
+  def self.records_by_league(year, league)
+    where(year: year, league: league)
   end
 
   def self.records_by_divisions(year, division)
@@ -64,10 +68,36 @@ class Standing < ActiveRecord::Base
   end
 
   def games_back_division
-    games_back = Standing.records_by_divisions(year, division)
-      .max_by { |standing| standing.wins }.wins - wins
+    records = Standing.records_by_divisions(year, division)
 
-    games_back == 0 ? '-' : games_back
+    if records.empty?
+      0
+    else
+      records.max_by { |standing| standing.wins }.wins - wins
+    end
+  end
+
+  def games_back_division_formatted
+    games_back_division == 0 ? '-' : games_back_division
+  end
+
+  def games_back_wildcard
+    divisions = []
+
+    records = Standing.records_by_league(year, league).map do |record|
+      if record.games_back_division == 0 && !divisions.include?(record.division)
+        divisions.push(record.division)
+        nil
+      else
+        record
+      end
+    end
+
+    if records.empty?
+      0
+    else
+      records.compact.max_by { |standing| standing.wins }.wins - wins
+    end
   end
 
   def record
