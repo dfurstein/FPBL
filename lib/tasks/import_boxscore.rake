@@ -5,7 +5,7 @@ namespace :import do
 
     puts args[:path]
 
-    Dir.glob(args[:path]) do |file|
+    Dir.glob(args[:path]).sort do |file|
       next if file == '.' || file == '..'
 
       puts file
