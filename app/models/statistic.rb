@@ -35,7 +35,7 @@ class Statistic < ActiveRecord::Base
     statistic.HO += boxscore.HO
     statistic.S += boxscore.S
     statistic.BS += boxscore.BS
-    statistic.IP += boxscore.IP
+    statistic.IP = add_ip(statistic.IP, boxscore.IP)
     statistic.HA += boxscore.HA
     statistic.RA += boxscore.RA
     statistic.ER += boxscore.ER
@@ -98,9 +98,30 @@ class Statistic < ActiveRecord::Base
       .map(&:attributes)
       .each_with_object({}) do |hash, result|
         hash.each do |key, value|
-          (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
+          unless ignore.include?(key)
+            if key == 'IP'
+              result[key] = add_ip(result.fetch(key, 0), value)
+            else
+              result[key] = result.fetch(key, 0) + value
+            end
+          end
         end; result
       end)
+  end
+
+  def self.add_ip(old_ip, current_ip)
+    old = BigDecimal(old_ip.round(1).to_s)
+    current = BigDecimal(current_ip.round(1).to_s)
+
+    old.truncate +
+    current.truncate +
+    ((old.frac + current.frac) * BigDecimal('10.0') / BigDecimal('3.0')).truncate +
+    ((old.frac + current.frac) * BigDecimal('10.0') % BigDecimal('3.0')) / BigDecimal('10.0')
+  end
+
+  def convert_ip_to_decimal(ip)
+    BigDecimal(ip).truncate +
+    BigDecimal(ip).frac * BigDecimal('10.0') / BigDecimal('3.0')
   end
 
   def PA
@@ -141,10 +162,10 @@ class Statistic < ActiveRecord::Base
   end
 
   def WHIP
-    (self.HA + self.BBA) / self.IP
+    (self.HA + self.BBA) / convert_ip_to_decimal(self.IP)
   end
 
   def ERA
-    (self.ER / self.IP) * 9
+    (self.ER / convert_ip_to_decimal(self.IP)) * 9
   end
 end

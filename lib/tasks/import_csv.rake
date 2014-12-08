@@ -67,3 +67,8 @@ namespace :import do
     end
   end
 end
+
+task import_all_csv: ['import:teams', 'import:owners', 'import:standings',
+                      'import:players', 'import:contracts', 'import:schedules',
+                      'import:drafts', 'import:draft_rights',
+                      'import:transactions']

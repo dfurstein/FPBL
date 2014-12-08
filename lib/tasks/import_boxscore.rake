@@ -5,7 +5,8 @@ namespace :import do
 
     puts args[:path]
 
-    Dir.glob(args[:path]).sort do |file|
+    files = Dir.glob(args[:path]).sort
+    files.each do |file|
       next if file == '.' || file == '..'
 
       puts file
@@ -170,8 +171,7 @@ namespace :import do
       boxscore.S = (stats[1] == 'S' || stats[3] == 'S') ? 1 : 0
       boxscore.BS = (stats[1] == 'BS' || stats[3] == 'BS') ? 1 : 0
 
-      boxscore.IP = BigDecimal(stats[5]).truncate + BigDecimal(stats[5]).frac *
-        BigDecimal('10.0') / BigDecimal('3.0')
+      boxscore.IP = BigDecimal(stats[5])
       boxscore.HA = stats[6]
       boxscore.RA = stats[7]
       boxscore.ER = stats[8]
