@@ -17,6 +17,5 @@
 # Ignore files for production
 /config/database.yml
 /config/unicorn.rb
-/pids
 
 /public/boxscores
