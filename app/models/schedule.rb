@@ -2,7 +2,7 @@
 class Schedule < ActiveRecord::Base
   attr_accessible :date, :franchise_id_home, :score_home,
                   :franchise_id_away, :score_away,
-                  :innings
+                  :outs
 
   def self.update(boxscore)
     schedule = find_or_create_by_date_and_franchise_id_home(
@@ -13,7 +13,7 @@ class Schedule < ActiveRecord::Base
     # The home team always pitches a full top of the inning
     if boxscore.franchise_id == boxscore.franchise_id_home
       schedule.score_away += boxscore.RA
-      schedule.innings += boxscore.IP
+      schedule.outs += boxscore.outs
     else
       schedule.score_home += boxscore.RA
     end

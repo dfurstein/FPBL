@@ -11,48 +11,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141128210704) do
+ActiveRecord::Schema.define(:version => 20141211031006) do
 
   create_table "boxscores", :id => false, :force => true do |t|
-    t.date     "date",                                                             :null => false
-    t.integer  "player_id",                                                        :null => false
-    t.integer  "franchise_id",                                                     :null => false
-    t.integer  "franchise_id_home",                                                :null => false
-    t.integer  "franchise_id_away",                                                :null => false
-    t.string   "position",                                                         :null => false
-    t.integer  "AB",                                              :default => 0
-    t.integer  "R",                                               :default => 0
-    t.integer  "H",                                               :default => 0
-    t.integer  "RBI",                                             :default => 0
-    t.integer  "D",                                               :default => 0
-    t.integer  "T",                                               :default => 0
-    t.integer  "HR",                                              :default => 0
-    t.integer  "SB",                                              :default => 0
-    t.integer  "CS",                                              :default => 0
-    t.integer  "K",                                               :default => 0
-    t.integer  "BB",                                              :default => 0
-    t.integer  "SF",                                              :default => 0
-    t.integer  "SAC",                                             :default => 0
-    t.integer  "HBP",                                             :default => 0
-    t.integer  "CI",                                              :default => 0
-    t.integer  "W",                                               :default => 0
-    t.integer  "L",                                               :default => 0
-    t.integer  "HO",                                              :default => 0
-    t.integer  "S",                                               :default => 0
-    t.integer  "BS",                                              :default => 0
-    t.decimal  "IP",                :precision => 4, :scale => 1, :default => 0.0
-    t.integer  "HA",                                              :default => 0
-    t.integer  "RA",                                              :default => 0
-    t.integer  "ER",                                              :default => 0
-    t.integer  "BBA",                                             :default => 0
-    t.integer  "KA",                                              :default => 0
-    t.integer  "HB",                                              :default => 0
-    t.integer  "WP",                                              :default => 0
-    t.integer  "PB",                                              :default => 0
-    t.integer  "BK",                                              :default => 0
-    t.integer  "E",                                               :default => 0
-    t.datetime "created_at",                                                       :null => false
-    t.datetime "updated_at",                                                       :null => false
+    t.date     "date",                                          :null => false
+    t.integer  "player_id",                                     :null => false
+    t.integer  "franchise_id",                                  :null => false
+    t.integer  "franchise_id_home",                             :null => false
+    t.integer  "franchise_id_away",                             :null => false
+    t.string   "position",                                      :null => false
+    t.integer  "AB",                             :default => 0
+    t.integer  "R",                              :default => 0
+    t.integer  "H",                              :default => 0
+    t.integer  "RBI",                            :default => 0
+    t.integer  "D",                              :default => 0
+    t.integer  "T",                              :default => 0
+    t.integer  "HR",                             :default => 0
+    t.integer  "SB",                             :default => 0
+    t.integer  "CS",                             :default => 0
+    t.integer  "K",                              :default => 0
+    t.integer  "BB",                             :default => 0
+    t.integer  "SF",                             :default => 0
+    t.integer  "SAC",                            :default => 0
+    t.integer  "HBP",                            :default => 0
+    t.integer  "CI",                             :default => 0
+    t.integer  "W",                              :default => 0
+    t.integer  "L",                              :default => 0
+    t.integer  "HO",                             :default => 0
+    t.integer  "S",                              :default => 0
+    t.integer  "BS",                             :default => 0
+    t.integer  "outs",              :limit => 4, :default => 0
+    t.integer  "HA",                             :default => 0
+    t.integer  "RA",                             :default => 0
+    t.integer  "ER",                             :default => 0
+    t.integer  "BBA",                            :default => 0
+    t.integer  "KA",                             :default => 0
+    t.integer  "HB",                             :default => 0
+    t.integer  "WP",                             :default => 0
+    t.integer  "PB",                             :default => 0
+    t.integer  "BK",                             :default => 0
+    t.integer  "E",                              :default => 0
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   add_index "boxscores", ["date", "player_id"], :name => "index_boxscores_on_date_and_player_id", :unique => true
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20141128210704) do
     t.integer  "score_away",        :default => 0
     t.string   "franchise_id_home",                  :null => false
     t.integer  "score_home",        :default => 0
-    t.decimal  "innings",           :default => 0.0
+    t.integer  "outs",           :default => 0
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
   end
@@ -146,44 +146,44 @@ ActiveRecord::Schema.define(:version => 20141128210704) do
   add_index "standings", ["year", "franchise_id"], :name => "index_standings_on_year_and_franchise_id", :unique => true
 
   create_table "statistics", :id => false, :force => true do |t|
-    t.integer  "year",                                                         :null => false
-    t.integer  "player_id",                                                    :null => false
-    t.integer  "franchise_id",                                                 :null => false
-    t.integer  "playoff_round",                               :default => 0
-    t.integer  "G",                                           :default => 0
-    t.integer  "AB",                                          :default => 0
-    t.integer  "R",                                           :default => 0
-    t.integer  "H",                                           :default => 0
-    t.integer  "RBI",                                         :default => 0
-    t.integer  "D",                                           :default => 0
-    t.integer  "T",                                           :default => 0
-    t.integer  "HR",                                          :default => 0
-    t.integer  "SB",                                          :default => 0
-    t.integer  "CS",                                          :default => 0
-    t.integer  "K",                                           :default => 0
-    t.integer  "BB",                                          :default => 0
-    t.integer  "SF",                                          :default => 0
-    t.integer  "SAC",                                         :default => 0
-    t.integer  "HBP",                                         :default => 0
-    t.integer  "CI",                                          :default => 0
-    t.integer  "W",                                           :default => 0
-    t.integer  "L",                                           :default => 0
-    t.integer  "HO",                                          :default => 0
-    t.integer  "S",                                           :default => 0
-    t.integer  "BS",                                          :default => 0
-    t.decimal  "IP",            :precision => 4, :scale => 1, :default => 0.0
-    t.integer  "HA",                                          :default => 0
-    t.integer  "RA",                                          :default => 0
-    t.integer  "ER",                                          :default => 0
-    t.integer  "BBA",                                         :default => 0
-    t.integer  "KA",                                          :default => 0
-    t.integer  "HB",                                          :default => 0
-    t.integer  "WP",                                          :default => 0
-    t.integer  "PB",                                          :default => 0
-    t.integer  "BK",                                          :default => 0
-    t.integer  "E",                                           :default => 0
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.integer  "year",                                      :null => false
+    t.integer  "player_id",                                 :null => false
+    t.integer  "franchise_id",                              :null => false
+    t.integer  "playoff_round",              :default => 0
+    t.integer  "G",                          :default => 0
+    t.integer  "AB",                         :default => 0
+    t.integer  "R",                          :default => 0
+    t.integer  "H",                          :default => 0
+    t.integer  "RBI",                        :default => 0
+    t.integer  "D",                          :default => 0
+    t.integer  "T",                          :default => 0
+    t.integer  "HR",                         :default => 0
+    t.integer  "SB",                         :default => 0
+    t.integer  "CS",                         :default => 0
+    t.integer  "K",                          :default => 0
+    t.integer  "BB",                         :default => 0
+    t.integer  "SF",                         :default => 0
+    t.integer  "SAC",                        :default => 0
+    t.integer  "HBP",                        :default => 0
+    t.integer  "CI",                         :default => 0
+    t.integer  "W",                          :default => 0
+    t.integer  "L",                          :default => 0
+    t.integer  "HO",                         :default => 0
+    t.integer  "S",                          :default => 0
+    t.integer  "BS",                         :default => 0
+    t.integer  "outs",          :limit => 4, :default => 0
+    t.integer  "HA",                         :default => 0
+    t.integer  "RA",                         :default => 0
+    t.integer  "ER",                         :default => 0
+    t.integer  "BBA",                        :default => 0
+    t.integer  "KA",                         :default => 0
+    t.integer  "HB",                         :default => 0
+    t.integer  "WP",                         :default => 0
+    t.integer  "PB",                         :default => 0
+    t.integer  "BK",                         :default => 0
+    t.integer  "E",                          :default => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "statistics", ["year", "player_id", "franchise_id", "playoff_round"], :name => "index_statistics", :unique => true

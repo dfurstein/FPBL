@@ -9,9 +9,10 @@ gem 'autoprefixer-rails'
 gem 'composite_primary_keys' # , '~> 5.0.8'
 gem 'simple_form'
 
-group :development, :test do
-  gem 'sqlite3'
+gem 'rake', '~> 10.3.2'
+gem 'mysql2'
 
+group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
 
@@ -28,7 +29,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'mysql2'
   gem 'unicorn'
 end
 

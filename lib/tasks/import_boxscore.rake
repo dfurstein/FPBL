@@ -171,7 +171,8 @@ namespace :import do
       boxscore.S = (stats[1] == 'S' || stats[3] == 'S') ? 1 : 0
       boxscore.BS = (stats[1] == 'BS' || stats[3] == 'BS') ? 1 : 0
 
-      boxscore.IP = BigDecimal(stats[5])
+      boxscore.outs = (BigDecimal(stats[5]).truncate * 3) +
+                      (BigDecimal(stats[5]).frac * 10).to_i
       boxscore.HA = stats[6]
       boxscore.RA = stats[7]
       boxscore.ER = stats[8]

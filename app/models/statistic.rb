@@ -3,8 +3,8 @@ class Statistic < ActiveRecord::Base
 
   attr_accessible :year, :player_id, :franchise_id, :playoff_round, :G, :AB, :R,
                   :H, :RBI, :D, :T, :HR, :SB, :CS, :K, :BB, :SF, :SAC, :HBP,
-                  :CI, :W, :L, :HO, :S, :BS, :IP, :HA, :RA, :ER, :BBA, :KA, :HB,
-                  :WP, :PB, :BK, :E
+                  :CI, :W, :L, :HO, :S, :BS, :outs, :HA, :RA, :ER, :BBA, :KA,
+                  :HB, :WP, :PB, :BK, :E
 
   belongs_to :player,  foreign_key: [:year, :player_id]
 
@@ -35,7 +35,7 @@ class Statistic < ActiveRecord::Base
     statistic.HO += boxscore.HO
     statistic.S += boxscore.S
     statistic.BS += boxscore.BS
-    statistic.IP = add_ip(statistic.IP, boxscore.IP)
+    statistic.outs += boxscore.outs
     statistic.HA += boxscore.HA
     statistic.RA += boxscore.RA
     statistic.ER += boxscore.ER
@@ -56,7 +56,7 @@ class Statistic < ActiveRecord::Base
   end
 
   def self.pitchers_as_hitters(year, franchise_id, playoff_round)
-    ignore = %w(year player_id franchise_id HO S BS IP HA RA ER BBA KA HB
+    ignore = %w(year player_id franchise_id HO S BS outs HA RA ER BBA KA HB
                 WP PB BK created_at updated_at)
 
     new(where(year: year, franchise_id: franchise_id,
@@ -71,7 +71,7 @@ class Statistic < ActiveRecord::Base
   end
 
   def self.hitting_totals(year, franchise_id, playoff_round)
-    ignore = %w(year player_id franchise_id HO S BS IP HA RA ER BBA KA HB
+    ignore = %w(year player_id franchise_id HO S BS outs HA RA ER BBA KA HB
                 WP PB BK created_at updated_at)
 
     new(where(year: year, franchise_id: franchise_id,
@@ -86,7 +86,7 @@ class Statistic < ActiveRecord::Base
 
   def self.pitchers(year, franchise_id, playoff_round)
     where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
-      .select { |statistic| statistic.IP > 0 && statistic.player.pitcher? }
+      .select { |statistic| statistic.outs > 0 && statistic.player.pitcher? }
   end
 
   def self.pitching_totals(year, franchise_id, playoff_round)
@@ -98,30 +98,9 @@ class Statistic < ActiveRecord::Base
       .map(&:attributes)
       .each_with_object({}) do |hash, result|
         hash.each do |key, value|
-          unless ignore.include?(key)
-            if key == 'IP'
-              result[key] = add_ip(result.fetch(key, 0), value)
-            else
-              result[key] = result.fetch(key, 0) + value
-            end
-          end
+          (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
         end; result
       end)
-  end
-
-  def self.add_ip(old_ip, current_ip)
-    old = BigDecimal(old_ip.round(1).to_s)
-    current = BigDecimal(current_ip.round(1).to_s)
-
-    old.truncate +
-    current.truncate +
-    ((old.frac + current.frac) * BigDecimal('10.0') / BigDecimal('3.0')).truncate +
-    ((old.frac + current.frac) * BigDecimal('10.0') % BigDecimal('3.0')) / BigDecimal('10.0')
-  end
-
-  def convert_ip_to_decimal(ip)
-    BigDecimal(ip).truncate +
-    BigDecimal(ip).frac * BigDecimal('10.0') / BigDecimal('3.0')
   end
 
   def PA
@@ -162,10 +141,10 @@ class Statistic < ActiveRecord::Base
   end
 
   def WHIP
-    (self.HA + self.BBA) / convert_ip_to_decimal(self.IP)
+    (self.HA + self.BBA) / (outs / 3.0)
   end
 
   def ERA
-    (self.ER / convert_ip_to_decimal(self.IP)) * 9
+    (self.ER / (outs / 3.0)) * 9
   end
 end
