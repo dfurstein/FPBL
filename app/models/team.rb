@@ -3,7 +3,7 @@ class Team < ActiveRecord::Base
   self.primary_keys = :year, :franchise_id
 
   attr_accessible :franchise_id, :year, :city, :nickname, :abbreviation,
-                  :stadium, :owner_id, :salary_cap, :dmb_id
+                  :stadium, :owner_id, :salary_cap, :penalty, :dmb_id
 
   has_many :contracts, foreign_key: [:year, :franchise_id]
   has_many :players,  foreign_key: [:year, :player_id], through: :contracts
@@ -13,6 +13,13 @@ class Team < ActiveRecord::Base
   def self.franchise_id_by_abbreviation(year, abbreviation)
     where(year: year, abbreviation: abbreviation.upcase)
       .pluck(:franchise_id).first
+  end
+
+  def self.update_penalty(year, franchise_id, penalty)
+    team = find_by_year_and_franchise_id(year, franchise_id)
+    team.penalty = penalty
+
+    team.save
   end
 
   def self.current_teams
