@@ -73,4 +73,15 @@ class PagesController < ApplicationController
       .to_date.to_formatted_s(:long)
     @to_date ||= Transaction.last.processed_at.to_date.to_formatted_s(:long)
   end
+
+  def rules
+    # Find the third saturday of January
+    if Date.today.month < 12
+      @draft = Date.new(Date.today.year, 1, 1) + 2.weeks
+    else
+      @draft = Date.new(Date.today.year.next, 1, 1) + 2.weeks
+    end
+
+    until @draft.saturday? do @draft = @draft.next end
+  end
 end

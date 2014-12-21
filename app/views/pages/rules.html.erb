@@ -1,0 +1,370 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Rules</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Calendar of Events</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="col-sm-4">Date</th>
+          <th class="col-sm-8">Event</th>
+        </tr>
+        <tr>
+          <td><%= (@draft - 2.weeks).next_day %></td>
+          <td>Teams are allowed to release players and make trades</td>
+        </tr>
+        <tr>
+          <td><%= (@draft - 1.week).next_day %></td>
+          <td>Stadium relocation is no longer allowed</td>
+        </tr>
+        <tr>
+          <td><%= @draft.prev_day %></td>
+          <td>All teams must be under salary cap</td>
+        </tr>
+        <tr>
+          <td><%= @draft %> / 1:00p EST</td>
+          <td>Rookie Draft</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 3.days) %></td>
+          <td>List of twenty four players for Auction to be submitted to Commissioner</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 5.days) %></td>
+          <td>Auction schedule is announced</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 1.week) %></td>
+          <td>Auction begins</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 1.week) %></td>
+          <td>Trade moratorium on players selected in Free Agency begins</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 1.week) %></td>
+          <td>Teams are no longer allowed to release players</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 3.weeks) %></td>
+          <td>Free Agent draft - 4M round</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 4.weeks) %></td>
+          <td>Free Agent draft - 3M round</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 5.weeks) %></td>
+          <td>Free Agent draft - 2M round</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 6.weeks) %></td>
+          <td>Free Agent draft - 1M round</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 7.weeks) %></td>
+          <td>Free Agent draft - 500k round</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 8.weeks) %></td>
+          <td>Free Agent draft - 100k round</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 8.weeks).next_day %></td>
+          <td>Trade moratorium on players selected in Free Agency ends</td>
+        </tr>
+        <tr>
+          <td><%= (@draft + 8.weeks).next_day %></td>
+          <td>Teams are allowed to release players</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 3, 31) %></td>
+          <td>Last day to sign players in first signing period</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 4, 1) %></td>
+          <td>Opening Day (approx)</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 6, 30) %></td>
+          <td>Last day to sign players in second signing period</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 7, 31) %></td>
+          <td>Trading Deadline</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 8, 31) %></td>
+          <td>Last day to be on roster for playoffs</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 9, 1) %></td>
+          <td>Rosters expand beyond twenty five players</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 9, 15) %></td>
+          <td>Last day to sign players in third signing period</td>
+        </tr>
+        <tr>
+          <td><%= Date.new(@draft.year, 10, 1) %></td>
+          <td>Playoffs begin (approx)</td>
+        </tr>
+      </table>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Weekly Events</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="col-sm-4">Date</th>
+          <th class="col-sm-8">Event</th>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td>New Manager Profiles used for weekly simulations</td>
+        </tr>
+        <tr>
+          <td>Tuesday / 11:59p PDT</td>
+          <td>Deadline to release players</td>
+        </tr>
+        <tr>
+          <td>Tuesday / 11:59p PDT</td>
+          <td>Deadline to submit trades</td>
+        </tr>
+        <tr>
+          <td>Thursday / 11:59p PDT</td>
+          <td>Deadline to petition pending trades</td>
+        </tr>
+        <tr>
+          <td>Friday / 11:59p PDT</td>
+          <td>Deadline to submit waiver wire claims</td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td>Results of outstanding trade challenges posted</td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td>Results of waiver wire claims posted</td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td>New league zip posted</td>
+        </tr>
+        <tr>
+          <td>Sunday / 11:00p EDT</td>
+          <td>Deadline to submit new Manager Profile for upcoming week's games</td>
+        </tr>
+      </table>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">League Format</div>
+      <ul class="list-group">
+        <li class="list-group-item">Favorite Pastime Baseball League is comprised of two leagues, an American League and a National League.</li>
+        <li class="list-group-item">The American League will use a designated hitter, while the National League shall not.</li>
+        <li class="list-group-item">Each league shall be divided into three divisions, consisting of four teams each.</li>
+        <li class="list-group-item">The three division winners and one wild card team will represent their league in the playoffs.</li>
+        <li class="list-group-item">In the playoffs, the home team rules will be applied.</li>
+        <li class="list-group-item">MLB divisional and wildcard tie-breaking rules will be used when necessary.</li>
+        <li class="list-group-item">The American League and National League champions will meet in the James Huang Memorial Championship Series.</li>
+        <li class="list-group-item">All owners are expected to obtain a copy of the season disk from Diamond Mind Baseball.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Schedule</div>
+      <ul class="list-group">
+        <li class="list-group-item">The league will play a full 162-game season.</li>
+        <li class="list-group-item">Each team will play each other team in their own division a total of twenty two times, resulting in sixty six games. They will also play each team outside of their division, but within their league, twelve times, for a total of ninety six games. There will be a day off after the last day of the regular season.</li>
+        <li class="list-group-item">The wild card team will play the division winner with the best record, while the #2 division winner will play the #3 division winner. If the wild card is from the same division at the team with the best record, the wild card team will play play the #2 winner, while the #1 and #3 division winners will play each other.</li>
+        <li class="list-group-item">In all rounds of the playoffs, home-field advantage will be given to the team with a better record. The sole exception is that a division winner always has priority over a wild card team.</li>
+        <li class="list-group-item">The Divisional Playoffs will be a best of five series, with the first, second and fifth games played at the stadium of the team with home field advantage.</li>
+        <li class="list-group-item">The League Championship Series and the World Series will be a best of seven series, with the first, second, sixth and seventh games played at the stadium of the team with home field advantage. There will be days off for "travel days", and one day off between rounds of the playoffs.</li>
+        <li class="list-group-item">Tie-breaking procedures will be used to determine which team has home-field advantage in the World Series.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Game Resolutions</div>
+      <ul class="list-group">
+        <li class="list-group-item">All games will be simulated on the commissioner's home computer using Diamond Mind Baseball v10.</li>
+        <li class="list-group-item">Results will be posted on the league home page.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Stadiums</div>
+      <ul class="list-group">
+        <li class="list-group-item">Owners must choose a present-day or historical stadium as the model for their team's home park. If a historical park is chosen, a specific season must be included in the request as park factors tend to change from year to year.</li>
+        <li class="list-group-item">All teams must remain in that stadium for at least two full seasons before being allowed to move. A new owner will be allowed to change their stadium immediately, but not if the season is underway.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Tie Breakers</div>
+      <div class="panel-body">
+        <p>The following rules will be used to break any ties between two teams:</p>
+        <ol>
+          <li>Head to head record</li>
+          <li>Divisional record</li>
+          <li>Pythagorean record</li>
+          <li>Coin flip</li>
+        </ol>
+      </div>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Player Eligibility</div>
+      <ul class="list-group">
+        <li class="list-group-item">In order to be eligible for the current season, a player must have accumulated a minimum of seventy five plate appearances or twenty five innings pitched.</li>
+        <li class="list-group-item">A player who only has eligibility at the catcher position will be eligible for the upcoming season if he has accumulated a minimum of fifty plate appearances. A pitcher who has not started a single game will be eligible for the upcoming season if he has accumulated a minimum a fifteen innings pitched.</li>
+        <li class="list-group-item">No player signed after the final Saturday in August will be eligible to play in the postseason.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Player Usage</div>
+      <ul class="list-group">
+        <li class="list-group-item">Players will be allowed to go up to 110% of their allotted usage (defined by DMB as their historical Plate Appearances or Innings Pitched), and then will revert to replacement level for the remainder of the season. During the playoffs, usage will be limited to 20%.</li>
+        <li class="list-group-item">If a hitter gets to 150% or more of their usage vs. either LHP or RHP, they will also revert to replacement level for the remainder of the season.</li>
+        <li class="list-group-item">Players who are overused during the season are still available for postseason play.</li>
+      </ul>
+      <div class="panel-body">
+        <p>All players must appear at positions for which the current DMB disk says they are eligible. However, there are a few exceptions:</p>
+        <ol>
+          <li>A corner outfielder is eligible to play in either right or left field.</li>
+          <li>A centerfielder is eligible to play any of the outfield positions.</li>
+          <li>In the playoffs, a starting pitcher is permitted to pitch out of the bullpen.</li>
+        </ol>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">In order to curb blatant exploitation issues, owners will be penalized wins, which will have a direct impact on their standing for the rookie draft, free agent draft, and salary cap calculations. A team will receive a win penalty for every 100% of over usage they accrue.</li>
+        <li class="list-group-item">If a team receives a penalty of at least five wins, they will be barred from the rookie draft lottery, even if their record suggests inclusion. If an owner's team receives a penalty of at least ten wins over the course of two consecutive seasons, they will be asked to leave the league, pending a legitimate excuse to explain their inactivity.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Rosters</div>
+      <ul class="list-group">
+        <li class="list-group-item">Team rosters will hold no fewer than thirty eligible players and no more than thirty-five eligible players.</li>
+        <li class="list-group-item">From Opening Day until August 31st, a team must have exactly twenty-five active players. On September 1st, a team can carry more than twenty-five active players on their roster. Teams may only carry twenty-five active players on their roster for the post-season.</li>
+        <li class="list-group-item">On the weekend of the 100k free agent signings, if a team does not have thirty eligible players on their roster, the commissioner will automatically assign free agents to the team until they have a legal roster.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Salary Cap</div>
+      <ul class="list-group">
+        <li class="list-group-item">A team's salary cap will be based on their three-year winning percentage, factoring in any win penalties they may have accrued during that time. Salaries will then be calculated based on a normalized distribution, with a minimum salary of 57M and a maximum salary of 63M.</li>
+        <li class="list-group-item">By default, new owners will start with a salary cap of 60M. Eighty-one wins will be applied for the years in which they were not in the league.</li>
+        <li class="list-group-item">No team may sign or acquire a player via trade when it would result in the team either exceeding their current salary cap in any of the player's contract years and/or exceeding the roster limit in a given year.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Contracts</div>
+      <div class="panel-body">
+        <p>Owners can elect to extend a players' contract up to four years for the following costs:</p>
+        <table class='table table-bordered table-condensed'>
+          <tr>
+            <th class="col-sm-3">Current Salary</th>
+            <th class="col-sm-3">January - March</th>
+            <th class="col-sm-3">April - June</th>
+            <th class="col-sm-3">July - September 15th</th>                  
+          </tr>
+          <tr>
+            <td>100k - 900k</td>
+            <td>+400k</td>
+            <td>+800k</td>
+            <td>+1.2M</td>
+          </tr>
+          <tr>
+            <td>1M - 1.9M</td>
+            <td>+500k</td>
+            <td>+1M</td>
+            <td>+1.5M</td>
+          </tr>
+          <tr>
+            <td>2M - 2.9M</td>
+            <td>+600k</td>
+            <td>+1.2M</td>
+            <td>+1.8M</td>
+          </tr>
+          <tr>
+            <td>3M - 3.9M</td>
+            <td>+800k</td>
+            <td>+1.6M</td>
+            <td>+2.4M</td>
+          </tr>
+          <tr>
+            <td>4M - 4.9M</td>
+            <td>+1M</td>
+            <td>+2M</td>
+            <td>+3M</td>
+          </tr>
+          <tr>
+            <td>5M+</td>
+            <td>+1.2M</td>
+            <td>+2.4M</td>
+            <td>+3.6M</td>
+          </tr>
+        </table>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">Players whose contracts have not been renewed or extended by the end of the third signing period, will be considered free agents for the upcoming season.</li>
+        <li class="list-group-item">When a new owner assumes control over a franchise, the owner will be granted a one time exception, allowing them to extend any player on the previous year's roster as if it were the second signing period.</li>
+        <li class="list-group-item">The maximum salary any player can have for a given season is 10M.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Releasing Players</div>
+      <ul class="list-group">
+        <li class="list-group-item">If an owner releases a player, he must continue to pay 50% of the player's salary (rounded up) for the remainder of the contract. If the owner who released him manages to resign him at the lower rate, then his prior salary is replaced by the new salary (assumed to be a 1-year deal), but they still must also pay the 50% penalty on future seasons. Those fees can be overridden by re-extending the player contract over those seasons.</li>
+        <li class="list-group-item">When a new owner takes over a vacant team, they will be allowed to release players before Opening Day and pay only 50% of the upcoming season's salary. (Subsequent years will not be charged.) However, any player obtained in trade or in Free Agency by the new owner is ineligible for this exemption.</li>
+        <li class="list-group-item">If a player is ineligible for the upcoming FPBL season, the owner can release that player from the remainder of their contract. This rule also applies towards players who are currently owed a release fee, but are not eligible for the current season.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Rookie Draft</div>
+      <ul class="list-group">
+        <li class="list-group-item">The rookie draft will consist of four rounds.</li>
+        <li class="list-group-item">All players who have not appeared active in any prior season and have met either the 75/50 PA or 25/15 IP thresholds, will be available in the draft.</li>
+        <li class="list-group-item">The draft order will be set based on win-loss record, from worst record to best record, with the exception that all the teams who finish in the bottom twentieth percentile will be placed in an equally weighted lottery to determine draft order. Based on a normal distribution, this will be approximately five teams. For each round of the draft, a separate drawing will occur, possibly resulting in a different draft order for each of the four rounds.</li>
+        <li class="list-group-item list-group-item-success">Starting in the 2015 season, all teams with records below 60 wins, will have the difference in their win totals, added to the baseline of 60 wins. For example, 70 wins = 70 wins, 60 wins = 60 wins, 50 wins = 70 wins, and 40 wins = 80 wins. The adjusted win total will be used to determine the draft order.</li>
+        <li class="list-group-item">If the league is missing an owner, or a team owner is absent from the draft and does not provide a list of players from which to select, the commissioner will act as the de facto owner during the draft.</li>
+        <li class="list-group-item">Draft picks will not be skipped due to absence.</li>
+        <li class="list-group-item">All first round selections will earn 500k in their first season. With each subsequent round, the starting salary will decrease by 100k. Any players not selected in the draft will go into the free agent pool.</li>
+        <li class="list-group-item">The rookie draft will occur on the third Saturday of January, starting at 1p EST.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Free Agency</div>
+      <ul class="list-group">
+        <li class="list-group-item">Free Agency will be divided between an auction and a weekly draft.</li>
+        <li class="list-group-item">Following the rookie draft, owners will be asked to submit a list of their top twenty four most desired free agents. The commissioner will then create an auction schedule of the twenty-four most sought after free agents and distribute it to the league. The auction will begin one week after the rookie draft and last for approximately two weeks.</li>
+        <li class="list-group-item">The auction will take place on the message boards and each player will be given their own thread. An auction will end only after a full twenty-four hours has elapsed on the last legal bid. To ensure that each auction is easy to monitor, do not make any non-bid post in a player thread.</li>
+        <li class="list-group-item">An owner is permitted to make a bid anywhere between 100k and 10M, as long as it is divisible by 100k and is greater than the previous bid. For a bid to be legal, the owner's bid on the current player, plus any currently winning bids on other players in the auction, plus 100k per player needed to reach thirty active players, cannot exceed the team's salary cap. In addition, the addition of the player cannot result in the team exceeding the roster limit.</li>
+        <li class="list-group-item">The only exception during the bidding process is that multiple teams are allowed to make a maximum bid on a player. The team with the better three-year winning percentage will win the tie breaker and be awarded the player.</li>
+        <li class="list-group-item">Three weeks after the rookie draft, the weekly Free Agent draft will begin.</li>
+        <li class="list-group-item">Draft order will be set based on a team's winning percentage from the previous season. We will use a method similar to the NBA's ping-pong approach to create a new draft order for each week of the Free Agent draft. The best, non-playoff team from the prior season gets sixteen ping-pong balls, all the way up to the worst team, who gets one ping-pong balls. The eight playoff teams will always go exactly in order of their final records (worst-to-first) to finish out a round.</li>
+        <li class="list-group-item">For each week of the free agent draft, each owner will submit a list of players they want to the commissioner's email account. The owner may specify a series of rules in which they would like the players taken from their list, such as "select at least 1 SP by the 2nd pass."</li>
+        <li class="list-group-item">For the first week of the draft, a team may select up to two players at 4M each.  For each subsequent week of the draft, a team may select as follows: three players at 3M; four players at 2M; five players at 1M; fifteen players at 500k; thirty players at 100k. By the conclusion of the draft, all teams must have a legal roster.</li>
+        <li class="list-group-item">An owner is allowed to list as many players as they would be willing to sign at that week's given price. It is also possible that due to the size of their list, a team may not sign any players in a given round. If a team wishes to skip a round entirely, they must send an e-mail explicitly stating so.</li>
+        <li class="list-group-item">At no point during free agency, may a team exceed either their salary cap or the roster limit to select a player. Any player selected in either the auction and/or the weekly free agent draft cannot be traded until the conclusion of free agency.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Waiver Wire</div>
+      <ul class="list-group">
+        <li class="list-group-item">The free agency style lottery will be used for the waiver wire. Once the season is underway, teams may submit lists of ranked free agent requests. Priority will be based on a team's place in the standings following Saturday's results. The team with the worst record will be given twenty-four ping pong balls, while the team with the best record will be given one ping pong ball. If two teams have the same record, the playoff tie breaking rules will dictate who has higher priority.</li>
+        <li class="list-group-item">Teams may sign a maximum of one free agent per week.</li>
+        <li class="list-group-item">If a player is cut during the season, their salary will be halved (rounded up to the nearest 100k) for each subsequent week they are free agents. For example, if a player has a salary for 5M and is cut on Tuesday, they are available to be selected on Friday at their current salary. The following week, the player's salary will be 2.5M, then 1.3M, then 700k... 400k... 200k... and finally 100k.</li>
+      </ul>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Trading Guidelines</div>
+      <ul class="list-group">
+        <li class="list-group-item">Trades may involve a combination of players and rookie selections for the upcoming draft. In addition, as long as the trade is deemed to be fair, trading assets to clear salary is allowed.</li>
+        <li class="list-group-item">Free agent draft selection cannot be traded, either directly, by proxy, or by any other action that equates to the same results as if the selection itself was dealt.</li>
+        <li class="list-group-item">Any trade of a player between two teams who have traded that same player since the start of the previous season will be heavily scrutinized for collusion and likely vetoed.</li>
+        <li class="list-group-item">You cannot trade rookie draft selections (or players) to be named (or given) later. All trades must involve immediate swapping of any picks or players, and not be based on other factors including, but not limited to, the performance of a player or team.</li>
+        <li class="list-group-item">A trade is considered pending, and cannot be amended, once both teams involved submit the trade to the commissioner.</li> 
+        <li class="list-group-item">Pending trades will be posted to the league in a timely matter, at which time they become fair game for review by the league.</li>
+        <li class="list-group-item">If any owner finds fault with a trade, they should e-mail the commissioner with their complaint. The commissioner reserves the right to nullify any trade. Trades are only final once they are affirmed by the commissioner later in the week.</li>
+        <li class="list-group-item">Traded players will be available for use by the new team beginning the week after the trade deadline that has been met. For example, with a Tuesday trade deadline, players traded on Monday will be available for the following week; however, trades made on Wednesday will require an additional week of waiting time, during which players will still be available to their original teams.</li>
+        <li class="list-group-item">When a trade is completed, player contracts are transferred with the player.</li>
+        <li class="list-group-item">Players and/or draft picks involved in a pending trade can themselves be traded. If for any reason the commissioner nullifies the initial trade, all subsequent trades will be nullified. No exceptions will be granted to work around deadlines.</li> 
+        <li class="list-group-item">See the Weekly Event Dates for deadlines involved in trades.</li>
+      </ul>
+    </div>
+  </div>
+</div>

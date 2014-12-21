@@ -6,6 +6,7 @@ FPBL::Application.routes.draw do
   match '/calendar/(:month)/(:year)' => 'pages#calendar', as: 'calendar'
   match '/draft/(:year)' => 'pages#draft', as: 'draft'
   match '/transaction/' => 'pages#transaction', as: 'transaction'
+  match '/rules/' => 'pages#rules', as: 'rules'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
