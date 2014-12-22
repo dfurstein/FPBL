@@ -1,64 +1,4 @@
 <div class="row">
-	<div class="col-md-12">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Totals</div>
-			<div class="panel panel-info">
-				<div class="panel-heading">Salary</div>
-				<table class='table table-condensed'>
-					<tr>
-						<th class="col-sm-offset-7"><!-- No Value --></th>
-						<% 5.times { |idx| %>
-							<th class="col-sm-1"><%= @year + idx %></th>
-						<% } %>
-					</tr>
-					<tr>
-						<td>Payroll</td>
-						<% 5.times { |idx| %>
-							<td><%= Contract.total_salary(@year + idx, @franchise_id) %></td>
-						<% } %>
-					</tr>
-					<tr>
-						<td>Salary Cap</td>
-						<td><%= Contract.salary_cap(@year, @franchise_id) %></td>
-						<% 4.times { |idx| %>
-							<td><!-- No Value --></td>
-						<% } %>
-					</tr>
-					<tr>
-						<td>Available Salary Cap</td>
-						<td><%= Contract.available_salary_cap(@year, @franchise_id) %></td>
-						<% 4.times { |idx| %>
-							<td><!-- No Value --></td>
-						<% } %>
-					</tr>
-				</table>
-			</div>
-			<div class="panel panel-info">
-				<div class="panel-heading">Players</div>
-				<table class='table table-condensed'>
-					<tr>
-						<th class="col-sm-offset-7"><!-- No Value --></th>
-						<% 5.times { |idx| %>
-							<th class="col-sm-1"><%= @year + idx %></th>
-						<% } %>
-					</tr>	
-					<tr>
-						<td>Active Players</td>
-						<% 5.times { |idx| %>
-							<td><%= Contract.total_active_players(@year + idx, @franchise_id) %></td>
-						<% } %>
-					</tr>
-					<tr>
-						<td>Inactive Players</td>
-						<% 5.times { |idx| %>
-							<td><%= Contract.total_inactive_players(@year + idx, @franchise_id) %></td>
-						<% } %>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-
 	<div class="col-md-6">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Pitchers</div>
@@ -78,4 +18,64 @@
 			<% } %>
 		</div>
 	</div>
+
+  <div class="col-md-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Totals</div>
+      <div class="panel panel-info">
+        <div class="panel-heading">Salary</div>
+        <table class='table table-condensed'>
+          <tr>
+            <th class="col-sm-offset-7"><!-- No Value --></th>
+            <% 5.times { |idx| %>
+              <th class="col-sm-1"><%= @year + idx %></th>
+            <% } %>
+          </tr>
+          <tr>
+            <td>Payroll</td>
+            <% 5.times { |idx| %>
+              <td><%= Contract.total_salary(@year + idx, @franchise_id) %></td>
+            <% } %>
+          </tr>
+          <tr>
+            <td>Salary Cap</td>
+            <td><%= Contract.salary_cap(@year, @franchise_id) %></td>
+            <% 4.times { |idx| %>
+              <td><!-- No Value --></td>
+            <% } %>
+          </tr>
+          <tr>
+            <td>Available Salary Cap</td>
+            <td><%= Contract.available_salary_cap(@year, @franchise_id) %></td>
+            <% 4.times { |idx| %>
+              <td><!-- No Value --></td>
+            <% } %>
+          </tr>
+        </table>
+      </div>
+      <div class="panel panel-info">
+        <div class="panel-heading">Players</div>
+        <table class='table table-condensed'>
+          <tr>
+            <th class="col-sm-offset-7"><!-- No Value --></th>
+            <% 5.times { |idx| %>
+              <th class="col-sm-1"><%= @year + idx %></th>
+            <% } %>
+          </tr> 
+          <tr>
+            <td>Active Players</td>
+            <% 5.times { |idx| %>
+              <td><%= Contract.total_active_players(@year + idx, @franchise_id) %></td>
+            <% } %>
+          </tr>
+          <tr>
+            <td>Inactive Players</td>
+            <% 5.times { |idx| %>
+              <td><%= Contract.total_inactive_players(@year + idx, @franchise_id) %></td>
+            <% } %>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
