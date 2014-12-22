@@ -10,7 +10,7 @@ class Contract < ActiveRecord::Base
   def self.under_contract(year, franchise_id)
     Contract.where(year: year, franchise_id: franchise_id)
       .map { |contract| contract.player }
-      .sort_by { |player| [player.last_name, player.first_name] }
+      .sort_by { |player| [player.last_name.upcase, player.first_name.upcase] }
   end
 
   def self.under_contract_per_position(year, franchise_id, position)

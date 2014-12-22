@@ -44,6 +44,13 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def self.rookies(year)
+    existing_players = Player.where('year < ?', year).pluck(:player_id).uniq
+
+    Player.where('year = ? and player_id not in (?)', year, existing_players)
+      .sort_by { |player| [player.last_name.upcase, player.first_name.upcase] }
+  end
+
   def name
     first_name + ' ' + last_name
   end

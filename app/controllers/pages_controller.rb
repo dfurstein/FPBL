@@ -84,4 +84,8 @@ class PagesController < ApplicationController
 
     until @draft.saturday? do @draft = @draft.next end
   end
+
+  def rookies
+    @rookies = Player.rookies(Team.last.year)
+  end
 end

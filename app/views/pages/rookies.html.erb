@@ -1,0 +1,20 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Players</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Rookies</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="col-sm-6">Player</th>
+          <th class="col-sm-6">Primary Position</th>
+        </tr>
+        <% @rookies.each { |player| %>
+        <tr>
+          <td><%= player.name %></td>
+          <td><%= Player.position_name(player.position) %></td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</div>
