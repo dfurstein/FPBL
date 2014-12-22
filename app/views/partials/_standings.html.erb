@@ -18,9 +18,9 @@
               <td><%= record.team.name %></td>
               <td><%= record.wins %></td>
               <td><%= record.losses %></td>
-              <td><%= record.win_percentage %></td>
-              <td><%= record.games_back_division_formatted %></td>
-              <td><%= record.game_streak %></td>
+              <td><%= format_win_percentage(record.win_percentage) %></td>
+              <td><%= format_games_back(record.games_back_division) %></td>
+              <td><%= format_game_streak(record.streak) %></td>
             </tr>
           <% } %>
         </table>

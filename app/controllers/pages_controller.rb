@@ -27,6 +27,7 @@ class PagesController < ApplicationController
     @hitters = %w(C 1B 2B 3B SS LF CF RF DH)
   end
 
+  helper StandingsHelper
   def standings
     @year = params[:year].nil? ? Team.last.year.to_s : params[:year]
     @years = Team.all.map { |season| season.year }.uniq.reverse

@@ -56,29 +56,13 @@ class Standing < ActiveRecord::Base
   end
 
   def win_percentage
-    format('%.03f', (wins / (wins + losses).to_f).round(3))
-  end
-
-  def game_streak
-    if streak > 0
-      "W#{streak}"
-    else
-      "L#{streak.abs}"
-    end
+    wins / (wins + losses).to_f
   end
 
   def games_back_division
     records = Standing.records_by_divisions(year, division)
 
-    if records.empty?
-      0
-    else
-      records.max_by { |standing| standing.wins }.wins - wins
-    end
-  end
-
-  def games_back_division_formatted
-    games_back_division == 0 ? '-' : games_back_division
+    records.empty? ? 0 : records.max_by { |standing| standing.wins }.wins - wins
   end
 
   def games_back_wildcard
@@ -93,11 +77,7 @@ class Standing < ActiveRecord::Base
       end
     end
 
-    if records.empty?
-      0
-    else
-      records.compact.max_by { |standing| standing.wins }.wins - wins
-    end
+    records.empty? ? 0 : records.compact.max_by { |standing| standing.wins }.wins - wins
   end
 
   def record
