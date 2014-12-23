@@ -17,6 +17,7 @@ class PagesController < ApplicationController
     end
   end
 
+  helper StatisticsHelper
   def team
     @franchise_id = params[:id]
     @year = Team.last.year

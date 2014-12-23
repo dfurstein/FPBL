@@ -42,9 +42,9 @@
                 <td><%= stat.K %></td>
                 <td><%= stat.SB %></td>
                 <td><%= stat.CS %></td>              
-                <td><%= '%.3f' % stat.AVG.round(3) %></td>
-                <td><%= '%.3f' % stat.OBP.round(3) %></td>
-                <td><%= '%.3f' % stat.SLG.round(3) %></td>
+                <td><%= format_percentage_thousandths(stat.AVG) %></td>
+                <td><%= format_percentage_thousandths(stat.OBP) %></td>
+                <td><%= format_percentage_thousandths(stat.SLG) %></td>
               </tr>  
             <% end %>
             <% stat = Statistic.pitchers_as_hitters(@year, @franchise_id, 0) %>
@@ -63,9 +63,9 @@
                 <td><%= stat.K %></td>
                 <td><%= stat.SB %></td>
                 <td><%= stat.CS %></td>              
-                <td><%= '%.3f' % stat.AVG.round(3) %></td>
-                <td><%= '%.3f' % stat.OBP.round(3) %></td>
-                <td><%= '%.3f' % stat.SLG.round(3) %></td>
+                <td><%= format_percentage_thousandths(stat.AVG) %></td>
+                <td><%= format_percentage_thousandths(stat.OBP) %></td>
+                <td><%= format_percentage_thousandths(stat.SLG) %></td>
               </tr>  
             <% end %>
             </tbody>
@@ -85,9 +85,9 @@
                 <th><%= stat.K %></th>
                 <th><%= stat.SB %></th>
                 <th><%= stat.CS %></th>              
-                <th><%= '%.3f' % stat.AVG.round(3) %></th>
-                <th><%= '%.3f' % stat.OBP.round(3) %></th>
-                <th><%= '%.3f' % stat.SLG.round(3) %></th>
+                <th><%= format_percentage_thousandths(stat.AVG) %></th>
+                <th><%= format_percentage_thousandths(stat.OBP) %></th>
+                <th><%= format_percentage_thousandths(stat.SLG) %></th>
               </tr>
             </tfoot>
           </table>
@@ -122,7 +122,7 @@
               <tr>
                 <td><%= stat.player.name %></td>
                 <td><%= stat.G %></td>
-                <td><%= "#{stat.outs / 3}.#{stat.outs % 3}" %></td>
+                <td><%= format_innings_pitched(stat.outs) %></td>
                 <td><%= stat.RA %></td>
                 <td><%= stat.HA %></td>
                 <td><%= stat.ER %></td>
@@ -134,8 +134,8 @@
                 <td><%= stat.S %></td>
                 <td><%= stat.HO %></td>
                 <td><%= stat.BS %></td>               
-                <td><%= '%.2f' % stat.WHIP.round(2) %></td>
-                <td><%= '%.2f' % stat.ERA.round(2) %></td>
+                <td><%= format_percentage_hundredths(stat.WHIP) %></td>
+                <td><%= format_percentage_hundredths(stat.ERA) %></td>
               </tr>  
             <% end %>
             </tbody>
@@ -144,7 +144,7 @@
               <tr>
                 <th><%= 'Totals' %></th>
                 <th><%= stat.W + stat.L %></th>
-                <th><%= "#{stat.outs / 3}.#{stat.outs % 3}" %></th>
+                <th><%= format_innings_pitched(stat.outs) %></th>
                 <th><%= stat.RA %></th>
                 <th><%= stat.HA %></th>
                 <th><%= stat.ER %></th>
@@ -156,8 +156,8 @@
                 <th><%= stat.S %></th>
                 <th><%= stat.HO %></th>
                 <th><%= stat.BS %></th>               
-                <th><%= '%.2f' % stat.WHIP.round(2) %></th>
-                <th><%= '%.2f' % stat.ERA.round(2) %></th>
+                <th><%= format_percentage_hundredths(stat.WHIP) %></th>
+                <th><%= format_percentage_hundredths(stat.ERA) %></th>
               </tr>
             </tfoot>
           </table>
