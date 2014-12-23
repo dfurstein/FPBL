@@ -11,12 +11,12 @@
           </tr>
         </thead>
         <tbody>
-          <% @rookies.each { |player| %>
-          <tr>
-            <td><%= player.name %></td>
-            <td><%= Player.position_name(player.position) %></td>
-          </tr>
-          <% } %>
+        <% @players.each { |player| %>
+        <tr>
+          <td><%= player.name %></td>
+          <td><%= Player.position_name(player.position) %></td>
+        </tr>
+        <% } %>
         </tbody>
       </table>
     </div>

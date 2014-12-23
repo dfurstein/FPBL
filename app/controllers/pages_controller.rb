@@ -90,4 +90,8 @@ class PagesController < ApplicationController
   def rookies
     @rookies = Player.rookies(Team.last.year)
   end
+
+  def freeagents
+    @players = Player.free_agents(Team.last.year)
+  end
 end

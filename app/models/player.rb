@@ -48,7 +48,16 @@ class Player < ActiveRecord::Base
     existing_players = Player.where('year < ?', year).pluck(:player_id).uniq
 
     Player.where('year = ? and player_id not in (?)', year, existing_players)
-      .sort_by { |player| [player.last_name.upcase, player.first_name.upcase] }
+      #.sort_by { |player| [player.last_name.upcase, player.first_name.upcase] }
+  end
+
+  def self.free_agents(year)
+    signed_players = Contract.where(year: 2015, released: FALSE)
+      .pluck(:player_id).uniq
+
+    Player.where('year = ? and active = ? and player_id not in (?)',
+                 year, TRUE, signed_players)
+      #.sort_by { |player| [player.last_name.upcase, player.first_name.upcase] }
   end
 
   def name
