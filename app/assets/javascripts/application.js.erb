@@ -25,6 +25,13 @@ $(document).ready(
 				}, 'text');
 		});
 
+    $.tablesorter.addParser({ 
+        id: 'name', 
+        is: function(s, table, cell, $cell) { return false; },
+        format: function(s, table, cell, cellIndex) { return $(cell).attr('sort-name') || s; },
+        type: 'text'
+      });
+
     $("#hitting-stats").tablesorter({
       theme: "bootstrap",
       widthFixed: true,
@@ -40,13 +47,13 @@ $(document).ready(
     $("#free-agents").tablesorter({
       theme: "bootstrap",
       widthFixed: true,
-      sortList: [[2,0],[0,0]]
+      headers: { 0: { sorter: 'name' } } 
     });
 
     $("#rookies").tablesorter({
       theme: "bootstrap",
       widthFixed: true,
-      sortList: [[2,0],[0,0]]
+      headers: { 0: { sorter: 'name' } } 
     });
     
     $(".date-picker").datepicker({
