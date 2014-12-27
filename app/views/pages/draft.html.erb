@@ -25,8 +25,12 @@
               <% draft_selection = Draft.draft_selection(@year, round, selection) %>
               <tr>
                 <td><%= selection %></td>
-                <td><%= draft_selection.team.name %></td>                
+                <td><%= draft_selection.team.name %></td>
+                <% if "2000" == @year %>
                 <td><%= draft_selection.player_id.nil? ? "***PASS***" : draft_selection.player.name%></td>
+                <% else %>
+                <td><%= draft_selection.player.name unless draft_selection.player_id.nil? %></td>
+                <% end %>
                 <td><%= draft_selection.player.position unless draft_selection.player_id.nil?%></td>
               </tr>
             <% } %>
