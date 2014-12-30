@@ -1,0 +1,34 @@
+<div class="panel-heading draft">Rookie Draft</div>
+<% current_round = 0 %>
+<% @draft.each do |selection| %>
+  
+  <% if current_round != selection.round %>
+    <% if current_round != 0 %>
+      </table></div>
+    <% end %>
+    <% current_round = selection.round %>
+    <div class="panel panel-info">
+      <div class="panel-heading">Round <%= selection.round %></div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="col-sm-2">Selection</th>
+          <th class="col-sm-4">Team</th>
+          <th class="col-sm-4">Player</th>
+          <th class="col-sm-2">Position</th>
+        </tr>
+  <% end %>
+
+  <tr>
+    <td><%= selection.selection %></td>
+    <td><%= selection.team.name %></td>
+    <% if "2000" == @year %>
+      <td><%= selection.player_id.nil? ? "***PASS***" : selection.player.name%></td>
+    <% else %>
+      <td><%= selection.player.name unless selection.player_id.nil? %></td>
+    <% end %>
+    <td><%= selection.player.position unless selection.player_id.nil?%></td>
+  </tr>
+
+<% end %>
+
+</table></div>

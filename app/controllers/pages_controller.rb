@@ -52,11 +52,6 @@ class PagesController < ApplicationController
     @games = Schedule.all_games_for_month(@date)
   end
 
-  def draft
-    @year = params[:year].nil? ? Draft.last.year.to_s : params[:year]
-    @years = Draft.all.map { |draft| draft.year }.uniq.reverse
-  end
-
   def transaction
     unless params[:search].nil?
       @franchise_id = params[:search][:franchise_id] unless

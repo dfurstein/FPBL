@@ -1,0 +1,16 @@
+<div class='text-center'>
+  <ul class='pagination pagination-sm'>
+    <% @years.each { |year| %>
+      <% if @year == year.to_s %><li class='active'><% else %><li><% end %>
+        <%= link_to year, draft_path(year: year) %>
+      </li>
+    <% } %>
+  </ul>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-primary draft">
+      <%= render "draft", draft: @draft, year: @year %>
+    </div>
+  </div>
+</div>

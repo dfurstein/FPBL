@@ -59,12 +59,21 @@ $(document).ready(
     $(".date-picker").datepicker({
       format: "MM d, yyyy",
       startDate: "<%= Transaction.first.processed_at.to_date.strftime('%m/%d/%Y') %>",
-      endDate: "<%= Transaction.last.processed_at.to_date.strftime('%m/%d/%Y') %>",
+      endDate: "12/31/2015",
       autoclose: true,
       todayHighlight: true
     });
 
     $(".from_date").datepicker("setDate", $(".from_date").val());
-    $(".to_date").datepicker("setDate", $(".to_date").val()); 
+    $(".to_date").datepicker("setDate", $(".to_date").val());
+
+    if($("#draft")) {
+      setTimeout(updateDraft, 10000);
+    }
   } 
 ); 
+
+function updateDraft() {
+  $.getScript("/draft.js")
+  setTimeout(updateDraft, 10000);
+}

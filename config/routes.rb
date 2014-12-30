@@ -4,7 +4,7 @@ FPBL::Application.routes.draw do
   match '/team/:id' => 'pages#team', as: 'team'
   match '/standings/(:year)' => 'pages#standings', as: 'standings'
   match '/calendar/(:month)/(:year)' => 'pages#calendar', as: 'calendar'
-  match '/draft/(:year)' => 'pages#draft', as: 'draft'
+  match '/draft/(:year)' => 'draft#index', as: 'draft'
   match '/transaction/' => 'pages#transaction', as: 'transaction'
   match '/rules/' => 'pages#rules', as: 'rules'
   match '/rookies/' => 'pages#rookies', as: 'rookies'

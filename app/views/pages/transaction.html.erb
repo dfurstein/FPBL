@@ -54,7 +54,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading">Transactions</div>
       <% Transaction.all_ids(@franchise_id, @transaction_type, 
-                             @from_date.to_date, @to_date.to_date).each do |id| %>
+                             @from_date.to_date, @to_date.to_date + 1.day).each do |id| %>
         <% @transaction = Transaction.where(transaction_group_id: id).first %>
         <% @id = id %>
         <% if @transaction.transaction_type == 'TRADE' %>
