@@ -15,7 +15,7 @@
     <% end %>
           <p class="list-group-item-text">
             <% if trade.player_id.nil? %>
-              Round <%= trade.draft_round %> - <%= trade.draft_team.name %> <% unless trade.draft.nil? %>(<%= trade.draft.player.name %>)<% end %>
+              Round <%= trade.draft_round %> - <%= trade.draft_team.name %> <% unless trade.draft.nil? || trade.draft.player_id.nil? %>(<%= trade.draft.player.name %>)<% end %>
             <% else %>
               <%= trade.player.name %>
             <% end %> 
