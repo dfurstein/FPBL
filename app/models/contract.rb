@@ -47,4 +47,10 @@ class Contract < ActiveRecord::Base
     Contract.where(year: year, franchise_id: franchise_id).count -
       total_active_players(year, franchise_id)
   end
+
+  def self.remove_inactive_released_players(year, franchise_id)
+    Contract.where(year: year, franchise_id: franchise_id, released: true)
+      .map { |contract| contract unless contract.player.active }.compact
+      .each { |contract| contract.destroy }
+  end
 end

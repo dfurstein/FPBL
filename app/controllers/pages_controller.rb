@@ -26,6 +26,8 @@ class PagesController < ApplicationController
 
     @pitchers = %w(SP MR CL)
     @hitters = %w(C 1B 2B 3B SS LF CF RF DH)
+
+    Contract.remove_inactive_released_players(@year, @franchise_id)
   end
 
   helper StandingsHelper

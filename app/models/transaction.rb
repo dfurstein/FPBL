@@ -22,7 +22,10 @@ class Transaction < ActiveRecord::Base
     "transaction_type = '#{transaction_type}'" unless transaction_type.nil?
   end
 
+  # Does not work correctly - DO NOT USE
   def self.release_player(franchise_id, player_id)
+    group_id = Transaction.last.transaction_group_id + 1
+
     contracts = Contract.where(franchise_id: franchise_id,
                                player_id: player_id,
                                released: FALSE)
@@ -35,7 +38,7 @@ class Transaction < ActiveRecord::Base
     end
 
     transaction = Transaction.new
-    transaction.transaction_group_id = Transaction.last.transaction_group_id + 1
+    transaction.transaction_group_id = group_id
     transaction.transaction_type = 'RELEASE'
     transaction.year = Team.last.year
     transaction.franchise_id_from = franchise_id
@@ -45,7 +48,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.draft_player(player_id)
-    draft = Draft.where(year: 2015).where('player_id is null').first
+    draft = Draft.where(year: Team.year.last).where('player_id is null').first
     draft.player_id = player_id
     draft.save
 
