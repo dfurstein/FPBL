@@ -15,6 +15,11 @@ class PagesController < ApplicationController
         |record| - record.wins
       end
     end
+
+    @franchise_id = nil
+    @transaction_type = nil
+    @from_date = Date.today - 1.week
+    @to_date = Date.today
   end
 
   helper StatisticsHelper

@@ -6,12 +6,12 @@
       <% team = trade.to_team %>
       <ul class="list-group">
         <li class="list-group-item">
-          <h4 class="list-group-item-heading"><%= team.name %></h4>
+          <h5 class="list-group-item-heading"><%= team.name %></h5>
     <% elsif team != trade.to_team %>
       <% team = trade.to_team %>
         </li>
         <li class="list-group-item">
-          <h4 class="list-group-item-heading"><%= team.name %></h4>
+          <h5 class="list-group-item-heading"><%= team.name %></h5>
     <% end %>
           <p class="list-group-item-text">
             <% if trade.player_id.nil? %>

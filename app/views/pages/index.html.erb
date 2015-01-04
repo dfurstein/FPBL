@@ -2,9 +2,11 @@
 	<div class="col-md-3">
     <%= render "partials/scoreboard" %>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-5">
     <%= render "partials/standings", local: {year: @year} %>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
+  	<%= render "partials/transaction", local: { franchise_id: @franchise_id, transaction_type: @transaction_type, 
+                                                from_date: @from_date, to_date: @to_date } %>
   </div>
 </div>

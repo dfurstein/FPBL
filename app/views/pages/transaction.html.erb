@@ -51,24 +51,8 @@
 
 <div class="row top-buffer">
   <div class="col-md-10 col-md-offset-1">
-    <div class="panel panel-primary">
-      <div class="panel-heading">Transactions</div>
-      <% Transaction.all_ids(@franchise_id, @transaction_type, 
-                             @from_date.to_date, @to_date.to_date + 1.day).each do |id| %>
-        <% @transaction = Transaction.where(transaction_group_id: id).first %>
-        <% @id = id %>
-        <% if @transaction.transaction_type == 'TRADE' %>
-          <%= render "partials/transaction_trade", local: {transaction: @transaction, id: @id} %>
-        <% elsif @transaction.transaction_type == 'SIGN' %>
-          <%= render "partials/transaction_sign", local: {transaction: @transaction, id: @id} %>
-        <% elsif @transaction.transaction_type == 'RELEASE' %>
-          <%= render "partials/transaction_release", local: {transaction: @transaction, id: @id} %>
-        <% elsif @transaction.transaction_type == 'EXTEND' %>
-          <%= render "partials/transaction_extend", local: {transaction: @transaction, id: @id} %>
-        <% elsif @transaction.transaction_type == 'DRAFT' %>
-        <% end %>
-      <% end %>
-    </div>
+    <%= render "partials/transaction", local: { franchise_id: @franchise_id, transaction_type: @transaction_type, 
+                                                from_date: @from_date, to_date: @to_date } %>
   </div>
 </div>
 
