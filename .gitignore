@@ -19,3 +19,4 @@
 /config/unicorn.rb
 
 /public/boxscores
+/public/files
