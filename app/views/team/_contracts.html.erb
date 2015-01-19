@@ -4,7 +4,7 @@
 			<div class="panel-heading">Pitchers</div>
 			<% @pitchers.each { |position| %>
 				<% @position = position %>
-				<%= render 'partials/salaries', locals: {year: @year, franchise_id: @franchise_id, position: @position} %>
+				<%= render 'salaries', locals: {year: @year, franchise_id: @franchise_id, position: @position} %>
 			<% } %>
 		</div>
 	</div>
@@ -14,7 +14,7 @@
 			<div class="panel-heading">Hitters</div>
 			<% @hitters.each { |position| %>
 			<% @position = position %>
-				<%= render 'partials/salaries', locals: {year: @year, franchise_id: @franchise_id, position: @position} %>
+				<%= render 'salaries', locals: {year: @year, franchise_id: @franchise_id, position: @position} %>
 			<% } %>
 		</div>
 	</div>

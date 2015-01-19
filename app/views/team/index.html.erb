@@ -12,21 +12,21 @@
       <div id="pane1" class="tab-pane active">
         <div class="row">
           <div class="col-md-12">
-            <%= render 'partials/contracts', locals: {year: @year, franchise_id: @franchise_id} %>
+            <%= render 'contracts', locals: {year: @year, franchise_id: @franchise_id} %>
           </div>
         </div>
       </div>
       <div id="pane2" class="tab-pane">
         <div class="row">
           <div class="col-md-12">
-            <%= render 'partials/team_stats', locals: {year: @year, franchise_id: @franchise_id} %>
+            <%= render 'statistics', locals: {year: @year, franchise_id: @franchise_id} %>
           </div>
         </div>
       </div>
       <div id="pane3" class="tab-pane">
         <div class="row">
           <div class="col-md-12">
-            <%= render 'partials/history', locals: {franchise_id: @franchise_id} %>
+            <%= render 'history', locals: {franchise_id: @franchise_id} %>
           </div>
         </div>
       </div>

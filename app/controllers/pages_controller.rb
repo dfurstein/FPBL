@@ -24,19 +24,6 @@ class PagesController < ApplicationController
     @to_date = Date.today
   end
 
-  helper StatisticsHelper
-  def team
-    @franchise_id = params[:id]
-    @year = Team.last.year
-    @team = Team.find(@year, @franchise_id)
-    @owner = Team.find(@year, @franchise_id).owner
-
-    @pitchers = %w(SP MR CL)
-    @hitters = %w(C 1B 2B 3B SS LF CF RF DH)
-
-    Contract.remove_inactive_released_players(@year, @franchise_id)
-  end
-
   helper StandingsHelper
   def standings
     @year = params[:year].nil? ? Team.last.year.to_s : params[:year]
