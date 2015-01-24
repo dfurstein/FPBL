@@ -4,7 +4,7 @@ class DraftController < ApplicationController
 
   def index
     @year = params[:year].nil? ? Draft.last.year.to_s : params[:year]
-    @years = Draft.all.map { |draft| draft.year }.uniq.reverse
+    @years = Draft.pluck(:year).uniq.reverse
 
     @draft = Draft.where(year: @year)
 

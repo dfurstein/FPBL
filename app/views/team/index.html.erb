@@ -4,26 +4,34 @@
 
 <div class="tabbable" id="team-tabs">
   <ul class="nav nav-tabs">
-      <li class="active"><a href="#pane1" data-toggle="tab">Contracts</a></li>
-      <li><a href="#pane2" data-toggle="tab">Stats</a></li>
-      <li><a href="#pane3" data-toggle="tab">History</a></li>
+      <li class="active"><a href="#contracts" data-toggle="tab">Contracts</a></li>
+      <li><a href="#picks" data-toggle="tab">Draft Picks</a></li>
+      <li><a href="#statistics" data-toggle="tab">Statistics</a></li>
+      <li><a href="#history" data-toggle="tab">Franchise History</a></li>
     </ul>
   <div class="tab-content">
-      <div id="pane1" class="tab-pane active">
+      <div id="contracts" class="tab-pane active">
         <div class="row">
           <div class="col-md-12">
             <%= render 'contracts', locals: {year: @year, franchise_id: @franchise_id} %>
           </div>
         </div>
       </div>
-      <div id="pane2" class="tab-pane">
+      <div id="picks" class="tab-pane">
+        <div class="row">
+          <div class="col-md-12">
+          <%= render 'picks', locals: {franchise_id: @franchise_id}%>
+          </div>
+        </div>
+      </div>
+      <div id="statistics" class="tab-pane">
         <div class="row">
           <div class="col-md-12">
             <%= render 'statistics', locals: {year: @year, franchise_id: @franchise_id} %>
           </div>
         </div>
       </div>
-      <div id="pane3" class="tab-pane">
+      <div id="history" class="tab-pane">
         <div class="row">
           <div class="col-md-12">
             <%= render 'history', locals: {franchise_id: @franchise_id} %>
