@@ -83,4 +83,17 @@ class Standing < ActiveRecord::Base
   def record
     "#{wins} - #{losses}"
   end
+
+  def postseason
+    postseason = []
+
+    unless playoff_berth.nil? || playoff_berth == ''
+      postseason.push('James Huang Memorial Champion') if playoff_round >= 4
+      postseason.push("#{league} League Champion") if playoff_round >= 3
+      postseason.push("#{division} Division Champion") if playoff_round >= 1 && playoff_berth == 'D'
+      postseason.push('Wildcard Champion') if playoff_round >= 1 && playoff_berth == 'W'
+    end
+
+    postseason
+  end
 end

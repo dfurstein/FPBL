@@ -22,6 +22,8 @@ class TeamController < ApplicationController
       hash[year] = Draft.where(year: year, franchise_id_current: @franchise_id)
     end
 
+    @years = Team.pluck(:year).uniq.reverse
+
     Contract.remove_inactive_released_players(@year, @franchise_id)
   end
 end

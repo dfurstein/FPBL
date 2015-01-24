@@ -16,7 +16,7 @@ class Team < ActiveRecord::Base
   end
 
   def self.update_penalty(year, franchise_id, penalty)
-    team = find_by_year_and_franchise_id(year, franchise_id)
+    team = find(year, franchise_id)
     team.penalty = penalty
 
     team.save
@@ -28,20 +28,5 @@ class Team < ActiveRecord::Base
 
   def name
     city + ' ' + nickname
-  end
-
-  def record
-    standing.nil? ? '' : standing.record
-  end
-
-  # TODO: revist function and move it out of this model
-  def games_back
-    if standing.nil?
-      ''
-    elsif standing.games_back_division == '-'
-      ''
-    else
-      ", #{standing.games_back_division} GB"
-    end
   end
 end

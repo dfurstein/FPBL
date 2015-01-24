@@ -17,7 +17,7 @@
           <div class="panel-heading"><%= year %></div>
           <dl class="dl-horizontal">
             <% @draft_selections[year].each { |selection| %>
-              <dt>Round <%= selection.round %> <!-- &mdash; Pick <%= format('%02d',selection.selection) %> --></dt>
+              <dt>Round <%= selection.round %></dt>
               <% if 2000 == year %>
                 <dd><%= selection.player_id.nil? ? "***PASS***" : selection.player.name%></dd>
               <% else %>
