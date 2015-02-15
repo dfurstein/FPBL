@@ -9,6 +9,7 @@ FPBL::Application.routes.draw do
   match '/rules/' => 'pages#rules', as: 'rules'
   match '/rookies/' => 'pages#rookies', as: 'rookies'
   match '/freeagents/' => 'pages#freeagents', as: 'freeagents'
+  match '/overview/' => 'overview#index', as: 'overview'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

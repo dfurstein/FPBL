@@ -96,4 +96,10 @@ class Standing < ActiveRecord::Base
 
     postseason
   end
+
+  def ranking_value
+    playoff_round = 0 if playoff_round.nil?
+
+    (wins / 12.5) + (playoff_round * 8.0)
+  end
 end

@@ -1,0 +1,24 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Overview</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Teams</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="col-sm-3">Team</th>
+          <th class="col-sm-3">Owner</th>
+          <th class="col-sm-3">Available Salary Cap</th>
+          <th class="col-sm-3">Active Roster Size</th>
+        </tr>
+        <% @overview.each { |team| %>
+          <tr>
+            <td><%= link_to team['name'], team_path(id: team['id']) %></td>
+            <td><%= mail_to team['email'], team['owner'], :encode => 'javascript' %></td>
+            <td><%= team['salary'] %></td>
+            <td><%= team['players'] %></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</div>
