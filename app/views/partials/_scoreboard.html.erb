@@ -11,18 +11,31 @@
         </ul>
       <% else %>
         <% @games.each { |current_game| %>
-
-          <a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
-            <h5 class="list-group-item-header text-center">James Huang Memorial Championship</h5>
-            <span class="scoreboard-badge"><%= current_game.score_away %></span>
-            <p class="list-group-item-text">
-              <%= current_game.away_team.name %>
-            </p>
-            <span class="scoreboard-badge"><%= current_game.score_home %></span>
-            <p class="list-group-item-text">
-              <%= current_game.home_team.name %>
-            </p>
-          </a>
+          <% if current_game.outs > 0 %>
+            <a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
+              <% if current_game.extra_innings? %>
+                <h5 class="list-group-item-header text-center">Extra Innings</h5>
+              <% end %>
+              <span class="scoreboard-badge"><%= current_game.score_away %></span>
+              <p class="list-group-item-text">
+                <%= current_game.away_team.name %>
+              </p>
+              <span class="scoreboard-badge"><%= current_game.score_home %></span>
+              <p class="list-group-item-text">
+                <%= current_game.home_team.name %>
+              </p>
+            </a>
+          <% else %>
+              <li class="list-group-item">
+                <p class="list-group-item-text">
+                  <%= current_game.away_team.name %>
+                </p>
+                <p class="list-group-item-text">
+                  <%= current_game.home_team.name %>
+                </p>
+              </li>
+            </ul>
+          <% end %>
 
           <div class="modal fade" id="boxscore<%= current_game.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">

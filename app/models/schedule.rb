@@ -22,7 +22,7 @@ class Schedule < ActiveRecord::Base
   end
 
   def self.all_games_for_day(date)
-    where(date: date)
+    where(date: date).order(:id)
   end
 
   def self.all_games_for_month(date)
@@ -67,5 +67,9 @@ class Schedule < ActiveRecord::Base
 
   def dmb_file
     "#{date.year}#{'%02d' % date.month}#{'%02d' % date.day}#{'%04d' % Team.find(date.year, home_team.franchise_id).dmb_id}0"
+  end
+
+  def extra_innings?
+    outs > 27
   end
 end

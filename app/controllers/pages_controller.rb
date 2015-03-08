@@ -3,7 +3,11 @@ class PagesController < ApplicationController
   def index
     @year = Team.last.year
 
-    @date = Schedule.last.date
+    if Time.now.hour < 18
+      @date = Date.today - 1.day
+    else
+      @date = Date.today
+    end
     @games = Schedule.all_games_for_day(@date)
 
     @leagues = Standing.leagues(@year).sort
