@@ -9,8 +9,9 @@ gem 'autoprefixer-rails'
 gem 'composite_primary_keys' # , '~> 5.0.8'
 gem 'simple_form'
 
-gem 'rake', '~> 10.3.2'
+gem 'rake'
 gem 'mysql2'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'better_errors'

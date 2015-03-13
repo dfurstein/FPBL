@@ -26,7 +26,7 @@ class Schedule < ActiveRecord::Base
   end
 
   def self.all_games_for_month(date)
-    where(date: date.beginning_of_month..date.end_of_month)
+    where(date: date.beginning_of_month..date.end_of_month).order(:id)
   end
 
   def year

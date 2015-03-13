@@ -3,9 +3,15 @@ desc 'Import boxscore into Game Log'
 namespace :import do
   task :boxscore, [:path] => :environment do |t, args|
 
-    puts args[:path]
+    if args[:path].nil?
+      file_path = "./public/boxscores/#{Date.today.strftime('%Y%m%d')}*"
+    else
+      file_path = args[:path]
+    end
 
-    files = Dir.glob(args[:path]).sort
+    puts file_path
+
+    files = Dir.glob(file_path).sort
     files.each do |file|
       next if file == '.' || file == '..'
 
