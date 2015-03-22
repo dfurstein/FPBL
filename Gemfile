@@ -8,6 +8,7 @@ gem 'autoprefixer-rails'
 
 gem 'composite_primary_keys' # , '~> 5.0.8'
 gem 'simple_form'
+gem 'time_diff'
 
 gem 'rake'
 gem 'mysql2'

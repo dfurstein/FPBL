@@ -72,14 +72,7 @@ class PagesController < ApplicationController
   end
 
   def rules
-    # Find the third saturday of January
-    if Date.today.month < 12
-      @draft = Date.new(Date.today.year, 1, 1) + 2.weeks
-    else
-      @draft = Date.new(Date.today.year.next, 1, 1) + 2.weeks
-    end
-
-    until @draft.saturday? do @draft = @draft.next end
+    @draft = Draft.draft_day
   end
 
   def rookies

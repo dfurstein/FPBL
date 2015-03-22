@@ -19,4 +19,17 @@ class Draft < ActiveRecord::Base
   def self.draft_selection(year, round, selection)
     where(year: year, round: round, selection: selection).first
   end
+
+  def self.draft_day
+    # Find the third saturday of January
+    if Date.today.month < 12
+      draft = Date.new(Date.today.year, 1, 1) + 2.weeks
+    else
+      draft = Date.new(Date.today.year.next, 1, 1) + 2.weeks
+    end
+
+    until draft.saturday? do draft = draft.next end
+
+    draft
+  end
 end

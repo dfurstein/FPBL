@@ -46,7 +46,7 @@ class Player < ActiveRecord::Base
 
   def self.rookies(year)
     existing_players = Player.where('year < ?', year).pluck(:player_id).uniq
-    signed_players = Contract.where(year: 2015, released: FALSE)
+    signed_players = Contract.where(year: year, released: FALSE)
       .pluck(:player_id).uniq
 
     Player.where('year = ? and player_id not in (?)', year,
@@ -55,7 +55,7 @@ class Player < ActiveRecord::Base
   end
 
   def self.free_agents(year)
-    signed_players = Contract.where(year: 2015, released: FALSE)
+    signed_players = Contract.where(year: year, released: FALSE)
       .pluck(:player_id).uniq
 
     Player.where('year = ? and active = ? and player_id not in (?)',
@@ -79,5 +79,42 @@ class Player < ActiveRecord::Base
 
   def current_contract(year, franchise_id)
     contracts.where(franchise_id: franchise_id).where('year >= ?', year)
+  end
+
+  def free_agent_salary
+    free_agent_draft = Draft.draft_day + 3.weeks
+    start_of_season = DateTime.new(year, 4, 2)
+    today = DateTime.now
+
+    if today <= free_agent_draft
+      BigDecimal.new('4.0')
+    elsif today <= free_agent_draft + 1.week
+      BigDecimal.new('3.0')
+    elsif today <= free_agent_draft + 2.week
+      BigDecimal.new('2.0')
+    elsif today <= free_agent_draft + 3.week
+      BigDecimal.new('1.0')
+    elsif today <= free_agent_draft + 4.week
+      BigDecimal.new('0.5')
+    elsif today <= free_agent_draft + 5.week
+      BigDecimal.new('0.1')
+    elsif last_contract_before_release.nil?
+      BigDecimal.new('0.1')
+    elsif last_contract_before_release.updated_at <= free_agent_draft
+      BigDecimal.new('0.1')
+    elsif last_contract_before_release.updated_at <= start_of_season
+      last_contract_before_release.salary * 2
+    else
+      ((last_contract_before_release.salary * 2) /
+        (2**Time.diff(
+          DateTime.now,
+          [last_contract_before_release.updated_at, start_of_season].max)[:week]
+        )
+      ).ceil(1)
+    end
+  end
+
+  def last_contract_before_release
+    contracts.where(year: year, released: TRUE).order(updated_at: :desc).first
   end
 end
