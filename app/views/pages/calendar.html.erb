@@ -21,7 +21,7 @@
     </tr>
     <% (@date.beginning_of_week(:sunday)..@date.end_of_month.end_of_week).each { |day| %>
     <% games_for_day = @games.where("date = '#{day}'") %>
-    <% if day.wday == 1 %>
+    <% if day.wday == 0 %>
     <!-- New Week -->
     <tr>
       <% end %>
