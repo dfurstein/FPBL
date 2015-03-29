@@ -19,7 +19,7 @@
       <th class="col-xs-1"><%= day %></th>
       <% } %> 
     </tr>
-    <% (@date.beginning_of_week..@date.end_of_month.end_of_week).each { |day| %>
+    <% (@date.beginning_of_week(:sunday)..@date.end_of_month.end_of_week).each { |day| %>
     <% games_for_day = @games.where("date = '#{day}'") %>
     <% if day.wday == 1 %>
     <!-- New Week -->
