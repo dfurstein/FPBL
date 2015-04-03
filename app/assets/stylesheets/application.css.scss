@@ -16,10 +16,6 @@ body {
   margin-bottom: 0;
 }
 
-.modal-dialog {
-  width: 700px;
-}
-
 .top-buffer { 
   margin-top:20px;
 }
@@ -37,4 +33,18 @@ body {
 
 .panel-info .panel-heading {
   border-radius: 0;
+}
+
+.modal-dialog {
+@media (min-width: 768px) {
+    width: 700px;
+  }
+}
+
+.modal-dialog {
+@media (max-width: 768px) {
+    pre {
+      word-wrap: normal;
+    }
+  }
 }

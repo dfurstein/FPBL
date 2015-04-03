@@ -21,7 +21,7 @@ $(document).ready(
 			function(event) {
         var $dmb = $(event.target).closest('a')[0].id.substring('boxscore-modal'.length);
 				$.get('/boxscores/' + $dmb + '.php', function(data) {
-					$(event.target).closest('a').parent().find('#boxscore-results' + $dmb).html('<pre>' + $(data).text().trim() + '</pre>');
+					$(event.target).closest('a').parent().find('#boxscore-results' + $dmb).html($(data).text().trim());
 				}, 'text');
 		});
 
