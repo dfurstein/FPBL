@@ -86,7 +86,7 @@ class Statistic < ActiveRecord::Base
 
   def self.pitchers(year, franchise_id, playoff_round)
     where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
-      .select { |statistic| statistic.outs > 0 && statistic.player.pitcher? }
+      .select { |statistic| statistic.player.pitcher? }
   end
 
   def self.pitching_totals(year, franchise_id, playoff_round)
