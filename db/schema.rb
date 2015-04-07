@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141221153825) do
+ActiveRecord::Schema.define(:version => 20150401154451) do
 
   create_table "boxscores", :id => false, :force => true do |t|
     t.date     "date",                             :null => false
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20141221153825) do
     t.integer  "player_id",                                                     :null => false
     t.integer  "franchise_id",                                                  :null => false
     t.integer  "year",                                                          :null => false
-    t.decimal  "salary",       :precision => 3, :scale => 1,                    :null => false
+    t.decimal  "salary",       :precision => 4, :scale => 2,                    :null => false
     t.boolean  "released",                                   :default => false, :null => false
     t.datetime "created_at",                                                    :null => false
     t.datetime "updated_at",                                                    :null => false
@@ -94,12 +94,24 @@ ActiveRecord::Schema.define(:version => 20141221153825) do
   add_index "drafts", ["year", "round", "selection"], :name => "index_drafts_on_year_and_round_and_selection", :unique => true
 
   create_table "owners", :force => true do |t|
-    t.string   "first_name", :null => false
-    t.string   "last_name",  :null => false
-    t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "first_name",                             :null => false
+    t.string   "last_name",                              :null => false
+    t.string   "email",                  :default => ""
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "owners", ["email"], :name => "index_owners_on_email", :unique => true
+  add_index "owners", ["reset_password_token"], :name => "index_owners_on_reset_password_token", :unique => true
 
   create_table "players", :id => false, :force => true do |t|
     t.integer  "player_id",                    :null => false
@@ -129,18 +141,17 @@ ActiveRecord::Schema.define(:version => 20141221153825) do
   add_index "schedules", ["date", "franchise_id_home"], :name => "index_schedules_on_date_and_franchise_id_home", :unique => true
 
   create_table "standings", :id => false, :force => true do |t|
-    t.integer  "year",                                   :null => false
-    t.integer  "franchise_id",                           :null => false
-    t.string   "league",                 :default => "", :null => false
-    t.string   "division",               :default => "", :null => false
-    t.integer  "wins",                   :default => 0,  :null => false
-    t.integer  "losses",                 :default => 0,  :null => false
-    t.integer  "streak",                 :default => 0,  :null => false
+    t.integer  "year",                          :null => false
+    t.integer  "franchise_id",                  :null => false
+    t.string   "league",        :default => "", :null => false
+    t.string   "division",      :default => "", :null => false
+    t.integer  "wins",          :default => 0,  :null => false
+    t.integer  "losses",        :default => 0,  :null => false
+    t.integer  "streak",        :default => 0,  :null => false
     t.string   "playoff_berth"
-    t.integer  "playoff_round",          :default => 0
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.integer  "wins_after_elimination", :default => 0
+    t.integer  "playoff_round", :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "standings", ["year", "franchise_id"], :name => "index_standings_on_year_and_franchise_id", :unique => true

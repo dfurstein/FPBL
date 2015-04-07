@@ -1,4 +1,6 @@
 FPBL::Application.routes.draw do
+  devise_for :owners
+
   get 'pages/index'
 
   match '/team/:id' => 'team#index', as: 'team'

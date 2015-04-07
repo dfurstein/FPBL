@@ -35,6 +35,19 @@ body {
   border-radius: 0;
 }
 
+.form-inputs .row {
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.fix-checkbox {
+  margin-left: 5px;
+}
+
 .modal-dialog {
 @media (min-width: 768px) {
     width: 700px;

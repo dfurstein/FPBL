@@ -14,6 +14,9 @@ gem 'rake'
 gem 'mysql2'
 gem 'whenever', require: false
 
+gem 'devise'
+gem 'cancan'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

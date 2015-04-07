@@ -20,8 +20,6 @@ class PagesController < ApplicationController
       end
     end
 
-    @file = Dir['public/files/*.zip'].sort_by{ |file| File.mtime(file) }.last.partition('/').last
-
     @franchise_id = nil
     @transaction_type = nil
     @from_date = Date.today - 1.week

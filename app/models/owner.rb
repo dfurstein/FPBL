@@ -1,6 +1,13 @@
 # Describes an owner in the league
 class Owner < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_name
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :recoverable, :rememberable,
+         :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me,
+                  :first_name, :last_name
 
   has_many :teams
 
@@ -12,6 +19,10 @@ class Owner < ActiveRecord::Base
     owner.email = email
 
     owner.save
+  end
+
+  def most_recent_team
+    teams.sort_by { |team| team.year }.last
   end
 
   def name
