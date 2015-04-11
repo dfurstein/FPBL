@@ -102,7 +102,8 @@ class Player < ActiveRecord::Base
       BigDecimal.new('0.1')
     elsif last_contract_before_release.updated_at <= free_agent_draft
       BigDecimal.new('0.1')
-    elsif last_contract_before_release.updated_at <= start_of_season
+    elsif last_contract_before_release.updated_at <= start_of_season  &&
+      today <= start_of_season
       last_contract_before_release.salary * 2
     else
       ((last_contract_before_release.salary * 2) /
