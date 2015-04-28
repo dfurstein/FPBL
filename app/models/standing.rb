@@ -62,7 +62,16 @@ class Standing < ActiveRecord::Base
   def games_back_division
     records = Standing.records_by_divisions(year, division)
 
-    records.empty? ? 0 : records.max_by { |standing| standing.wins }.wins - wins
+    wins_back = records.empty? ? 0 : records.max_by { |standing| standing.wins }.wins - wins
+    losses_back = records.empty? ? 0 : losses - records.max_by { |standing| standing.wins }.losses
+
+    games_back = (wins_back + losses_back).to_f / 2.0
+
+    if games_back.to_i == games_back.to_f
+      games_back.to_i
+    else
+      games_back.to_f
+    end
   end
 
   def games_back_wildcard
@@ -77,7 +86,16 @@ class Standing < ActiveRecord::Base
       end
     end
 
-    records.empty? ? 0 : records.compact.max_by { |standing| standing.wins }.wins - wins
+    wins_back = records.empty? ? 0 : records.compact.max_by { |standing| standing.wins }.wins - wins
+    losses_back = records.empty? ? 0 : losses - records.compact.max_by { |standing| standing.wins }.losses_back
+
+    games_back = (wins_back + losses_back).to_f / 2.0
+
+    if games_back.to_i == games_back.to_f
+      games_back.to_i
+    else
+      games_back.to_f
+    end
   end
 
   def record
