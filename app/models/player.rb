@@ -116,6 +116,6 @@ class Player < ActiveRecord::Base
   end
 
   def last_contract_before_release
-    contracts.where(year: year, released: TRUE).order(updated_at: :desc).first
+    contracts.where(year: year, released: TRUE).order('updated_at desc').first
   end
 end
