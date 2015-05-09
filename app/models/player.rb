@@ -107,9 +107,9 @@ class Player < ActiveRecord::Base
       last_contract_before_release.salary * 2
     else
       ((last_contract_before_release.salary * 2) /
-        (2**Time.diff(
-          DateTime.now,
-          [last_contract_before_release.updated_at, start_of_season].max)[:week]
+        (2**(
+          ((DateTime.now - [last_contract_before_release.updated_at, start_of_season].max).to_f / 7.0).to_i
+          )
         )
       ).ceil(1)
     end
