@@ -41,6 +41,10 @@ class Schedule < ActiveRecord::Base
     Team.find(year, franchise_id_away)
   end
 
+  def boxscores
+    Boxscore.where(date: date, franchise_id_home: franchise_id_home)
+  end
+
   def long_description
     if score_away == 0 && score_home == 0
       "#{away_team.name} at #{home_team.name}"
@@ -71,5 +75,9 @@ class Schedule < ActiveRecord::Base
 
   def extra_innings?
     outs > 27
+  end
+
+  def no_hitter?
+    boxscores.group(:franchise_id).sum(:HA).values.include?(0) && outs > 0
   end
 end
