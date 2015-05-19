@@ -78,6 +78,6 @@ class Schedule < ActiveRecord::Base
   end
 
   def no_hitter?
-    boxscores.group(:franchise_id).sum(:HA).values.include?(0) && outs > 0
+    boxscores.group(:franchise_id).sum(:HA).values.include?(0)
   end
 end
