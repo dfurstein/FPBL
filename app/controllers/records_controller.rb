@@ -2,7 +2,7 @@
 class RecordsController < ApplicationController
   def index
     @year = params[:year].nil? ? Boxscore.last.date.year.to_s : params[:year]
-    @years = Boxscore.first.date.year.to_s .. Boxscore.last.date.year.to_s
+    @years = Boxscore.last.date.year.to_s .. Boxscore.first.date.year.to_s
   
     @pitcher_scores = Boxscore.where("position = 'SP' AND YEAR(date) = #{@year}")
     .sort_by { |boxscore| -boxscore.game_score }.first(20)
