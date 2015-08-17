@@ -28,4 +28,18 @@ class Owner < ActiveRecord::Base
   def name
     first_name + ' ' + last_name
   end
+
+  def points
+    points = 0
+
+    teams.each do |team|
+      penalty = team.penalty
+      standing = team.standing
+
+      points += ((standing.wins - penalty) / 8.1)
+      points += ((2**standing.playoff_round) * 4) unless standing.playoff_round.blank?
+    end
+
+    points
+  end
 end

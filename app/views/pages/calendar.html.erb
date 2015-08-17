@@ -44,7 +44,7 @@
               <div class="list-group">
                 <% games_for_day.each { |current_game| %>
                   <% if current_game.outs > 0 %>
-                    <a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal<%= current_game.dmb_file %>">
+                    <a class="list-group-item" data-toggle="modal" href="#boxscore<%= current_game.id %>" id="boxscore-modal-a<%= current_game.dmb_file %>">
                       <%= current_game.abbreviated_description %>
                     </a>
                   <% else %>

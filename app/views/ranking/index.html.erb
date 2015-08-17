@@ -1,0 +1,27 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Rankings</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Owners</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="col-sm-2">Rank</th>
+          <th class="col-sm-4">Owner</th>
+          <th class="col-sm-2">Points</th>
+          <th class="col-sm-2">Years</th>
+          <th class="col-sm-2">Points Per Year</th>
+
+        </tr>
+        <% @ranking.each_with_index { |owner, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= owner['name'] %></td>
+            <td><%= '%.2f' % owner['points'] %></td>
+            <td><%= owner['teams'].count %></td>
+            <td><%= '%.2f' % (owner['points'] / owner['teams'].count.to_f) %></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Outstanding Performances</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Pitchers</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th>Pitcher</th>
+          <th>Date</th>
+          <th>Score</th>
+          <th>IP</th>
+          <th>H</th>
+          <th>R</th>
+          <th>ER</th>
+          <th>BB</th>
+          <th>SO</th>
+          <th>Result</th>
+          <th>Score</th>
+        </tr>
+        <% @pitcher_scores.each { |pitcher| %>
+          <tr data-toggle="modal" href="#boxscore<%= pitcher['boxscore'].id %>" id="boxscore-modal-tr<%= pitcher['boxscore'].dmb_file %>">
+            <td><%= pitcher['pitcher'] %>, <%= pitcher['team'] %></td>
+            <td><%= pitcher['date'].to_formatted_s(:long) %></td>
+            <td><%= pitcher['score'] %></td>
+            <td><%= format_innings_pitched(pitcher['IP']) %></td>
+            <td><%= pitcher['H'] %></td>
+            <td><%= pitcher['R'] %></td>
+            <td><%= pitcher['ER'] %></td>
+            <td><%= pitcher['BB'] %></td>
+            <td><%= pitcher['SO'] %></td>
+            <td><%= pitcher['decision'] %></td>
+            <td><%= '%.0f' % pitcher['gamescore'] %></td>
+          </tr>
+          <div class="modal fade" id="boxscore<%= pitcher['boxscore'].id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                  </button>
+                  <h4 class="modal-title"><%= pitcher['boxscore'].long_description %></h4>
+                </div>
+                <div class="modal-body">
+                  <pre id="boxscore-results<%= pitcher['boxscore'].dmb_file %>">
+                  </pre>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </table>
+    </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Hitters</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th>Hitters</th>
+          <th>Date</th>
+          <th>Score</th>
+          <th>AB</th>
+          <th>R</th>
+          <th>H</th>
+          <th>2B</th>
+          <th>3B</th>
+          <th>HR</th>
+          <th>RBI</th>
+          <th>SB</th>
+          <th>Score</th>
+        </tr>
+        <% @hitter_scores.each { |hitter| %>
+          <tr data-toggle="modal" href="#boxscore<%= hitter['boxscore'].id %>" id="boxscore-modal-tr<%= hitter['boxscore'].dmb_file %>">
+            <td><%= hitter['hitter'] %>, <%= hitter['team'] %></td>
+            <td><%= hitter['date'].to_formatted_s(:long) %></td>
+            <td><%= hitter['score'] %></td>
+            <td><%= hitter['AB'] %></td>
+            <td><%= hitter['R'] %></td>
+            <td><%= hitter['H'] %></td>
+            <td><%= hitter['2B'] %></td>
+            <td><%= hitter['3B'] %></td>
+            <td><%= hitter['HR'] %></td>
+            <td><%= hitter['RBI'] %></td>
+            <td><%= hitter['SB'] %></td>
+            <td><%= '%.2f' % hitter['gamescore'] %></td>
+          </tr>
+          <div class="modal fade" id="boxscore<%= hitter['boxscore'].id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                  </button>
+                  <h4 class="modal-title"><%= hitter['boxscore'].long_description %></h4>
+                </div>
+                <div class="modal-body">
+                  <pre id="boxscore-results<%= hitter['boxscore'].dmb_file %>">
+                  </pre>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</div>

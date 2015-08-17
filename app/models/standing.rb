@@ -87,7 +87,7 @@ class Standing < ActiveRecord::Base
     end
 
     wins_back = records.empty? ? 0 : records.compact.max_by { |standing| standing.wins }.wins - wins
-    losses_back = records.empty? ? 0 : losses - records.compact.max_by { |standing| standing.wins }.losses_back
+    losses_back = records.empty? ? 0 : losses - records.compact.max_by { |standing| standing.wins }.games_back_division
 
     games_back = (wins_back + losses_back).to_f / 2.0
 

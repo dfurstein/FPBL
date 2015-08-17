@@ -17,13 +17,23 @@
 
 $(document).ready(
 	function() {
-		$("[id*='boxscore-modal']").click(
+    // For Lists
+		$("[id*='boxscore-modal-a']").click(
 			function(event) {
-        var $dmb = $(event.target).closest('a')[0].id.substring('boxscore-modal'.length);
+        var $dmb = $(event.target).closest('a')[0].id.substring('boxscore-modal-a'.length);
 				$.get('/boxscores/' + $dmb + '.php', function(data) {
 					$(event.target).closest('a').parent().find('#boxscore-results' + $dmb).html($(data).text().trim());
 				}, 'text');
 		});
+
+    // For Tables
+    $("[id*='boxscore-modal-tr']").click(
+      function(event) {
+        var $dmb = $(event.target).closest('tr')[0].id.substring('boxscore-modal-tr'.length);
+        $.get('/boxscores/' + $dmb + '.php', function(data) {
+          $(event.target).closest('tr').parents().eq(2).find('#boxscore-results' + $dmb).html($(data).text().trim());
+        }, 'text');
+    });
 
     $.tablesorter.addParser({ 
         id: 'name', 

@@ -12,6 +12,8 @@ FPBL::Application.routes.draw do
   match '/rookies/' => 'pages#rookies', as: 'rookies'
   match '/freeagents/' => 'pages#freeagents', as: 'freeagents'
   match '/overview/' => 'overview#index', as: 'overview'
+  match '/ranking/' => 'ranking#index', as: 'ranking'
+  match '/records/(:year)' => 'records#index', as: 'records'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
