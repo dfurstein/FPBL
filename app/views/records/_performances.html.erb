@@ -5,6 +5,7 @@
       <div class="panel-heading">Pitchers</div>
       <table class='table table-bordered table-condensed'>
         <tr>
+          <th>#</th>
           <th>Pitcher</th>
           <th>Date</th>
           <th>Score</th>
@@ -17,8 +18,10 @@
           <th>Result</th>
           <th>Score</th>
         </tr>
-        <% @pitcher_scores.each { |pitcher| %>
+        <% score = 0 %>
+        <% @pitcher_scores.each_with_index { |pitcher, index| %>
           <tr data-toggle="modal" href="#boxscore<%= pitcher['boxscore'].id %>" id="boxscore-modal-tr<%= pitcher['boxscore'].dmb_file %>">
+            <td><%= pitcher['gamescore'] != score ? index + 1 : '' %></td>
             <td><%= pitcher['pitcher'] %>, <%= pitcher['team'] %></td>
             <td><%= pitcher['date'].to_formatted_s(:long) %></td>
             <td><%= pitcher['score'] %></td>
@@ -50,6 +53,7 @@
               </div>
             </div>
           </div>
+          <% score = pitcher['gamescore'] %>
         <% } %>
       </table>
     </div>
@@ -57,6 +61,7 @@
       <div class="panel-heading">Hitters</div>
       <table class='table table-bordered table-condensed'>
         <tr>
+          <th>#</th>
           <th>Hitters</th>
           <th>Date</th>
           <th>Score</th>
@@ -68,10 +73,12 @@
           <th>HR</th>
           <th>RBI</th>
           <th>SB</th>
-          <th>Score</th>
+          <th>ESPN<sup>*</sup></th>
         </tr>
-        <% @hitter_scores.each { |hitter| %>
+        <% score = 0 %>
+        <% @hitter_scores.each_with_index { |hitter, index| %>
           <tr data-toggle="modal" href="#boxscore<%= hitter['boxscore'].id %>" id="boxscore-modal-tr<%= hitter['boxscore'].dmb_file %>">
+            <td><%= hitter['gamescore'] != score ? index + 1 : '' %></td>
             <td><%= hitter['hitter'] %>, <%= hitter['team'] %></td>
             <td><%= hitter['date'].to_formatted_s(:long) %></td>
             <td><%= hitter['score'] %></td>
@@ -104,6 +111,7 @@
               </div>
             </div>
           </div>
+          <% score = hitter['gamescore'] %>
         <% } %>
       </table>
     </div>
