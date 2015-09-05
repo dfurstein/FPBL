@@ -1,0 +1,122 @@
+<% if locals[:stats].reject { |stat| stat.outs == 0 }.count > 0 %>
+  <div class="panel panel-info">
+    <div class="panel-heading"><%= locals[:title] %></div>
+    <div class="table-responsive">
+      <table class='table table-condensed'>
+        <thead>
+          <tr>
+            <th class>Year</th>
+            <th class>Team</th>
+            <th class>G</th>
+            <th class>IP</th>
+            <th class>R</th>
+            <th class>H</th>
+            <th class>ER</th>
+            <th class>BB</th>
+            <th class>SO</th>
+            <th class>HBP</th>
+            <th class>W</th>
+            <th class>L</th>
+            <th class>SV</th>
+            <th class>HLD</th>
+            <th class>BS</th>
+            <th class>WHIP</th>
+            <th class>ERA</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% count = 0 %>
+        <% locals[:stats].reject { |stat| stat.outs == 0 }.each do |stat| %>
+          <% teams = locals[:stats].where(year: stat.year).count %>
+          <% if teams == 1 %>
+            <tr>
+              <td><%= stat.year %></td>
+              <td><%= stat.team.nickname %></td>
+              <td><%= stat.G %></td>
+              <td><%= format_innings_pitched(stat.outs) %></td>
+              <td><%= stat.RA %></td>
+              <td><%= stat.HA %></td>
+              <td><%= stat.ER %></td>
+              <td><%= stat.BBA %></td>
+              <td><%= stat.KA %></td>
+              <td><%= stat.HB %></td>
+              <td><%= stat.W %></td>
+              <td><%= stat.L %></td>
+              <td><%= stat.S %></td>
+              <td><%= stat.HO %></td>
+              <td><%= stat.BS %></td>               
+              <td><%= format_percentage_hundredths(stat.WHIP) %></td>
+              <td><%= format_percentage_hundredths(stat.ERA) %></td>
+            </tr>
+          <% else %>
+            <% if count == 0 %>
+              <% total = Statistic.player_pitching_totals(stat.year, stat.player_id, stat.playoff_round) %>
+              <tr data-toggle='collapse' id='<%= stat.year %>' data-target='.<%= stat.year %>-collapsed'>
+                <td><%= stat.year %></td>
+                <td><em><%= teams.to_words.capitalize %> Teams</em></td>
+                <td><%= total.G %></td>
+                <td><%= format_innings_pitched(stat.outs) %></td>
+                <td><%= stat.RA %></td>
+                <td><%= stat.HA %></td>
+                <td><%= stat.ER %></td>
+                <td><%= stat.BBA %></td>
+                <td><%= stat.KA %></td>
+                <td><%= stat.HB %></td>
+                <td><%= stat.W %></td>
+                <td><%= stat.L %></td>
+                <td><%= stat.S %></td>
+                <td><%= stat.HO %></td>
+                <td><%= stat.BS %></td>               
+                <td><%= format_percentage_hundredths(stat.WHIP) %></td>
+                <td><%= format_percentage_hundredths(stat.ERA) %></td>
+              </tr>
+            <% end %>
+            <% count += 1 %>
+            <tr class='active collapse <%= stat.year %>-collapsed'>
+              <td><!-- No Value --></td>
+              <td><%= stat.team.nickname %></td>
+              <td><%= stat.G %></td>
+              <td><%= format_innings_pitched(stat.outs) %></td>
+              <td><%= stat.RA %></td>
+              <td><%= stat.HA %></td>
+              <td><%= stat.ER %></td>
+              <td><%= stat.BBA %></td>
+              <td><%= stat.KA %></td>
+              <td><%= stat.HB %></td>
+              <td><%= stat.W %></td>
+              <td><%= stat.L %></td>
+              <td><%= stat.S %></td>
+              <td><%= stat.HO %></td>
+              <td><%= stat.BS %></td>               
+              <td><%= format_percentage_hundredths(stat.WHIP) %></td>
+              <td><%= format_percentage_hundredths(stat.ERA) %></td>
+            </tr>
+            <% count = 0 if count == teams %>
+          <% end %> 
+        <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th><%= 'Totals' %></th>
+            <th><!-- No Value --></th>
+            <th><%= locals[:totals].G %></th>
+            <th><%= format_innings_pitched(locals[:totals].outs) %></th>
+            <th><%= locals[:totals].RA %></th>
+            <th><%= locals[:totals].HA %></th>
+            <th><%= locals[:totals].ER %></th>
+            <th><%= locals[:totals].BBA %></th>
+            <th><%= locals[:totals].KA %></th>
+            <th><%= locals[:totals].HB %></th>
+            <th><%= locals[:totals].W %></th>
+            <th><%= locals[:totals].L %></th>
+            <th><%= locals[:totals].S %></th>
+            <th><%= locals[:totals].HO %></th>              
+            <th><%= locals[:totals].BS %></th>
+            <th><%= format_percentage_hundredths(locals[:totals].WHIP) %></th>
+            <th><%= format_percentage_hundredths(locals[:totals].ERA) %></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+<% end %>

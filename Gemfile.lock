@@ -128,6 +128,9 @@ GEM
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    numbers_and_words (0.10.0)
+      activesupport
+      i18n
     orm_adapter (0.5.0)
     polyglot (0.3.5)
     pry (0.10.1)
@@ -253,6 +256,7 @@ DEPENDENCIES
   jquery-ui-rails
   launchy (~> 2.4.2)
   mysql2
+  numbers_and_words
   pry-nav
   pry-rails
   pry-remote

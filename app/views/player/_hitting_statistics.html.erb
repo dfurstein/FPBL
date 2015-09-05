@@ -1,0 +1,21 @@
+<div class="col-md-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Hitting Statistics</div>
+    
+    <%= render 'hitting_statistics_panel', locals: { title: 'Regular Season', 
+                                               stats: @regular_season_stats, 
+                                               totals: @regular_season_hitting_totals } %>
+    
+    <%= render 'hitting_statistics_panel', locals: { title: 'Divisional Series', 
+                                               stats: @divisional_series_stats, 
+                                               totals: @divisional_series_hitting_totals } %>
+
+    <%= render 'hitting_statistics_panel', locals: { title: 'League Series', 
+                                               stats: @league_series_stats, 
+                                               totals: @league_series_hitting_totals } %>
+
+    <%= render 'hitting_statistics_panel', locals: { title: 'James Huang Championship Series', 
+                                               stats: @championship_series_stats, 
+                                               totals: @championship_series_hitting_totals } %>                                                                      
+  </div>
+</div>

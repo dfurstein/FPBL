@@ -19,9 +19,9 @@
             <% @draft_selections[year].each { |selection| %>
               <dt>Round <%= selection.round %></dt>
               <% if 2000 == year %>
-                <dd><%= selection.player_id.nil? ? "***PASS***" : selection.player.name%></dd>
+                <dd><%= selection.player_id.nil? ? "***PASS***" : link_to(selection.player.name, player_path(id: selection.player.player_id)) %></dd>
               <% else %>
-                <dd><%= selection.player.name unless selection.player_id.nil? %></dd>
+                <dd><%= link_to(selection.player.name, player_path(id: selection.player.player_id)) unless selection.player_id.nil? %></dd>
               <% end %>
             <% } %>
           </dl>

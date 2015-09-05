@@ -1,0 +1,122 @@
+<% if locals[:stats].reject { |stat| stat.PA == 0 }.count > 0 %>
+  <div class="panel panel-info">
+    <div class="panel-heading"><%= locals[:title] %></div>
+    <div class="table-responsive">
+      <table class='table table-condensed'>
+        <thead>
+          <tr>
+            <th class>Year</th>
+            <th class>Team</th>
+            <th class>G</th>
+            <th class>AB</th>
+            <th class>R</th>
+            <th class>H</th>
+            <th class>2B</th>
+            <th class>3B</th>
+            <th class>HR</th>
+            <th class>RBI</th>
+            <th class>BB</th>
+            <th class>SO</th>
+            <th class>SB</th>
+            <th class>CS</th>
+            <th class>AVG</th>
+            <th class>OBP</th>
+            <th class>SLG</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% count = 0 %>
+        <% locals[:stats].reject { |stat| stat.PA == 0 }.each do |stat| %>
+          <% teams = locals[:stats].where(year: stat.year).count %>
+          <% if teams == 1 %>
+            <tr>
+              <td><%= stat.year %></td>
+              <td><%= stat.team.nickname %></td>
+              <td><%= stat.G %></td>
+              <td><%= stat.AB %></td>
+              <td><%= stat.R %></td>
+              <td><%= stat.H %></td>
+              <td><%= stat.D %></td>
+              <td><%= stat.T %></td>
+              <td><%= stat.HR %></td>
+              <td><%= stat.RBI %></td>
+              <td><%= stat.BB %></td>
+              <td><%= stat.K %></td>
+              <td><%= stat.SB %></td>
+              <td><%= stat.CS %></td>              
+              <td><%= format_percentage_thousandths(stat.AVG) %></td>
+              <td><%= format_percentage_thousandths(stat.OBP) %></td>
+              <td><%= format_percentage_thousandths(stat.SLG) %></td>
+            </tr>
+          <% else %>
+            <% if count == 0 %>
+              <% total = Statistic.player_hitting_totals(stat.year, stat.player_id, stat.playoff_round) %>
+              <tr data-toggle='collapse' id='<%= stat.year %>' data-target='.<%= stat.year %>-collapsed'>
+                <td><%= stat.year %></td>
+                <td><em><%= teams.to_words.capitalize %> Teams</em></td>
+                <td><%= total.G %></td>
+                <td><%= total.AB %></td>
+                <td><%= total.R %></td>
+                <td><%= total.H %></td>
+                <td><%= total.D %></td>
+                <td><%= total.T %></td>
+                <td><%= total.HR %></td>
+                <td><%= total.RBI %></td>
+                <td><%= total.BB %></td>
+                <td><%= total.K %></td>
+                <td><%= total.SB %></td>
+                <td><%= total.CS %></td>              
+                <td><%= format_percentage_thousandths(total.AVG) %></td>
+                <td><%= format_percentage_thousandths(total.OBP) %></td>
+                <td><%= format_percentage_thousandths(total.SLG) %></td>
+              </tr>
+            <% end %>
+            <% count += 1 %>
+            <tr class='active collapse <%= stat.year %>-collapsed'>
+              <td><!-- No Value --></td>
+              <td><%= stat.team.nickname %></td>
+              <td><%= stat.G %></td>
+              <td><%= stat.AB %></td>
+              <td><%= stat.R %></td>
+              <td><%= stat.H %></td>
+              <td><%= stat.D %></td>
+              <td><%= stat.T %></td>
+              <td><%= stat.HR %></td>
+              <td><%= stat.RBI %></td>
+              <td><%= stat.BB %></td>
+              <td><%= stat.K %></td>
+              <td><%= stat.SB %></td>
+              <td><%= stat.CS %></td>              
+              <td><%= format_percentage_thousandths(stat.AVG) %></td>
+              <td><%= format_percentage_thousandths(stat.OBP) %></td>
+              <td><%= format_percentage_thousandths(stat.SLG) %></td>
+            </tr>
+            <% count = 0 if count == teams %>
+          <% end %> 
+        <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th><%= 'Totals' %></th>
+            <th><!-- No Value --></th>
+            <th><%= locals[:totals].G %></th>
+            <th><%= locals[:totals].AB %></th>
+            <th><%= locals[:totals].R %></th>
+            <th><%= locals[:totals].H %></th>
+            <th><%= locals[:totals].D %></th>
+            <th><%= locals[:totals].T %></th>
+            <th><%= locals[:totals].HR %></th>
+            <th><%= locals[:totals].RBI %></th>
+            <th><%= locals[:totals].BB %></th>
+            <th><%= locals[:totals].K %></th>
+            <th><%= locals[:totals].SB %></th>
+            <th><%= locals[:totals].CS %></th>              
+            <th><%= format_percentage_thousandths(locals[:totals].AVG) %></th>
+            <th><%= format_percentage_thousandths(locals[:totals].OBP) %></th>
+            <th><%= format_percentage_thousandths(locals[:totals].SLG) %></th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+<% end %>

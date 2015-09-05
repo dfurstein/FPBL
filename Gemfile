@@ -17,6 +17,8 @@ gem 'whenever', require: false
 gem 'devise'
 gem 'cancan'
 
+gem 'numbers_and_words'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

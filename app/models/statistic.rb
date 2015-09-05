@@ -7,6 +7,7 @@ class Statistic < ActiveRecord::Base
                   :HB, :WP, :PB, :BK, :E
 
   belongs_to :player,  foreign_key: [:year, :player_id]
+  belongs_to :team, foreign_key: [:year, :franchise_id]
 
   def self.update(boxscore, playoff_round)
     statistic =
@@ -50,12 +51,12 @@ class Statistic < ActiveRecord::Base
     statistic.save
   end
 
-  def self.hitters(year, franchise_id, playoff_round)
+  def self.team_hitters(year, franchise_id, playoff_round)
     where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
       .select { |statistic| statistic.PA > 0 && statistic.player.hitter? }
   end
 
-  def self.pitchers_as_hitters(year, franchise_id, playoff_round)
+  def self.team_pitchers_as_hitters(year, franchise_id, playoff_round)
     ignore = %w(year player_id franchise_id HO S BS outs HA RA ER BBA KA HB
                 WP PB BK created_at updated_at)
 
@@ -70,7 +71,7 @@ class Statistic < ActiveRecord::Base
       end)
   end
 
-  def self.hitting_totals(year, franchise_id, playoff_round)
+  def self.team_hitting_totals(year, franchise_id, playoff_round)
     ignore = %w(year player_id franchise_id HO S BS outs HA RA ER BBA KA HB
                 WP PB BK created_at updated_at)
 
@@ -84,12 +85,39 @@ class Statistic < ActiveRecord::Base
       end)
   end
 
-  def self.pitchers(year, franchise_id, playoff_round)
+  def self.player_career_hitting_totals(player_id, playoff_round)
+    ignore = %w(year player_id franchise_id HO S BS outs HA RA ER BBA KA HB
+                WP PB BK created_at updated_at)
+
+    new(where(player_id: player_id, playoff_round: playoff_round)
+    .reject { |stat| stat.PA == 0 }
+    .map(&:attributes)
+    .each_with_object({}) do |hash, result|
+      hash.each do |key, value|
+        (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
+      end; result
+    end)
+  end
+
+  def self.player_hitting_totals(year, player_id, playoff_round)
+    ignore = %w(year player_id franchise_id HO S BS outs HA RA ER BBA KA HB
+                WP PB BK created_at updated_at)
+
+    new(where(year: year, player_id: player_id, playoff_round: playoff_round)
+    .map(&:attributes)
+    .each_with_object({}) do |hash, result|
+      hash.each do |key, value|
+        (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
+      end; result
+    end)
+  end
+
+  def self.team_pitchers(year, franchise_id, playoff_round)
     where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
       .select { |statistic| statistic.player.pitcher? }
   end
 
-  def self.pitching_totals(year, franchise_id, playoff_round)
+  def self.team_pitching_totals(year, franchise_id, playoff_round)
     ignore = %w(year player_id franchise_id AB R H RBI D T HR SB CS K BB SF
                 SAC HBP CI created_at updated_at)
 
@@ -101,6 +129,33 @@ class Statistic < ActiveRecord::Base
           (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
         end; result
       end)
+  end
+
+  def self.player_career_pitching_totals(player_id, playoff_round)
+    ignore = %w(year player_id franchise_id AB R H RBI D T HR SB CS K BB SF
+                SAC HBP CI created_at updated_at)
+
+    new(where(player_id: player_id, playoff_round: playoff_round)
+    .reject { |stat| stat.outs == 0 }
+    .map(&:attributes)
+    .each_with_object({}) do |hash, result|
+      hash.each do |key, value|
+        (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
+      end; result
+    end)
+  end
+
+  def self.player_pitching_totals(year, player_id, playoff_round)
+    ignore = %w(year player_id franchise_id AB R H RBI D T HR SB CS K BB SF
+                SAC HBP CI created_at updated_at)
+
+    new(where(year: year, player_id: player_id, playoff_round: playoff_round)
+    .map(&:attributes)
+    .each_with_object({}) do |hash, result|
+      hash.each do |key, value|
+        (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
+      end; result
+    end)
   end
 
   def PA

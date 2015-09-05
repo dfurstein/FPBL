@@ -14,6 +14,7 @@ FPBL::Application.routes.draw do
   match '/overview/' => 'overview#index', as: 'overview'
   match '/ranking/' => 'ranking#index', as: 'ranking'
   match '/records/(:year)' => 'records#index', as: 'records'
+  match '/player/(:id)' => 'player#index', as: 'player'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

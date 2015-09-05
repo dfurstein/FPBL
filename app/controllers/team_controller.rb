@@ -24,6 +24,13 @@ class TeamController < ApplicationController
 
     @years = Team.pluck(:year).uniq.reverse
 
+    @hitter_stats = Statistic.team_hitters(@year, @franchise_id, 0)
+    @pitcher_stats = Statistic.team_pitchers(@year, @franchise_id, 0)
+    @pitchers_as_hitters = Statistic.team_pitchers_as_hitters(@year, @franchise_id, 0)
+
+    @hitting_totals = Statistic.team_hitting_totals(@year, @franchise_id, 0)
+    @pitching_totals = Statistic.team_pitching_totals(@year, @franchise_id, 0)
+
     Contract.remove_inactive_released_players(@year, @franchise_id)
   end
 end

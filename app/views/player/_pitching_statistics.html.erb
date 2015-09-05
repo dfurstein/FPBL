@@ -1,0 +1,21 @@
+<div class="col-md-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Pitching Statistics</div>
+    
+    <%= render 'pitching_statistics_panel', locals: { title: 'Regular Season', 
+                                                stats: @regular_season_stats, 
+                                                totals: @regular_season_pitching_totals } %>
+    
+    <%= render 'pitching_statistics_panel', locals: { title: 'Divisional Series', 
+                                                stats: @divisional_series_stats, 
+                                                totals: @divisional_series_pitching_totals } %>
+
+    <%= render 'pitching_statistics_panel', locals: { title: 'League Series', 
+                                                stats: @league_series_stats, 
+                                                totals: @league_series_pitching_totals } %>
+
+    <%= render 'pitching_statistics_panel', locals: { title: 'James Huang Championship Series', 
+                                                stats: @championship_series_stats, 
+                                                totals: @championship_series_pitching_totals } %>                                                                      
+  </div>
+</div>

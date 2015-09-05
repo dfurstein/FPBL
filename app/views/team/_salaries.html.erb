@@ -11,7 +11,7 @@
       </tr>
       <% contracts.each do |player| %>
         <% if !player.active %><tr class="active"><% else %><tr><% end %>
-            <td><%= player.name %></td>
+            <td><%= link_to player.name, player_path(id: player.player_id) %></td>
             <% contract = player.current_contract(@year, @franchise_id) %>
             <% 5.times do |idx| %>
               <% if contract[idx].nil? %>
