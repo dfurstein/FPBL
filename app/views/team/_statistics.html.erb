@@ -29,7 +29,7 @@
             <tbody>
             <% @hitter_stats.each do |stat| %>
               <tr>
-                <td><%= link_to stat.player.name, player_path(id: stat.player.player_id) %></td>
+                <td><%= stat.player.name %></td>
                 <td><%= stat.G %></td>
                 <td><%= stat.AB %></td>
                 <td><%= stat.R %></td>
@@ -118,7 +118,7 @@
             <tbody>
             <% @pitcher_stats.each do |stat| %>
               <tr>
-                <td><%= link_to stat.player.name, player_path(id: stat.player.player_id) %></td>
+                <td><%= stat.player.name %></td>
                 <td><%= stat.G %></td>
                 <td><%= format_innings_pitched(stat.outs) %></td>
                 <td><%= stat.RA %></td>

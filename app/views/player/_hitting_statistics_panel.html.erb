@@ -51,7 +51,7 @@
           <% else %>
             <% if count == 0 %>
               <% total = Statistic.player_hitting_totals(stat.year, stat.player_id, stat.playoff_round) %>
-              <tr data-toggle='collapse' id='<%= stat.year %>' data-target='.<%= stat.year %>-collapsed'>
+              <tr data-toggle='collapse' id='<%= stat.year %>' data-target='.<%= stat.year %>-hitting-collapsed'>
                 <td><%= stat.year %></td>
                 <td><em><%= teams.to_words.capitalize %> Teams</em></td>
                 <td><%= total.G %></td>
@@ -72,7 +72,7 @@
               </tr>
             <% end %>
             <% count += 1 %>
-            <tr class='active collapse <%= stat.year %>-collapsed'>
+            <tr class='active collapse <%= stat.year %>-hitting-collapsed'>
               <td><!-- No Value --></td>
               <td><%= stat.team.nickname %></td>
               <td><%= stat.G %></td>

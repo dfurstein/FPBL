@@ -51,28 +51,28 @@
           <% else %>
             <% if count == 0 %>
               <% total = Statistic.player_pitching_totals(stat.year, stat.player_id, stat.playoff_round) %>
-              <tr data-toggle='collapse' id='<%= stat.year %>' data-target='.<%= stat.year %>-collapsed'>
+              <tr data-toggle='collapse' id='<%= stat.year %>' data-target='.<%= stat.year %>-pitching-collapsed'>
                 <td><%= stat.year %></td>
                 <td><em><%= teams.to_words.capitalize %> Teams</em></td>
                 <td><%= total.G %></td>
-                <td><%= format_innings_pitched(stat.outs) %></td>
-                <td><%= stat.RA %></td>
-                <td><%= stat.HA %></td>
-                <td><%= stat.ER %></td>
-                <td><%= stat.BBA %></td>
-                <td><%= stat.KA %></td>
-                <td><%= stat.HB %></td>
-                <td><%= stat.W %></td>
-                <td><%= stat.L %></td>
-                <td><%= stat.S %></td>
-                <td><%= stat.HO %></td>
-                <td><%= stat.BS %></td>               
-                <td><%= format_percentage_hundredths(stat.WHIP) %></td>
-                <td><%= format_percentage_hundredths(stat.ERA) %></td>
+                <td><%= format_innings_pitched(total.outs) %></td>
+                <td><%= total.RA %></td>
+                <td><%= total.HA %></td>
+                <td><%= total.ER %></td>
+                <td><%= total.BBA %></td>
+                <td><%= total.KA %></td>
+                <td><%= total.HB %></td>
+                <td><%= total.W %></td>
+                <td><%= total.L %></td>
+                <td><%= total.S %></td>
+                <td><%= total.HO %></td>
+                <td><%= total.BS %></td>               
+                <td><%= format_percentage_hundredths(total.WHIP) %></td>
+                <td><%= format_percentage_hundredths(total.ERA) %></td>
               </tr>
             <% end %>
             <% count += 1 %>
-            <tr class='active collapse <%= stat.year %>-collapsed'>
+            <tr class='active collapse <%= stat.year %>-pitching-collapsed'>
               <td><!-- No Value --></td>
               <td><%= stat.team.nickname %></td>
               <td><%= stat.G %></td>
