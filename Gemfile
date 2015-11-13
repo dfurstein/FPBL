@@ -19,6 +19,11 @@ gem 'cancan'
 
 gem 'numbers_and_words'
 
+gem 'forem', github: 'radar/forem', branch: 'rails3'
+gem 'forem-bootstrap', github: 'radar/forem-bootstrap'
+gem 'forem-redcarpet', github: 'radar/forem-redcarpet'
+gem 'kaminari', '0.15.1'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

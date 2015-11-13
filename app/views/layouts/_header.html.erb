@@ -16,7 +16,7 @@
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams<b class="caret"></b></a>
       	<ul class="dropdown-menu">
       		<% Team.current_teams.each { |team| %>
-		       <li><%= link_to team.name, team_path(id: team.franchise_id) %></li>
+		       <li><%= link_to team.name, main_app.team_path(id: team.franchise_id) %></li>
       		<% } %>
       	</ul>
       </li>
@@ -24,17 +24,17 @@
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transactions<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
-              <%= link_to 'Available Free Agents', freeagents_path %>
+              <%= link_to 'Available Free Agents', main_app.freeagents_path %>
             </li>
             <li>
-              <%= link_to 'Transaction Log', transaction_path %>
+              <%= link_to 'Transaction Log', main_app.transaction_path %>
             </li>
             <li role="presentation" class="divider"></li>
             <li>
-              <%= link_to 'Available Rookies', rookies_path %>
+              <%= link_to 'Available Rookies', main_app.rookies_path %>
             </li>
             <li>
-              <%= link_to 'Drafts', draft_path %>
+              <%= link_to 'Drafts', main_app.draft_path %>
             </li>
             <li>
               <a href="http://chat.fp-baseball.com">Draft Room</a>
@@ -45,33 +45,29 @@
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">League Data<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>
-              <%= link_to 'League Schedule', calendar_path %>
+              <%= link_to 'League Schedule', main_app.calendar_path %>
             </li>
             <li>
-              <%= link_to 'Standings', standings_path %>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-              <%= link_to 'Outstanding Performances', records_path %>
+              <%= link_to 'Standings', main_app.standings_path %>
             </li>
             <li role="presentation" class="divider"></li>
             <li>
-              <%= link_to 'Team Overview', overview_path %>
+              <%= link_to 'Outstanding Performances', main_app.records_path %>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li>
+              <%= link_to 'Team Overview', main_app.overview_path %>
             </li>
             <li>
-              <%= link_to 'Owner Ranking', ranking_path %>
+              <%= link_to 'Owner Ranking', main_app.ranking_path %>
             </li>
           </ul>
-      </li>
-      
-      <li>
-        <a href="http://boards.fp-baseball.com">Message Boards</a>
       </li>
 
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li>
-            <%= link_to 'Rules', rules_path %>
+            <%= link_to 'Rules', main_app.rules_path %>
           </li>
         </ul>
       </li>
@@ -80,17 +76,23 @@
         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Owner Section<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
+              <%= link_to 'Message Boards', forem.root_path %>
+            </li>
+            <li>
+              <%= link_to "Administrate", forem.admin_root_url %>
+            </li>
+            <li>
               <%= link_to 'Season Disk', season_disk %>
             </li>
             <li role="presentation" class="divider"></li>
             <li>
-              <%= link_to 'Sign Out', destroy_owner_session_path, method: :delete %>
+              <%= link_to 'Sign Out', main_app.destroy_owner_session_path, method: :delete %>
             </li>
           </ul>
         </li>
       <% else %>
         <li>
-          <%= link_to 'Sign In', new_owner_session_path %>
+          <%= link_to 'Sign In', main_app.new_owner_session_path %>
         </li>
       <% end %>
     </ul>

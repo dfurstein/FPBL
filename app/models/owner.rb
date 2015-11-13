@@ -42,4 +42,8 @@ class Owner < ActiveRecord::Base
 
     points
   end
+
+  def forem_admin?
+    id == 45
+  end
 end
