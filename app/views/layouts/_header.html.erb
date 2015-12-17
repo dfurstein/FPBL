@@ -78,9 +78,11 @@
             <li>
               <%= link_to 'Message Boards', forem.root_path %>
             </li>
+            <% if forem_admin? %>
             <li>
               <%= link_to "Administrate", forem.admin_root_url %>
             </li>
+            <% end %>
             <li>
               <%= link_to 'Season Disk', season_disk %>
             </li>

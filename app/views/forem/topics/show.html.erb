@@ -1,6 +1,7 @@
 <div id='topic' class='<%= 'un' unless @topic.locked? %>locked'>
   <%= render :partial => 'forem/topics/head', :locals => { :topic => @topic } %>
 
+<!--
   <div id='menu'>
     <div class='btn-group'>
       <% if @topic.can_be_replied_to? && can?(:reply, @topic) %>
@@ -17,6 +18,7 @@
         <% end %>
       <% end %>
     </div>
+    
     <% if forem_admin? %>
       <div class='btn-group'>
         <%= link_to t('forem.topic.links.edit'), forem.edit_admin_forum_topic_path(@forum, @topic), :class => "btn" %>
@@ -38,11 +40,39 @@
     </div>
   <% end %>
 
-  <%= forem_pages_widget(@posts) %>
+-->
+  <% if @posts.num_pages > 1 %>
+    <div class='text-center'>
+      <ul class='pagination pagination-sm'>
+        <% @posts.num_pages.times.each { |page| %>
+          <% if @posts.current_page == page + 1 %><li class='active'><% else %><li><% end %>
+            <%= link_to (page + 1), params.merge(:page => page + 1) %>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div id='posts'>
-    <%= render :partial => "forem/posts/post", :collection => @posts %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Message Board</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Posts</div>
+      <div class="table-responsive">
+        <table class='table table-bordered table-condensed'>
+          <tr>
+            <th>Team</th>
+            <th>Post</th>
+            <th>Date</th>
+            <th>Options</th>
+          </tr>
+          <% if @posts.empty? %>
+            <tr>
+              <td colspan='4' align='center'></td>
+            </tr>
+          <% end %>
+          <%= render :partial => "forem/posts/post", :collection => @posts %>
+        </table>
+      </div>
+    </div>
   </div>
-
-  <%= forem_pages_widget(@posts) %>
 </div>

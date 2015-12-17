@@ -7,7 +7,7 @@ class Owner < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :first_name, :last_name
+                  :first_name, :last_name, :admin
 
   has_many :teams
 
@@ -43,7 +43,7 @@ class Owner < ActiveRecord::Base
     points
   end
 
-  def forem_admin?
-    id == 45
+  def forem_name
+    most_recent_team.name
   end
 end

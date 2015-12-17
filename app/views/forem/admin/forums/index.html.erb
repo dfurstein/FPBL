@@ -22,7 +22,9 @@
             <td><%= link_to t('delete', :scope => 'forem.admin.forums'), forem.admin_forum_path(forum), :method => :delete, data: { :confirm => t("delete_confirm", :scope => "forem.admin.forums") }, :class => "btn btn-danger" %></td>
             <td>
               <%= link_to forem_emojify(forum.title), forem.forum_path(forum) %>
-              <div class='description'><%= forem_format(forum.description) %></div>
+              <% unless forum.description.nil? %>
+                <div class='description'><%= forem_format(forum.description) %></div>
+              <% end %>
               <%= t('.last_post') %>
               <% if last_post = forum.posts.last %>
   <%= link_to(forem_emojify(last_post.topic.subject), forem.forum_topic_path(forum, last_post.topic)) -%> <%= t('by') %> <%= last_post.user.most_recent_team.name %> <%= time_ago_in_words(last_post.created_at) -%>
@@ -49,3 +51,5 @@
     </table>
   <% end %>
 </div>
+
+<%= javascript_include_tag "application" %>

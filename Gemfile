@@ -11,7 +11,7 @@ gem 'simple_form'
 gem 'time_diff'
 
 gem 'rake'
-gem 'mysql2'
+gem 'mysql2', '~>0.3.19'
 gem 'whenever', require: false
 
 gem 'devise'
@@ -21,7 +21,8 @@ gem 'numbers_and_words'
 
 gem 'forem', github: 'radar/forem', branch: 'rails3'
 gem 'forem-bootstrap', github: 'radar/forem-bootstrap'
-gem 'forem-redcarpet', github: 'radar/forem-redcarpet'
+# gem 'bbcoder'
+gem 'ruby-bbcode'
 gem 'kaminari', '0.15.1'
 
 group :development, :test do

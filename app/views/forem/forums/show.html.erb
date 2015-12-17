@@ -1,23 +1,56 @@
 <div class='forum'>
   <%= render :partial => 'forem/forums/head', :locals => { :forum => @forum } %>
 
-  <%= forem_pages_widget(@topics) %>
-  <table class='topics table-striped table' cellspacing='0'>
-    <thead>
-      <tr>
-        <th class="icon"></th>
-        <th class="byline"><%= t('forem.topic.headings.topic') -%></th>
-        <th class="latest-post text-center"><%= t('forem.topic.headings.latest') -%></th>
-        <th class="posts-count text-center"><%= t('forem.topic.headings.posts') -%></th>
-        <th class="views-count text-center"><%= t('forem.topic.headings.views') -%></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @topics.empty? %>
-        <tr><td colspan='5' align='center'><%= t('forem.topic.none') %></td></tr>
-      <% end %>
-      <%= render @topics %>
-    </tbody>
-  </table>
-  <%= forem_pages_widget(@topics) %>
+  <% if @topics.num_pages > 1 %>
+    <div class='text-center'>
+      <ul class='pagination pagination-sm'>
+        <% skip_page = false %>
+        <% @topics.num_pages.times.each { |page| %>
+          <% if @topics.current_page == page + 1 %>
+            <li class='active'>
+              <%= link_to (page + 1), params.merge(:page => page + 1) %>
+            </li>
+            <% skip_page = false %>
+          <% elsif page < 2 || page >= @topics.num_pages - 2 || (page > @topics.current_page - 4 && page < @topics.current_page + 2) %>
+            <li>
+              <%= link_to (page + 1), params.merge(:page => page + 1) %>
+            </li>
+            <% skip_page = false %>
+          <% else %>
+            <% unless skip_page %>
+              <li class='disabled'>
+                <a href="#" onclick="return false;">...</a>
+              </li>
+              <% skip_page = true %>
+            <% end %>
+          <% end %>
+        <% } %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">Message Board</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Topics</div>
+      <div class="table-responsive">
+        <table class='table table-bordered table-condensed'>
+          <tr>
+            <th class="icon"></th>
+            <th class="byline"><%= t('forem.topic.headings.topic') -%></th>
+            <th>Started By</th>
+            <th class="latest-post">Last Post</th>
+            <th class="posts-count"><%= t('forem.topic.headings.posts') -%></th>
+            <th class="views-count"><%= t('forem.topic.headings.views') -%></th>
+          </tr>
+          <% if @topics.empty? %>
+          <tr>
+            <td colspan='6' align='center'><%= t('forem.topic.none') %></td>
+          </tr>
+          <% end %>
+          <%= render @topics %>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
