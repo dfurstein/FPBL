@@ -11,12 +11,21 @@
     <% end %>
     <% if forem_user && view = topic.view_for(forem_user) %>
       <% if topic.posts.exists?(["created_at > ?", view.updated_at]) %>
-        <span class='new_posts icon'>new</span>
+        <span class='glyphicon glyphicon-star' aria-hidden="true"></span>
+      <% end %>
+    <% end %>
+    <!-- new_since_last_view_text -->
+    <% if forem_user %>
+      <% topic_view = topic.view_for(forem_user) %>
+      <% forum_view = topic.forum.view_for(forem_user) %>
+      <% if forum_view %>
+        <% if topic_view.nil? && topic.created_at > forum_view.past_viewed_at %>
+          <span class='glyphicon glyphicon-star' aria-hidden="true"></span>
+        <% end %>
       <% end %>
     <% end %>
   </td>
   <td class='byline'>
-    <%= new_since_last_view_text(topic) %>
     <div class='subject'>
       <%= link_to forem_emojify(topic.subject), forem.forum_topic_path(@forum, topic) %>
     </div>
