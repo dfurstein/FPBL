@@ -1,6 +1,6 @@
 Forem::TopicsHelper.class_eval do
   def link_to_latest_post(topic)
-    post = relevant_posts(topic).last
+    post = topic.posts.sort_by { |p| p.updated_at }.last
     text = "#{time_ago_in_words(post.updated_at)} #{t("ago_by")} #{post.user.forem_name}"
     link_to text, forem.forum_topic_path(post.topic.forum, post.topic, :anchor => "post-#{post.id}", pagination_param => topic.last_page)
   end
