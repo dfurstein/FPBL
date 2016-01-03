@@ -9,6 +9,9 @@
   </td>
   <td width='50%'>
     <%= forem_format(post.text).bbcode_to_html.html_safe %>
+    <% unless post.created_at == post.updated_at %>
+      <div class='bottom'><%= "Edited #{time_ago_in_words(post.updated_at)} #{t(:ago)}" %></div>
+    <% end %>
   </td>
   <td>
     <%= post_time_tag(post) %>
