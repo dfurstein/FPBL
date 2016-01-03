@@ -8,6 +8,8 @@
   <% end %>
 </div>
 
+<% @post.text = @post.text.gsub('[quote]', '[quote=' + @reply_to_post.forem_user.forem_name + '] ') || @post.text unless @post.text.nil? %>
+
 <%= simple_form_for [forem, @topic.forum, @topic, @post] do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <%= f.submit t("forem.post.buttons.reply"), :class => "btn btn-primary" %>
