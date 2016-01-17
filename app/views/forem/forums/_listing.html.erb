@@ -9,7 +9,7 @@
           <th class="topics-count"><%= t('topics', :scope => 'forem.general') %></th>
           <th class="posts-count"><%= t('posts', :scope => 'forem.general') %></th>
         </tr>
-        <%= render category.forums.sort_by { |forum| forum.posts.max.updated_at }.reverse %>
+        <%= render category.forums.sort_by { |forum| forum.posts.max_by { |post| post.updated_at }.updated_at }.reverse! %>
       </table>
     </div>
   </div>
