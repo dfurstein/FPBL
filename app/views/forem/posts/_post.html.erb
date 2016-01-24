@@ -8,7 +8,11 @@
     <% end %>
   </td>
   <td width='50%'>
-    <%= forem_format(post.text).bbcode_to_html.html_safe %>
+    <% begin %>
+      <%= forem_format(post.text).bbcode_to_html.html_safe %>
+    <% rescue %>
+      <%= forem_format(post.text).bbcode_show_errors.html_safe %>
+    <% end %>
     <% unless post.created_at == post.updated_at %>
       <div class='bottom'><%= "Edited #{time_ago_in_words(post.updated_at)} #{t(:ago)}" %></div>
     <% end %>
