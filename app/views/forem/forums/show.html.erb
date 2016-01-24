@@ -50,7 +50,7 @@
             <td colspan='6' align='center'><%= t('forem.topic.none') %></td>
           </tr>
           <% end %>
-          <%= render @topics.sort_by { |topic| topic.posts.sort_by { |p| p.updated_at }.last.updated_at }.reverse! %>
+          <%= render @topics %>
         </table>
       </div>
     </div>
