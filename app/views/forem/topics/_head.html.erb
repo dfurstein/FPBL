@@ -1,0 +1,5 @@
+<ol class='breadcrumb'>
+  <li><%= link_to t('forem.forum.forums'), forem.root_path %></li>
+  <li><%= link_to forem_emojify(topic.forum.title), [forem, topic.forum] %></li>
+  <li class='active'><%= forem_emojify(topic.subject) %></li>
+</ol>

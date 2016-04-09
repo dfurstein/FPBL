@@ -1,0 +1,17 @@
+<% unless owner_signed_in? %>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    Not authorized to view this page.
+  </div>
+<% else %>
+  <% if can?(:read, category) %>
+    <div id='category_<%= category.id %>' class='category'>
+    	<ol class='breadcrumb'>
+      	<li class='active'><%= forem_emojify(category.name) %></li>
+    	</ol>
+
+      <%= render "/forem/forums/listing", :category => category %>
+    </div>
+  <% end %>
+<% end %>

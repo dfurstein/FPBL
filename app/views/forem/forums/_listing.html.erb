@@ -1,0 +1,16 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Message Board</div>
+  <div class="panel panel-info">
+    <div class="panel-heading">Forums</div>
+    <div class="table-responsive">
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="desc-and-last-post"><%= t('forum', :scope => 'forem.general') %></th>
+          <th class="topics-count"><%= t('topics', :scope => 'forem.general') %></th>
+          <th class="posts-count"><%= t('posts', :scope => 'forem.general') %></th>
+        </tr>
+        <%= render category.forums.sort_by { |forum| forum.posts.max_by { |post| post.updated_at }.updated_at }.reverse! %>
+      </table>
+    </div>
+  </div>
+</div>

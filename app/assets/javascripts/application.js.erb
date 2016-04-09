@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require forem
 //= require_tree .
 
 $(document).ready(
@@ -77,9 +78,16 @@ $(document).ready(
     $(".from_date").datepicker("setDate", $(".from_date").val());
     $(".to_date").datepicker("setDate", $(".to_date").val());
 
+    $(".bbcode_error").tooltip({
+      title: function() { 
+        var errors = JSON.parse($(this).attr('data-bbcode-errors'));
+        return errors.join("\n");
+      }
+    });
+
     if($(".draft")) {
       // setTimeout(updateDraft, 10000);
-    }
+    }    
   } 
 ); 
 
