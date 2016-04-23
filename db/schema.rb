@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150818235555) do
+ActiveRecord::Schema.define(:version => 20160418012813) do
 
   create_table "boxscores", :id => false, :force => true do |t|
     t.date     "date",                             :null => false
@@ -222,15 +222,27 @@ ActiveRecord::Schema.define(:version => 20150818235555) do
 
   add_index "players", ["year", "player_id"], :name => "index_players_on_year_and_player_id", :unique => true
 
+  create_table "rankings", :id => false, :force => true do |t|
+    t.date     "date"
+    t.integer  "franchise_id"
+    t.decimal  "ranking",      :precision => 8, :scale => 4
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  add_index "rankings", ["date", "franchise_id"], :name => "index_rankings_on_date_and_franchise_id", :unique => true
+
   create_table "schedules", :force => true do |t|
-    t.date     "date",                             :null => false
-    t.string   "franchise_id_away"
-    t.integer  "score_away",        :default => 0
-    t.string   "franchise_id_home",                :null => false
-    t.integer  "score_home",        :default => 0
-    t.integer  "outs",              :default => 0
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.date     "date",                                                            :null => false
+    t.integer  "franchise_id_away"
+    t.integer  "score_away",                                       :default => 0
+    t.integer  "franchise_id_home",                                               :null => false
+    t.integer  "score_home",                                       :default => 0
+    t.integer  "outs",                                             :default => 0
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+    t.decimal  "elo_away",          :precision => 10, :scale => 5
+    t.decimal  "elo_home",          :precision => 10, :scale => 5
   end
 
   add_index "schedules", ["date", "franchise_id_home"], :name => "index_schedules_on_date_and_franchise_id_home", :unique => true

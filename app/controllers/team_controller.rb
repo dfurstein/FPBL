@@ -31,6 +31,15 @@ class TeamController < ApplicationController
     @hitting_totals = Statistic.team_hitting_totals(@year, @franchise_id, 0)
     @pitching_totals = Statistic.team_pitching_totals(@year, @franchise_id, 0)
 
+    @schedule = Schedule.games_for_franchise(@franchise_id, Date.new(@year, 1, 1))
+      .each_with_object({}) do |game, hash|
+        if hash[game.date.month].nil?
+          hash[game.date.month] = [game]
+        else
+          hash[game.date.month] << game
+        end
+      end
+
     Contract.remove_inactive_released_players(@year, @franchise_id)
   end
 end

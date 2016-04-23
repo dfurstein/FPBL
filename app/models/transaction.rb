@@ -8,7 +8,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :player,  foreign_key: [:year, :player_id]
 
   def self.all_ids(franchise_id, transaction_type, from_date, to_date)
-    Transaction.where(processed_at: from_date..to_date)
+    where(processed_at: from_date..to_date)
     .where(from_franchise_id(franchise_id))
     .where(from_transaction_type(transaction_type))
     .pluck(:transaction_group_id).uniq
@@ -24,7 +24,7 @@ class Transaction < ActiveRecord::Base
 
   # Does not work correctly - DO NOT USE
   def self.release_player(franchise_id, player_id)
-    group_id = Transaction.last.transaction_group_id + 1
+    group_id = last.transaction_group_id + 1
 
     contracts = Contract.where(franchise_id: franchise_id,
                                player_id: player_id,

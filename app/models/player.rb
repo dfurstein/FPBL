@@ -9,7 +9,7 @@ class Player < ActiveRecord::Base
   has_many :teams,  foreign_key: [:year, :franchise_id], through: :contracts
 
   def self.player_id_by_dmb_name(year, dmb_name)
-    Player.where(year: year, dmb_name: dmb_name).pluck(:player_id).first
+    where(year: year, dmb_name: dmb_name).pluck(:player_id).first
   end
 
   # ['SP', 'MR', 'CL', 'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH']
@@ -45,12 +45,12 @@ class Player < ActiveRecord::Base
   end
 
   def self.rookies(year)
-    existing_players = Player.where('year < ?', year).pluck(:player_id).uniq
+    existing_players = where('year < ?', year).pluck(:player_id).uniq
     signed_players = Contract.where(year: year, released: FALSE)
       .pluck(:player_id).uniq
 
-    Player.where('year = ? and player_id not in (?)', year,
-                 existing_players | signed_players)
+    where('year = ? and player_id not in (?)', year,
+          existing_players | signed_players)
       .sort_by { |player| [player.last_name.upcase, player.first_name.upcase] }
   end
 
@@ -58,8 +58,8 @@ class Player < ActiveRecord::Base
     signed_players = Contract.where(year: year, released: FALSE)
       .pluck(:player_id).uniq
 
-    Player.where('year = ? and active = ? and player_id not in (?)',
-                 year, TRUE, signed_players)
+    where('year = ? and active = ? and player_id not in (?)',
+          year, TRUE, signed_players)
       .sort_by { |player| [player.last_name.upcase, player.first_name.upcase] }
   end
 

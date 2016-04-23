@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-12">
+  	<div class="panel panel-primary">
+  		<div class="panel-heading">Schedule</div>
+      <% @schedule.keys.each { |month| %>
+        <div class="panel panel-info">
+          <% games = @schedule[month].select { |game| game.score_home != game.score_away } %>
+          <% wins = games.map { |game| game.home_team?(@franchise_id.to_i) ? (game.home_win? ? 1 : 0) : (game.home_win? ? 0 : 1) }.reduce(:+) %>
+          <% loses = games.count - wins %>
+          <div class="panel-heading"><%= Date::MONTHNAMES[month] %>&nbsp;<%= "(#{wins} - #{loses})" %></div>
+          <table class='table table-condensed'>
+            <tr>
+              <th class="col-sm-3">Date</th>
+              <th class="col-sm-3">Matchup</th>
+              <th class="col-sm-3">Result</th>
+              <th class="col-sm-3">Score</th>
+            </tr>
+            <% @schedule[month].each { |game| %>
+              <tr>
+                <td><%= game.date.strftime("%a, %B #{game.date.day.ordinalize}") %></td>
+                <td><%= game.home_team?(@franchise_id.to_i) ? "vs #{game.away_team.nickname}" : "@ #{game.home_team.nickname}" %></td>
+                <% if game.score_home == game.score_away %>
+                  <td><!-- NO GAME --></td>
+                  <td><!-- NO GAME --></td>
+                <% else %>
+                  <td><%= game.home_team?(@franchise_id.to_i) ? (game.home_win? ? 'W' : 'L') : (game.home_win? ? 'L' : 'W') %></td>
+                  <td><%= game.home_win? ? "#{game.score_home} - #{game.score_away}" : "#{game.score_away} - #{game.score_home}" %></td>
+                <% end %>
+              </tr>
+            <% } %>
+          </table>
+        </div>
+      <% } %>
+  	</div>
+  </div>
+</div>

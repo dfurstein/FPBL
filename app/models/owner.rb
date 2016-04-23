@@ -12,13 +12,7 @@ class Owner < ActiveRecord::Base
   has_many :teams
 
   def self.add_owner(first_name, last_name, email)
-    owner = Owner.new
-
-    owner.first_name = first_name
-    owner.last_name = last_name
-    owner.email = email
-
-    owner.save
+    create(first_name: first_name, last_name: last_name, email: email)
   end
 
   def most_recent_team

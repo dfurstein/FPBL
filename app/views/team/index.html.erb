@@ -6,7 +6,8 @@
   <ul class="nav nav-tabs">
     <li class="active"><a href="#contracts" data-toggle="tab">Contracts</a></li>
     <li><a href="#picks" data-toggle="tab">Draft Picks</a></li>
-    <li><a href="#statistics" data-toggle="tab">Current Statistics</a></li>
+    <li><a href="#statistics" data-toggle="tab">Statistics</a></li>
+    <li><a href="#schedule" data-toggle="tab">Schedule</a></li>
     <li><a href="#history" data-toggle="tab">Franchise History</a></li>
   </ul>
   <div class="tab-content">
@@ -28,6 +29,13 @@
       <div class="row">
         <div class="col-md-12">
           <%= render 'statistics', locals: {year: @year, franchise_id: @franchise_id} %>
+        </div>
+      </div>
+    </div>
+    <div id="schedule" class="tab-pane">
+      <div class="row">
+        <div class="col-md-12">
+          <%= render 'schedule', locals: {year: @year, franchise_id: @franchise_id} %>
         </div>
       </div>
     </div>

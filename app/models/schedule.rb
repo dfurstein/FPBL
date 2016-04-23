@@ -29,8 +29,18 @@ class Schedule < ActiveRecord::Base
     where(date: date.beginning_of_month..date.end_of_month).order(:id)
   end
 
+  def self.games_for_franchise(franchise_id, start_date,
+      end_date = Date.new(start_date.year, 12, 31))
+    where('franchise_id_home = ? OR franchise_id_away = ?', franchise_id, franchise_id)
+    .where('date BETWEEN ? AND ?', start_date, end_date)
+  end
+
   def year
     date.year
+  end
+
+  def home_team?(franchise_id)
+    franchise_id_home == franchise_id
   end
 
   def home_team
@@ -45,11 +55,19 @@ class Schedule < ActiveRecord::Base
     Boxscore.where(date: date, franchise_id_home: franchise_id_home)
   end
 
+  def home_win?
+    score_home > score_away
+  end
+
   def long_description
     if score_away == 0 && score_home == 0
       "#{away_team.name} at #{home_team.name}"
     else
-      "#{away_team.name} #{score_away}, #{home_team.name} #{score_home}"
+      if home_win?
+        "#{home_team.name} #{score_home}, #{away_team.name} #{score_away}"
+      else
+        "#{away_team.name} #{score_away}, #{home_team.name} #{score_home}"
+      end
     end
   end
 
@@ -57,7 +75,11 @@ class Schedule < ActiveRecord::Base
     if score_away == 0 && score_home == 0
       "#{away_team.nickname} at #{home_team.nickname}"
     else
-      "#{away_team.nickname} #{score_away}, #{home_team.nickname} #{score_home}"
+      if home_win?
+        "#{home_team.nickname} #{score_home}, #{away_team.nickname} #{score_away}"
+      else
+        "#{away_team.nickname} #{score_away}, #{home_team.nickname} #{score_home}"
+      end
     end
   end
 
@@ -65,7 +87,11 @@ class Schedule < ActiveRecord::Base
     if score_away == 0 && score_home == 0
       "#{away_team.abbreviation.upcase} at #{home_team.abbreviation.upcase}"
     else
-      "#{away_team.abbreviation.upcase} #{score_away}, #{home_team.abbreviation.upcase} #{score_home}"
+      if home_win?
+        "#{home_team.abbreviation.upcase} #{score_home}, #{away_team.abbreviation.upcase} #{score_away}"
+      else
+        "#{away_team.abbreviation.upcase} #{score_away}, #{home_team.abbreviation.upcase} #{score_home}"
+      end
     end
   end
 

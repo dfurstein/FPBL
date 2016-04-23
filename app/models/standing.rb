@@ -77,7 +77,7 @@ class Standing < ActiveRecord::Base
   def games_back_wildcard
     divisions = []
 
-    records = Standing.records_by_league(year, league).map do |record|
+    records = records_by_league(year, league).map do |record|
       if record.games_back_division == 0 && !divisions.include?(record.division)
         divisions.push(record.division)
         nil
