@@ -59,6 +59,11 @@ class Schedule < ActiveRecord::Base
     score_home > score_away
   end
 
+  def opening_day?
+    games = Schedule.where('date < ?', date)
+    games.empty? ? true : games.last.year != year
+  end
+
   def long_description
     if score_away == 0 && score_home == 0
       "#{away_team.name} at #{home_team.name}"
