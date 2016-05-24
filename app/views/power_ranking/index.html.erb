@@ -1,0 +1,28 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Rankings</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Teams</div>
+      <table class='table table-bordered table-condensed'>
+        <tr>
+          <th class="col-sm-2">Rank</th>
+          <th class="col-sm-2">ELO</th>
+          <th class="col-sm-4">Team</th>
+          <th class="col-sm-2">Current Record</th>
+          <th class="col-sm-2">Predicted Record</th>
+
+        </tr>
+        <% @current.each_with_index { |ranking, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= '%.2f' % ranking[1] %></td>
+            <td><%= ranking[0].name %></td>
+            <td><%= ranking[0].standing.record %></td>
+            <% wins = @wins[ranking[0].franchise_id] %>
+            <td><%= wins + ranking[0].standing.wins %> - <%= 162 - (wins + ranking[0].standing.wins) %></td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
+  </div>
+</div>

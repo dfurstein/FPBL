@@ -3,6 +3,9 @@ desc 'Import boxscore into Game Log'
 namespace :import do
   task :boxscore, [:path] => :environment do |t, args|
 
+    @date = Date.today
+    previous = Ranking.previous_elo(@date)
+
     if args[:path].nil?
       file_path = "./public/boxscores/#{Date.today.strftime('%Y%m%d')}*"
     else
@@ -17,7 +20,6 @@ namespace :import do
 
       puts file
 
-      @date = Date.today
       @franchise_id_home = -1
       @franchise_id_away = -1
       @current_franchise_id = -1
@@ -74,6 +76,17 @@ namespace :import do
           puts boxscore.inspect
           puts exception
         end
+      end
+
+      begin 
+        game = Schedule.where(date: @date, franchise_id_home: @franchise_id_home).first
+        exp = Ranking.expected_win(game, previous)
+        elo = Ranking.calculate_elo(game, previous, exp)
+        Ranking.save_elo(game, elo)
+      rescue ActiveRecord::RecordNotUnique
+        puts 'ELO already saved'
+      rescue => exception
+        puts exception
       end
     end
   end

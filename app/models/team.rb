@@ -29,4 +29,8 @@ class Team < ActiveRecord::Base
   def name
     city + ' ' + nickname
   end
+
+  def rankings
+    Ranking.where(franchise_id: franchise_id)
+  end
 end

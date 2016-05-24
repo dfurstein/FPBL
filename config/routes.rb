@@ -20,7 +20,8 @@ FPBL::Application.routes.draw do
   match '/rookies/' => 'pages#rookies', as: 'rookies'
   match '/freeagents/' => 'pages#freeagents', as: 'freeagents'
   match '/overview/' => 'overview#index', as: 'overview'
-  match '/ranking/' => 'ranking#index', as: 'ranking'
+  match '/ranking/owners/' => 'owner_ranking#index', as: 'owner_ranking'
+  match '/ranking/daily/' => 'power_ranking#index', as: 'power_ranking'
   match '/records/(:year)' => 'records#index', as: 'records'
   match '/player/(:id)' => 'player#index', as: 'player'
 
