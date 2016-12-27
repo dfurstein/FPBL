@@ -4,7 +4,7 @@ class TeamController < ApplicationController
 
   def index
     @franchise_id = params[:id]
-    @year = Team.last.year
+    @year = params[:year].nil? ? Team.last.year : params[:year].to_i
     @team = Team.find(@year, @franchise_id)
     @owner = Team.find(@year, @franchise_id).owner
 

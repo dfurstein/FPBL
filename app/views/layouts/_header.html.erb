@@ -36,9 +36,6 @@
             <li>
               <%= link_to 'Drafts', main_app.draft_path %>
             </li>
-            <li>
-              <a href="http://chat.fp-baseball.com">Draft Room</a>
-            </li>
           </ul>
       </li>
       
@@ -78,8 +75,11 @@
       <% if owner_signed_in? %>
         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Owner Section<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li>
+            <!-- <li>
               <%= link_to 'Message Boards', forem.root_path %>
+            </li> -->
+            <li>
+              <a href="http://fpbl.slack.com">Chat Room</a>
             </li>
             <% if forem_admin? %>
             <li>

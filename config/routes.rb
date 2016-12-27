@@ -11,7 +11,7 @@ FPBL::Application.routes.draw do
 
   get 'pages/index'
 
-  match '/team/:id' => 'team#index', as: 'team'
+  match '/team/:id/(:year)' => 'team#index', as: 'team'
   match '/standings/(:year)' => 'pages#standings', as: 'standings'
   match '/calendar/(:month)/(:year)' => 'pages#calendar', as: 'calendar'
   match '/draft/(:year)' => 'draft#index', as: 'draft'
