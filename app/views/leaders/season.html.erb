@@ -1,0 +1,51 @@
+<div class='text-center'>
+  <ul class='pagination pagination-sm'>
+    <% @years.each { |year| %>
+      <% if @year == year.to_s %><li class='active'><% else %><li><% end %>
+        <%= link_to year, season_leaders_path(year: year, league: @league) %>
+      </li>
+    <% } %>
+  </ul>
+</div>
+<div class='text-center'>
+  <ul class='pagination pagination-sm'>
+    <% if @league.upcase == 'AL' %><li class='active'><% else %><li><% end %>
+      <%= link_to 'American', season_leaders_path(year: @year, league: 'AL') %>
+    </li>
+    <% if @league.upcase == 'NL' %><li class='active'><% else %><li><% end %>
+      <%= link_to 'National', season_leaders_path(year: @year, league: 'NL') %>
+    </li>
+  </ul>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= @league.upcase == 'AL' ? 'American' : 'National' %> League Hitters</div>
+      <%= render 'leaders/topten', locals: { name: 'Batting Average', stats: @avg } %>
+      <%= render 'leaders/topten', locals: { name: 'On-Base Percentage', stats: @obp } %>
+      <%= render 'leaders/topten', locals: { name: 'Slugging Percentage', stats: @slg } %>
+      <%= render 'leaders/topten', locals: { name: 'Hits', stats: @hits } %>
+      <%= render 'leaders/topten', locals: { name: 'Doubles', stats: @doubles } %>
+      <%= render 'leaders/topten', locals: { name: 'Triples', stats: @triples } %>
+      <%= render 'leaders/topten', locals: { name: 'Home Runs', stats: @homeruns } %>
+      <%= render 'leaders/topten', locals: { name: 'Runs', stats: @runs } %>
+      <%= render 'leaders/topten', locals: { name: 'Runs Batted In', stats: @rbis } %>
+      <%= render 'leaders/topten', locals: { name: 'Stolen Bases', stats: @stolenbases } %>
+  	</div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><%= @league.upcase == 'AL' ? 'American' : 'National' %> League Pitchers</div>
+      <%= render 'leaders/topten', locals: { name: 'Earned Run Average', stats: @era } %>
+      <%= render 'leaders/topten', locals: { name: 'WHIP', stats: @whip } %>
+      <%= render 'leaders/topten', locals: { name: 'Wins', stats: @wins } %>
+      <%= render 'leaders/topten', locals: { name: 'Losses', stats: @losses } %>
+      <%= render 'leaders/topten', locals: { name: 'Innings Pitched', stats: @ip } %>
+      <%= render 'leaders/topten', locals: { name: 'Strikeouts', stats: @k } %>
+      <%= render 'leaders/topten', locals: { name: 'Saves', stats: @saves } %>
+      <%= render 'leaders/topten', locals: { name: 'Blown Saves', stats: @blownsaves } %>
+      <%= render 'leaders/topten', locals: { name: 'Holds', stats: @holds } %>
+    </div>
+  </div>
+</div>

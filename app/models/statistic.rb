@@ -51,9 +51,16 @@ class Statistic < ActiveRecord::Base
     statistic.save
   end
 
+  def self.all_hitters(year, franchise_id, playoff_round, plate_appearances_threshold)
+    all_stats = where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
+      .group_by { |statistic| statistic[:player_id] }
+
+    all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge(all_stats[id]) }.values
+      .select { |statistic| statistic.PA > plate_appearances_threshold && statistic.player.hitter? }
+  end
+
   def self.team_hitters(year, franchise_id, playoff_round)
-    where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
-      .select { |statistic| statistic.PA > 0 && statistic.player.hitter? }
+    self.all_hitters(year, franchise_id, playoff_round, 0)
   end
 
   def self.team_pitchers_as_hitters(year, franchise_id, playoff_round)
@@ -112,9 +119,16 @@ class Statistic < ActiveRecord::Base
     end)
   end
 
+  def self.all_pitchers(year, franchise_id, playoff_round, innings_threshold)
+    all_stats = where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
+      .group_by { |statistic| statistic[:player_id] }
+
+    all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge(all_stats[id]) }.values
+      .select { |statistic| statistic.outs > innings_threshold * 3 && statistic.player.pitcher? }
+  end
+
   def self.team_pitchers(year, franchise_id, playoff_round)
-    where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
-      .select { |statistic| statistic.player.pitcher? }
+    all_pitchers(year, franchise_id, playoff_round, 0)
   end
 
   def self.team_pitching_totals(year, franchise_id, playoff_round)
@@ -156,6 +170,52 @@ class Statistic < ActiveRecord::Base
         (result[key] = result.fetch(key, 0) + value) unless ignore.include?(key)
       end; result
     end)
+  end
+
+  def self.merge(teams)
+    if teams.count == 1
+      return teams[0]
+    else
+      combined = teams[0]
+      combined.franchise_id = 0
+
+      teams[1..-1].each do |statistic|
+        combined.G += statistic.G
+        combined.AB += statistic.AB
+        combined.R += statistic.R
+        combined.H += statistic.H
+        combined.RBI += statistic.RBI
+        combined.D += statistic.D
+        combined.T += statistic.T
+        combined.HR += statistic.HR
+        combined.SB += statistic.SB
+        combined.CS += statistic.CS
+        combined.K += statistic.K
+        combined.BB += statistic.BB
+        combined.SF += statistic.SF
+        combined.SAC += statistic.SAC
+        combined.HBP += statistic.HBP
+        combined.CI += statistic.CI
+        combined.W += statistic.W
+        combined.L += statistic.L
+        combined.HO += statistic.HO
+        combined.S += statistic.S
+        combined.BS += statistic.BS
+        combined.outs += statistic.outs
+        combined.HA += statistic.HA
+        combined.RA += statistic.RA
+        combined.ER += statistic.ER
+        combined.BBA += statistic.BBA
+        combined.KA += statistic.KA
+        combined.HB += statistic.HB
+        combined.WP += statistic.WP
+        combined.PB += statistic.PB
+        combined.BK += statistic.BK
+        combined.E += statistic.E
+      end
+
+      return combined
+    end 
   end
 
   def PA
@@ -201,5 +261,17 @@ class Statistic < ActiveRecord::Base
 
   def ERA
     (self.ER / (outs / 3.0)) * 9
+  end
+
+  def WinPct
+    self.W / (self.W + self.L).to_f * 100.0
+  end
+
+  def SavePct
+    self.S / (self.S + self.BS).to_f * 100.0
+  end
+
+  def IP
+    "#{self.outs / 3}.#{self.outs % 3}".to_f
   end
 end

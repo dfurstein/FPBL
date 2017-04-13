@@ -1,0 +1,15 @@
+<div class="panel panel-info">
+  <div class="panel-heading"><%= locals[:name] %></div>
+  <table class='table table-bordered table-condensed'>
+    <tr>
+      <th class="col-sm-8">Player</th>
+      <th class="col-sm-4"><%= locals[:name] %></th>
+    </tr>
+    <% locals[:stats].each do |stat| %>
+    <tr>
+      <td><%= stat['name'] %>, <%= stat['team'] %></td>
+      <td><%= stat['stat'] %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
