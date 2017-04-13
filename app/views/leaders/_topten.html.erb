@@ -7,7 +7,11 @@
     </tr>
     <% locals[:stats].each do |stat| %>
     <tr>
-      <td><%= stat['name'] %>, <%= stat['team'] %></td>
+      <td>
+        <% if stat['active'] %><b><% end %>
+          <%= link_to [stat['name'], stat['team']].reject(&:blank?).join(', '), player_path(id: stat['id']) %>
+        <% if stat['active'] %></b><% end %>
+      </td>
       <td><%= stat['stat'] %></td>
     </tr>
     <% end %>

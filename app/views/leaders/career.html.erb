@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Hitters</div>
+      <%= render 'leaders/topten', locals: { name: 'Batting Average', stats: @avg } %>
+      <%= render 'leaders/topten', locals: { name: 'On-Base Percentage', stats: @obp } %>
+      <%= render 'leaders/topten', locals: { name: 'Slugging Percentage', stats: @slg } %>
+      <%= render 'leaders/topten', locals: { name: 'Hits', stats: @hits } %>
+      <%= render 'leaders/topten', locals: { name: 'Doubles', stats: @doubles } %>
+      <%= render 'leaders/topten', locals: { name: 'Triples', stats: @triples } %>
+      <%= render 'leaders/topten', locals: { name: 'Home Runs', stats: @homeruns } %>
+      <%= render 'leaders/topten', locals: { name: 'Runs', stats: @runs } %>
+      <%= render 'leaders/topten', locals: { name: 'Runs Batted In', stats: @rbis } %>
+      <%= render 'leaders/topten', locals: { name: 'Stolen Bases', stats: @stolenbases } %>
+  	</div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Pitchers</div>
+      <%= render 'leaders/topten', locals: { name: 'Earned Run Average', stats: @era } %>
+      <%= render 'leaders/topten', locals: { name: 'WHIP', stats: @whip } %>
+      <%= render 'leaders/topten', locals: { name: 'Wins', stats: @wins } %>
+      <%= render 'leaders/topten', locals: { name: 'Losses', stats: @losses } %>
+      <%= render 'leaders/topten', locals: { name: 'Innings Pitched', stats: @ip } %>
+      <%= render 'leaders/topten', locals: { name: 'Strikeouts', stats: @k } %>
+      <%= render 'leaders/topten', locals: { name: 'Saves', stats: @saves } %>
+      <%= render 'leaders/topten', locals: { name: 'Blown Saves', stats: @blownsaves } %>
+      <%= render 'leaders/topten', locals: { name: 'Holds', stats: @holds } %>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="alert alert-success" role="alert">Active players listed in bold.</div>
+</div>

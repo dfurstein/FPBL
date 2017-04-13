@@ -53,6 +53,7 @@ class Statistic < ActiveRecord::Base
 
   def self.all_hitters(year, franchise_id, playoff_round, plate_appearances_threshold)
     all_stats = where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
+      .sort_by { |statistic| -statistic.year }
       .group_by { |statistic| statistic[:player_id] }
 
     all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge(all_stats[id]) }.values
@@ -121,6 +122,7 @@ class Statistic < ActiveRecord::Base
 
   def self.all_pitchers(year, franchise_id, playoff_round, innings_threshold)
     all_stats = where(year: year, franchise_id: franchise_id, playoff_round: playoff_round)
+      .sort_by { |statistic| -statistic.year }
       .group_by { |statistic| statistic[:player_id] }
 
     all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge(all_stats[id]) }.values
