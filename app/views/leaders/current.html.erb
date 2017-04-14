@@ -1,7 +1,27 @@
+<div class='text-center'>
+  <ul class='pagination pagination-sm'>
+    <% @years.each { |year| %>
+      <% if @year == year.to_s %><li class='active'><% else %><li><% end %>
+        <%= link_to year, current_leaders_path(year: year, league: @league) %>
+      </li>
+    <% } %>
+  </ul>
+</div>
+<div class='text-center'>
+  <ul class='pagination pagination-sm'>
+    <% if @league.upcase == 'AL' %><li class='active'><% else %><li><% end %>
+      <%= link_to 'American', current_leaders_path(year: @year, league: 'AL') %>
+    </li>
+    <% if @league.upcase == 'NL' %><li class='active'><% else %><li><% end %>
+      <%= link_to 'National', current_leaders_path(year: @year, league: 'NL') %>
+    </li>
+  </ul>
+</div>
+
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-primary">
-      <div class="panel-heading">Hitters</div>
+      <div class="panel-heading"><%= @league.upcase == 'AL' ? 'American' : 'National' %> League Hitters</div>
       <%= render 'leaders/topten', locals: { name: 'Batting Average', stats: @avg } %>
       <%= render 'leaders/topten', locals: { name: 'On-Base Percentage', stats: @obp } %>
       <%= render 'leaders/topten', locals: { name: 'Slugging Percentage', stats: @slg } %>
@@ -16,7 +36,7 @@
   </div>
   <div class="col-md-6">
     <div class="panel panel-primary">
-      <div class="panel-heading">Pitchers</div>
+      <div class="panel-heading"><%= @league.upcase == 'AL' ? 'American' : 'National' %> League Pitchers</div>
       <%= render 'leaders/topten', locals: { name: 'Earned Run Average', stats: @era } %>
       <%= render 'leaders/topten', locals: { name: 'WHIP', stats: @whip } %>
       <%= render 'leaders/topten', locals: { name: 'Wins', stats: @wins } %>
@@ -28,7 +48,4 @@
       <%= render 'leaders/topten', locals: { name: 'Holds', stats: @holds } %>
     </div>
   </div>
-</div>
-<div class="col-md-12">
-  <div class="alert alert-success" role="alert">Active players listed in bold.</div>
 </div>

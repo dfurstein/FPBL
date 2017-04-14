@@ -56,7 +56,7 @@ class Statistic < ActiveRecord::Base
       .sort_by { |statistic| -statistic.year }
       .group_by { |statistic| statistic[:player_id] }
 
-    all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge(all_stats[id]) }.values
+    all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge_hitters(all_stats[id]) }.values
       .select { |statistic| statistic.PA > plate_appearances_threshold && statistic.player.hitter? }
   end
 
@@ -125,7 +125,7 @@ class Statistic < ActiveRecord::Base
       .sort_by { |statistic| -statistic.year }
       .group_by { |statistic| statistic[:player_id] }
 
-    all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge(all_stats[id]) }.values
+    all_stats.keys.each_with_object({}) { |id, hash| hash[id] = merge_pitchers(all_stats[id]) }.values
       .select { |statistic| statistic.outs > innings_threshold * 3 && statistic.player.pitcher? }
   end
 
@@ -174,7 +174,7 @@ class Statistic < ActiveRecord::Base
     end)
   end
 
-  def self.merge(teams)
+  def self.merge_hitters(teams)
     if teams.count == 1
       return teams[0]
     else
@@ -198,6 +198,22 @@ class Statistic < ActiveRecord::Base
         combined.SAC += statistic.SAC
         combined.HBP += statistic.HBP
         combined.CI += statistic.CI
+        combined.E += statistic.E
+      end
+
+      return combined
+    end 
+  end
+
+    def self.merge_pitchers(teams)
+    if teams.count == 1
+      return teams[0]
+    else
+      combined = teams[0]
+      combined.franchise_id = 0
+
+      teams[1..-1].each do |statistic|
+        combined.G += statistic.G
         combined.W += statistic.W
         combined.L += statistic.L
         combined.HO += statistic.HO

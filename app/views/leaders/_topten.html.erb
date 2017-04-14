@@ -9,7 +9,7 @@
     <tr>
       <td>
         <% if stat['active'] %><b><% end %>
-          <%= link_to [stat['name'], stat['team']].reject(&:blank?).join(', '), player_path(id: stat['id']) %>
+          <%= link_to [stat['name'], stat['team'], stat['year']].reject(&:blank?).join(', '), player_path(id: stat['id']) %>
         <% if stat['active'] %></b><% end %>
       </td>
       <td><%= stat['stat'] %></td>
