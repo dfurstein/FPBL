@@ -18,7 +18,7 @@ gem 'whenever', require: false
 gem 'devise'
 gem 'cancan'
 
-gem 'numbers_and_words'
+gem 'numbers_and_words', '0.10.0'
 
 group :development, :test do
   gem 'better_errors', '1.1.0'
