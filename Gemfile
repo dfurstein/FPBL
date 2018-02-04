@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.18'
 
 gem 'bootstrap-sass', '~> 3.2.0'
-gem 'sass', '3.4.19'
+gem 'sass', '3.4.25'
 gem 'sass-rails', '>= 3.2'
 gem 'autoprefixer-rails', '6.1.0.1'
 

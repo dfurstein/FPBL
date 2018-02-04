@@ -24,3 +24,5 @@
 /log
 /db
 /public
+
+Gemfile.lock
