@@ -4,7 +4,7 @@ gem 'rails', '3.2.18'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'sass-rails', '>= 3.2'
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', '6.1.0.1'
 
 gem 'composite_primary_keys' # , '~> 5.0.8'
 gem 'simple_form'
