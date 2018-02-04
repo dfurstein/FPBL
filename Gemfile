@@ -10,7 +10,7 @@ gem 'composite_primary_keys' # , '~> 5.0.8'
 gem 'simple_form'
 gem 'time_diff'
 
-gem 'rake'
+gem 'rake', '10.4.2'
 gem 'mysql2', '~>0.3.19'
 gem 'whenever', require: false
 
@@ -19,14 +19,8 @@ gem 'cancan'
 
 gem 'numbers_and_words'
 
-gem 'forem', github: 'radar/forem', branch: 'rails3'
-gem 'forem-bootstrap', github: 'radar/forem-bootstrap'
-# gem 'bbcoder'
-gem 'ruby-bbcode'
-gem 'kaminari', '0.15.1'
-
 group :development, :test do
-  gem 'better_errors'
+  gem 'better_errors', '1.1.0'
   gem 'binding_of_caller'
 
   gem 'pry-rails'

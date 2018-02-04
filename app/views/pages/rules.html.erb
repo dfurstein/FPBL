@@ -44,7 +44,7 @@
           <td><%= (@draft + 1.week) %></td>
           <td>Teams are no longer allowed to release players</td>
         </tr>
-        <tr>
+        <tr class="danger">
           <td><%= (@draft + 3.weeks) %></td>
           <td>Free Agent draft - 4M round</td>
         </tr>
@@ -160,20 +160,20 @@
       <ul class="list-group">
         <li class="list-group-item">Favorite Pastime Baseball League is comprised of two leagues, an American League and a National League.</li>
         <li class="list-group-item">The American League will use a designated hitter, while the National League shall not.</li>
-        <li class="list-group-item">Each league shall be divided into three divisions, consisting of four teams each.</li>
-        <li class="list-group-item">The three division winners and one wild card team will represent their league in the playoffs.</li>
+        <li class="list-group-item list-group-item-success">Each league shall be divided into two divisions, consisting of six teams each.</li>
+        <li class="list-group-item list-group-item-success">The two division winners, along with the two next best teams, will represent their league in the playoffs.</li>
         <li class="list-group-item">In the playoffs, the home team rules will be applied.</li>
         <li class="list-group-item">MLB divisional and wildcard tie-breaking rules will be used when necessary.</li>
         <li class="list-group-item">The American League and National League champions will meet in the James Huang Memorial Championship Series.</li>
-        <li class="list-group-item">All owners are expected to obtain a copy of the season disk from Diamond Mind Baseball.</li>
+        <li class="list-group-item list-group-item-success">All owners are expected to obtain a copy of the season disk from Diamond Mind Baseball. If Diamond Mind Baseball can verify the purchase by each owner, the champion of the the James Huang Memorial Championship Series will be granted the season disk awarded to the league for the following season (per Diamond Mind Baseball's discretion).</li>
       </ul>
     </div>
     <div class="panel panel-info">
       <div class="panel-heading">Schedule</div>
       <ul class="list-group">
         <li class="list-group-item">The league will play a full 162-game season.</li>
-        <li class="list-group-item">Each team will play each other team in their own division a total of twenty two times, resulting in sixty six games. They will also play each team outside of their division, but within their league, twelve times, for a total of ninety six games. There will be a day off after the last day of the regular season.</li>
-        <li class="list-group-item">The wild card team will play the division winner with the best record, while the #2 division winner will play the #3 division winner. If the wild card is from the same division at the team with the best record, the wild card team will play play the #2 winner, while the #1 and #3 division winners will play each other.</li>
+        <li class="list-group-item list-group-item-success">Each team will play each other team in their own division a total of eighteen times, resulting in ninety games. They will also play each team outside of their division, but within their league, twelve times, for a total of seventy two games. There will be a day off after the last day of the regular season.</li>
+        <li class="list-group-item list-group-item-success">The division winners, based on record, will be given the first and second seed in the playoffs, while the wild card teams, based on record, will be given the third and fourth seeds in the playoffs. In the divisional round, the first seed will play the fourth seed, while the second seed will play the third seed.</li>
         <li class="list-group-item">In all rounds of the playoffs, home-field advantage will be given to the team with a better record. The sole exception is that a division winner always has priority over a wild card team.</li>
         <li class="list-group-item">The Divisional Playoffs will be a best of five series, with the first, second and fifth games played at the stadium of the team with home field advantage.</li>
         <li class="list-group-item">The League Championship Series and the World Series will be a best of seven series, with the first, second, sixth and seventh games played at the stadium of the team with home field advantage. There will be days off for "travel days", and one day off between rounds of the playoffs.</li>
@@ -183,7 +183,7 @@
     <div class="panel panel-info">
       <div class="panel-heading">Game Resolutions</div>
       <ul class="list-group">
-        <li class="list-group-item">All games will be simulated on the commissioner's home computer using Diamond Mind Baseball v10.</li>
+        <li class="list-group-item list-group-item-success">All games will be simulated on the commissioner's home computer using Diamond Mind Baseball v11.</li>
         <li class="list-group-item">Results will be posted on the league home page.</li>
       </ul>
     </div>
@@ -210,7 +210,7 @@
       <div class="panel-heading">Player Eligibility</div>
       <ul class="list-group">
         <li class="list-group-item">In order to be eligible for the current season, a player must have accumulated a minimum of seventy five plate appearances or twenty five innings pitched.</li>
-        <li class="list-group-item">A player who only has eligibility at the catcher position will be eligible for the upcoming season if he has accumulated a minimum of fifty plate appearances. A pitcher who has not started a single game will be eligible for the upcoming season if he has accumulated a minimum a fifteen innings pitched.</li>
+        <li class="list-group-item list-group-item-success">A player who has eligibility at the catcher position will be eligible for the upcoming season if he has accumulated a minimum of fifty plate appearances. A pitcher who has not started a single game will be eligible for the upcoming season if he has accumulated a minimum a fifteen innings pitched.</li>
         <li class="list-group-item">No player signed after the final Saturday in August will be eligible to play in the postseason.</li>
       </ul>
     </div>
@@ -302,7 +302,7 @@
       <ul class="list-group">
         <li class="list-group-item">Players whose contracts have not been renewed or extended by the end of the third signing period, will be considered free agents for the upcoming season.</li>
         <li class="list-group-item">When a new owner assumes control over a franchise, the owner will be granted a one time exception, allowing them to extend any player on the previous year's roster as if it were the second signing period.</li>
-        <li class="list-group-item list-group-item-success">There is no upper limit on a player's salary. Players who are under contract prior to the 2017 season will be granted grandfathered status and have a maximum salary of 10M.</li>
+        <li class="list-group-item">There is no upper limit on a player's salary. Players who are under contract prior to the 2017 season will be granted grandfathered status and have a maximum salary of 10M.</li>
       </ul>
     </div>
     <div class="panel panel-info">
@@ -330,13 +330,13 @@
       <div class="panel-heading">Free Agency</div>
       <ul class="list-group">
         <li class="list-group-item">Free Agency will be divided between an auction and a weekly draft.</li>
-        <li class="list-group-item">Following the rookie draft, owners will be asked to submit a list of their top twenty four most desired free agents. The commissioner will then create an auction schedule of the twenty-four most sought after free agents and distribute it to the league. The auction will begin one week after the rookie draft and last for approximately two weeks.</li>
-        <li class="list-group-item">The auction will take place on the message boards and each player will be given their own thread. An auction will end only after a full twenty-four hours has elapsed on the last legal bid. To ensure that each auction is easy to monitor, do not make any non-bid post in a player thread.</li>
-        <li class="list-group-item list-group-item-success">An owner is permitted to make a bid as long as it is divisible by 100k and is greater than the previous bid. For a bid to be legal, the owner's bid on the current player, plus any currently winning bids on other players in the auction, plus 100k per player needed to reach thirty active players, cannot exceed the team's salary cap. In addition, the addition of the player cannot result in the team exceeding the roster limit.</li>
-        <li class="list-group-item">Three weeks after the rookie draft, the weekly Free Agent draft will begin.</li>
-        <li class="list-group-item">Draft order will be set based on a team's winning percentage from the previous season. We will use a method similar to the NBA's ping-pong approach to create a new draft order for each week of the Free Agent draft. The best, non-playoff team from the prior season gets sixteen ping-pong balls, all the way up to the worst team, who gets one ping-pong balls. The eight playoff teams will always go exactly in order of their final records (worst-to-first) to finish out a round.</li>
+        <li class="list-group-item list-group-item-success">Following the rookie draft, owners will be asked to submit a list of their top thirty six most desired free agents. The commissioner will then create an auction schedule of the thirty six most sought after free agents and distribute it to the league. The auction will begin one week after the rookie draft and last for approximately three weeks.</li>
+        <li class="list-group-item list-group-item-success">The auction will take place Slack and each player will be given their own channel. An auction will end only after a full twenty-four hours has elapsed on the last legal bid. To ensure that each auction is easy to monitor, do not make any non-bid post in a player thread.</li>
+        <li class="list-group-item">An owner is permitted to make a bid as long as it is divisible by 100k and is greater than the previous bid. For a bid to be legal, the owner's bid on the current player, plus any currently winning bids on other players in the auction, plus 100k per player needed to reach thirty active players, cannot exceed the team's salary cap. In addition, the addition of the player cannot result in the team exceeding the roster limit.</li>
+        <li class="list-group-item">Four weeks after the rookie draft, the weekly Free Agent draft will begin.</li>
+        <li class="list-group-item list-group-item-success">Draft order will be set based on a team's winning percentage from the previous season. We will use a method similar to the NBA's ping-pong approach to create a new draft order for each round of the Free Agent draft. The best, non-playoff team from the prior season will get the most ping-pong balls, while the worst team, will get the least amount of ping-pong balls. The amount of ping-pong balls will be based on the Fibonacci series. The eight playoff teams will always go exactly in order of their final records (worst-to-first) to finish out a round.</li>
         <li class="list-group-item">For each week of the free agent draft, each owner will submit a list of players they want to the commissioner's email account. The owner may specify a series of rules in which they would like the players taken from their list, such as "select at least 1 SP by the 2nd pass."</li>
-        <li class="list-group-item">For the first week of the draft, a team may select up to two players at 4M each.  For each subsequent week of the draft, a team may select as follows: three players at 3M; four players at 2M; five players at 1M; fifteen players at 500k; thirty players at 100k. By the conclusion of the draft, all teams must have a legal roster.</li>
+        <li class="list-group-item list-group-item-success">For the first week of the draft, a team may select up to three players at 3M each.  For each subsequent week of the draft, a team may select as follows: four players at 2M; five players at 1M; fifteen players at 500k; thirty players at 100k. By the conclusion of the draft, all teams must have a legal roster.</li>
         <li class="list-group-item">An owner is allowed to list as many players as they would be willing to sign at that week's given price. It is also possible that due to the size of their list, a team may not sign any players in a given round. If a team wishes to skip a round entirely, they must send an e-mail explicitly stating so.</li>
         <li class="list-group-item">At no point during free agency, may a team exceed either their salary cap or the roster limit to select a player. Any player selected in either the auction and/or the weekly free agent draft cannot be traded until the conclusion of free agency.</li>
       </ul>
@@ -356,6 +356,7 @@
         <li class="list-group-item">Free agent draft selection cannot be traded, either directly, by proxy, or by any other action that equates to the same results as if the selection itself was dealt.</li>
         <li class="list-group-item">Any trade of a player between two teams who have traded that same player since the start of the previous season will be heavily scrutinized for collusion and likely vetoed.</li>
         <li class="list-group-item">You cannot trade rookie draft selections (or players) to be named (or given) later. All trades must involve immediate swapping of any picks or players, and not be based on other factors including, but not limited to, the performance of a player or team.</li>
+        <li class="list-group-item list-group-item-success">Any trade that is agreed upon in principle, prior to first day of the off-season or involves draft selections for the following season, prior to those selections being officially granted to the team, will be vetoed by the commissioner, if and only if, sufficient evidence regarding details of the trade is provided by a third-party. The details of that evidence, and the identity of the third-party, will not be shared with the offending teams.</li>
         <li class="list-group-item">A trade is considered pending, and cannot be amended, once both teams involved submit the trade to the commissioner.</li> 
         <li class="list-group-item">Pending trades will be posted to the league in a timely matter, at which time they become fair game for review by the league.</li>
         <li class="list-group-item">If any owner finds fault with a trade, they should e-mail the commissioner with their complaint. The commissioner reserves the right to nullify any trade. Trades are only final once they are affirmed by the commissioner later in the week.</li>
