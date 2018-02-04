@@ -36,8 +36,4 @@ class Owner < ActiveRecord::Base
 
     points
   end
-
-  def forem_name
-    most_recent_team.name
-  end
 end

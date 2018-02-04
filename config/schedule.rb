@@ -22,7 +22,3 @@
 every 1.day, at: '8:00pm' do
   rake 'import:boxscore', output: '~/web/FPBL/log/cron.log'
 end
-
-every 1.minute do
-  rake 'update:auction'
-end
