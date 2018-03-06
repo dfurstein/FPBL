@@ -1,0 +1,20 @@
+<% contracts = Contract.under_contract_per_position(@year, @franchise_id, @position, false) %>
+<% if contracts.size != 0 %>
+  <div class="panel panel-info">
+    <div class="panel-heading"><%= Player.position_name(@position).pluralize %></div>
+    <table class='table table-condensed'>
+      <tr>
+        <th class="col-sm-4 col-sm-offset-3">Player</th>
+        <% 5.times do |idx| %>
+          <th class="col-sm-1"><%= @year + idx %></th>
+        <% end %>
+      </tr>
+      <% contracts.each do |player| %>
+        <% @player = player %>
+        <tr id="extension<%= @player.player_id %>">
+          <%= render 'salaries', locals: { year: @year, franchise_id: @franchise_id, player: @player } %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>

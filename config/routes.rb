@@ -4,33 +4,35 @@ FPBL::Application.routes.draw do
 
   get 'pages/index'
 
-  match '/team/:id/(:year)' => 'team#index', as: 'team'
-  match '/standings/(:year)' => 'pages#standings', as: 'standings'
-  match '/calendar/(:month)/(:year)' => 'pages#calendar', as: 'calendar'
-  match '/draft/(:year)' => 'draft#index', as: 'draft'
-  match '/transaction/' => 'pages#transaction', as: 'transaction'
-  match '/rules/' => 'pages#rules', as: 'rules'
-  match '/rookies/' => 'pages#rookies', as: 'rookies'
-  match '/freeagents/' => 'pages#freeagents', as: 'freeagents'
-  match '/overview/' => 'overview#index', as: 'overview'
-  match '/ranking/owners/' => 'owner_ranking#index', as: 'owner_ranking'
-  match '/ranking/daily/' => 'power_ranking#index', as: 'power_ranking'
-  match '/records/(:year)' => 'records#index', as: 'records'
-  match '/player/(:id)' => 'player#index', as: 'player'
-  match '/leaders/current/(:league)/(:year)' => 'leaders#current', as: 'current_leaders'
-  match '/leaders/career/' => 'leaders#career', as: 'career_leaders'
-  match '/leaders/season/' => 'leaders#season', as: 'season_leaders'
+  match '/team/:id/(:year)', to: 'team#index', as: 'team'
+  match '/standings/(:year)', to: 'pages#standings', as: 'standings'
+  match '/calendar/(:month)/(:year)', to: 'pages#calendar', as: 'calendar'
+  match '/draft/(:year)', to: 'draft#index', as: 'draft'
+  match '/transaction/', to: 'pages#transaction', as: 'transaction'
+  match '/rules/', to: 'pages#rules', as: 'rules'
+  match '/rookies/', to: 'pages#rookies', as: 'rookies'
+  match '/freeagents/', to: 'pages#freeagents', as: 'freeagents'
+  match '/overview/', to: 'overview#index', as: 'overview'
+  match '/ranking/owners/', to: 'owner_ranking#index', as: 'owner_ranking'
+  match '/ranking/daily/', to: 'power_ranking#index', as: 'power_ranking'
+  match '/records/(:year)', to: 'records#index', as: 'records'
+  match '/player/(:id)', to: 'player#index', as: 'player'
+  match '/leaders/current/(:league)/(:year)', to: 'leaders#current', as: 'current_leaders'
+  match '/leaders/career/', to: 'leaders#career', as: 'career_leaders'
+  match '/leaders/season/', to: 'leaders#season', as: 'season_leaders'
+  match '/extensions', to: 'extensions#index', as: 'extensions'
 
+  post 'extensions/add', to: 'extensions#add', as: 'add_extensions'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
+  #   match 'products/:id', to: 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  #   match 'products/:id/purchase', to: 'catalog#purchase', :as, to: :purchase
+  # This route can be invoked with purchase_url(:id, to: product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
@@ -57,7 +59,7 @@ FPBL::Application.routes.draw do
   #   resources :products do
   #     resources :comments
   #     resources :sales do
-  #       get 'recent', :on => :collection
+  #       get 'recent', :on, to: :collection
   #     end
   #   end
 
@@ -70,7 +72,7 @@ FPBL::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  # root :to, to: 'welcome#index'
   root to: 'pages#index'
 
   # See how all your routes lay out with "rake routes"

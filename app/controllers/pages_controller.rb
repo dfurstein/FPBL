@@ -22,8 +22,8 @@ class PagesController < ApplicationController
 
     @franchise_id = nil
     @transaction_type = nil
-    @from_date = Date.today - 1.week
-    @to_date = Date.today
+    @from_date = DateTime.now - 1.week
+    @to_date = DateTime.now
   end
 
   helper StandingsHelper

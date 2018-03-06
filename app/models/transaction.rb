@@ -22,6 +22,29 @@ class Transaction < ActiveRecord::Base
     "transaction_type = '#{transaction_type}'" unless transaction_type.nil?
   end
 
+  def self.extend_player(player_id, franchise_id, year, salary, group_id = nil)
+    contract = Contract.find_or_create_by_player_id_and_franchise_id_and_year(player_id: player_id, 
+      franchise_id: franchise_id, year: year) do |contract|
+      contract.salary = salary
+    end
+
+    contract.salary = salary
+    contract.released = FALSE
+    contract.save
+
+    group_id ||= maximum(:transaction_group_id) + 1
+
+    transaction = Transaction.new
+    transaction.transaction_group_id = group_id
+    transaction.transaction_type = 'EXTEND'
+    transaction.year = Team.last.year
+    transaction.franchise_id_to = franchise_id
+    transaction.player_id = player_id
+    transaction.extension_year = year
+    transaction.processed_at = DateTime.now
+    transaction.save
+  end
+
   # Does not work correctly - DO NOT USE
   def self.release_player(franchise_id, player_id)
     group_id = last.transaction_group_id + 1

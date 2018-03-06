@@ -16,7 +16,7 @@
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams<b class="caret"></b></a>
       	<ul class="dropdown-menu">
       		<% Team.current_teams.each { |team| %>
-		       <li><%= link_to team.name, main_app.team_path(id: team.franchise_id) %></li>
+		       <li><%= link_to team.name, team_path(id: team.franchise_id) %></li>
       		<% } %>
       	</ul>
       </li>
@@ -24,17 +24,17 @@
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transactions<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
-              <%= link_to 'Available Free Agents', main_app.freeagents_path %>
+              <%= link_to 'Available Free Agents', freeagents_path %>
             </li>
             <li>
-              <%= link_to 'Transaction Log', main_app.transaction_path %>
+              <%= link_to 'Transaction Log', transaction_path %>
             </li>
             <li role="presentation" class="divider"></li>
             <li>
-              <%= link_to 'Available Rookies', main_app.rookies_path %>
+              <%= link_to 'Available Rookies', rookies_path %>
             </li>
             <li>
-              <%= link_to 'Drafts', main_app.draft_path %>
+              <%= link_to 'Drafts', draft_path %>
             </li>
           </ul>
       </li>
@@ -42,33 +42,33 @@
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">League Data<b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li>
-              <%= link_to 'League Schedule', main_app.calendar_path %>
+              <%= link_to 'League Schedule', calendar_path %>
             </li>
             <li>
-              <%= link_to 'Standings', main_app.standings_path %>
+              <%= link_to 'Standings', standings_path %>
             </li>
             <li role="presentation" class="divider"></li>
             <li>
-              <%= link_to 'League Leaders', main_app.current_leaders_path %>
+              <%= link_to 'League Leaders', current_leaders_path %>
             </li>
             <li>
-              <%= link_to 'Season Records', main_app.season_leaders_path %>
+              <%= link_to 'Season Records', season_leaders_path %>
             </li>
             <li>
-              <%= link_to 'Career Records', main_app.career_leaders_path %>
+              <%= link_to 'Career Records', career_leaders_path %>
             </li>
             <li>
-              <%= link_to 'Outstanding Performances', main_app.records_path %>
+              <%= link_to 'Outstanding Performances', records_path %>
             </li>
             <!-- <li>
-              <%= link_to 'Power Rankings', main_app.power_ranking_path %>
+              <%= link_to 'Power Rankings', power_ranking_path %>
             </li> -->
             <li role="presentation" class="divider"></li>
             <li>
-              <%= link_to 'Team Overview', main_app.overview_path %>
+              <%= link_to 'Team Overview', overview_path %>
             </li>
             <li>
-              <%= link_to 'Owner Rankings', main_app.owner_ranking_path %>
+              <%= link_to 'Owner Rankings', owner_ranking_path %>
             </li>
           </ul>
       </li>
@@ -76,7 +76,7 @@
       <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li>
-            <%= link_to 'Rules', main_app.rules_path %>
+            <%= link_to 'Rules', rules_path %>
           </li>
         </ul>
       </li>
@@ -92,13 +92,17 @@
             </li>
             <li role="presentation" class="divider"></li>
             <li>
-              <%= link_to 'Sign Out', main_app.destroy_owner_session_path, method: :delete %>
+              <%= link_to 'Extensions', extensions_path %>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li>
+              <%= link_to 'Sign Out', destroy_owner_session_path, method: :delete %>
             </li>
           </ul>
         </li>
       <% else %>
         <li>
-          <%= link_to 'Sign In', main_app.new_owner_session_path %>
+          <%= link_to 'Sign In', new_owner_session_path %>
         </li>
       <% end %>
     </ul>
