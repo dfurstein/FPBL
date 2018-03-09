@@ -1,2 +1,2 @@
-$("[id*='extension']")
+$("[id*='extension<%= @player.player_id %>']")
 	.html("<%= escape_javascript(render 'salaries', locals: {year: @year, franchise_id: @franchise_id, player: @player} )%>");

@@ -84,11 +84,6 @@ $(document).ready(
       }
     });
 
-    $('[data-toggle=confirmation]').confirmation({
-      rootSelector: '[data-toggle=confirmation]',
-      // other options
-    });
-
     if($(".draft")) {
       // setTimeout(updateDraft, 10000);
     }    
@@ -99,3 +94,34 @@ function updateDraft() {
   $.getScript("/draft.js")
   setTimeout(updateDraft, 10000);
 }
+
+//Override the default confirm dialog by rails
+$.rails.allowAction = function(event){
+  if (event.data("confirm") == undefined){
+    return true;
+  }
+  $.rails.showConfirmationDialog(event);
+  return false;
+}
+
+//User click confirm button
+$.rails.confirmed = function(event){
+  event.data("confirm", null);
+  event.trigger("click.rails");
+}
+
+//Display the confirmation dialog
+$.rails.showConfirmationDialog = function(event){
+  var message = event.data("confirm");
+  swal({
+    title: message,
+    type: 'warning',
+    confirmButtonText: 'OK',
+    confirmButtonColor: '##428bca',
+    showCancelButton: true
+  }, function(e) {
+    if (e == true) {
+      $.rails.confirmed(event);
+    }
+  });
+};

@@ -22,7 +22,7 @@ class Transaction < ActiveRecord::Base
     "transaction_type = '#{transaction_type}'" unless transaction_type.nil?
   end
 
-  def self.extend_player(player_id, franchise_id, year, salary, group_id = nil)
+  def self.extend_player(player_id, franchise_id, year, salary)
     contract = Contract.find_or_create_by_player_id_and_franchise_id_and_year(player_id: player_id, 
       franchise_id: franchise_id, year: year) do |contract|
       contract.salary = salary
@@ -32,17 +32,23 @@ class Transaction < ActiveRecord::Base
     contract.released = FALSE
     contract.save
 
-    group_id ||= maximum(:transaction_group_id) + 1
+    group_id = extend_group_id(franchise_id);
+    transaction = find_or_create_by_player_id_and_transaction_group_id(player_id: player_id, transaction_group_id: group_id) do |transaction|
+      transaction.transaction_type = 'EXTEND'
+      transaction.year = Team.last.year
+      transaction.franchise_id_to = franchise_id
+    end
 
-    transaction = Transaction.new
-    transaction.transaction_group_id = group_id
-    transaction.transaction_type = 'EXTEND'
-    transaction.year = Team.last.year
-    transaction.franchise_id_to = franchise_id
-    transaction.player_id = player_id
     transaction.extension_year = year
     transaction.processed_at = DateTime.now
     transaction.save
+  end
+
+  def self.extend_group_id(franchise_id)
+    where(franchise_id_to: franchise_id, transaction_type: "EXTEND")
+      .where('processed_at >= ?', DateTime.now - 5.minutes)
+      .pluck(:transaction_group_id)
+      .first || maximum(:transaction_group_id) + 1
   end
 
   # Does not work correctly - DO NOT USE

@@ -10,7 +10,7 @@
       <% salary = [salary, 10.0].min if Contract.grandfathered?(@player.player_id) %>
       <td>
         <% message = "Resiging #{@player.name} at #{salary}M for the #{@year + idx} season." %>
-        <%= button_to salary, add_extensions_path(player_id: @player.player_id, franchise_id: @franchise_id, year: (@year + idx), salary: salary), data: { content: message, toggle: 'confirmation' }, class: 'btn btn-primary btn-xs' %>
+        <%= button_to salary, add_extensions_path(player_id: @player.player_id, franchise_id: @franchise_id, year: @year, extend_year: (@year + idx), salary: salary), data: { confirm: message, title: 'Are you sure?'}, remote: true, id: "extend#{@player.player_id}#{@year + idx}", class: 'btn btn-primary btn-xs' %>
       </td>
     <% else %>
       <td><!-- No Salary --></td>
