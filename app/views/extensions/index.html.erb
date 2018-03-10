@@ -41,20 +41,6 @@
               <td><%= Contract.total_salary(@year + idx, @franchise_id) %></td>
             <% } %>
           </tr>
-          <tr>
-            <td>Salary Cap</td>
-            <td><%= Contract.salary_cap(@year, @franchise_id) %></td>
-            <% 4.times { |idx| %>
-              <td><!-- No Value --></td>
-            <% } %>
-          </tr>
-          <tr>
-            <td>Available Salary Cap</td>
-            <td><%= Contract.available_salary_cap(@year, @franchise_id) %></td>
-            <% 4.times { |idx| %>
-              <td><!-- No Value --></td>
-            <% } %>
-          </tr>
         </table>
       </div>
     </div>

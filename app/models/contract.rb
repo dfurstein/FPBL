@@ -75,15 +75,15 @@ class Contract < ActiveRecord::Base
   def self.extension_cost(current_salary, period = nil)
     period ||= signing_period
 
-    if current_salary > 5
+    if current_salary >= 5
       period * 1.2
-    elsif current_salary > 4
+    elsif current_salary >= 4
       period * 1.0
-    elsif current_salary > 3
+    elsif current_salary >= 3
       period * 0.8
-    elsif current_salary > 2
+    elsif current_salary >= 2
       period * 0.6
-    elsif current_salary > 1
+    elsif current_salary >= 1
       period * 0.5
     else
       period * 0.4
