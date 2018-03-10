@@ -25,7 +25,11 @@ class Contract < ActiveRecord::Base
   end
 
   def self.salary_cap(year, franchise_id)
-    Team.find(year, franchise_id).salary_cap
+    begin 
+      Team.find(year, franchise_id).salary_cap 
+    rescue 
+      BigDecimal.new("63.0")
+    end
   end
 
   def self.available_salary_cap(year, franchise_id)

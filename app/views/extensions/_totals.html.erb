@@ -1,0 +1,24 @@
+<tr>
+  <th class="col-sm-offset-7"><!-- No Value --></th>
+  <% 5.times { |idx| %>
+    <th class="col-sm-1"><%= @year + idx %></th>
+  <% } %>
+</tr>
+<tr>
+  <td>Payroll</td>
+  <% 5.times { |idx| %>
+    <td><%= Contract.total_salary(@year + idx, @franchise_id) %></td>
+  <% } %>
+</tr>
+<tr>
+  <td>Salary Cap</td>
+  <% 5.times { |idx| %>
+    <td><%= Contract.salary_cap(@year + idx, @franchise_id) %></td>
+  <% } %>
+</tr>
+<tr>
+  <td>Available Salary Cap</td>
+  <% 5.times { |idx| %>
+    <td><%= Contract.available_salary_cap(@year + idx, @franchise_id) %></td>
+  <% } %>
+</tr>

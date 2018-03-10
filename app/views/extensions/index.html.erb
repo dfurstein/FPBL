@@ -28,19 +28,8 @@
       <div class="panel-heading">Totals</div>
       <div class="panel panel-info">
         <div class="panel-heading">Salary</div>
-        <table class='table table-condensed'>
-          <tr>
-            <th class="col-sm-offset-7"><!-- No Value --></th>
-            <% 5.times { |idx| %>
-              <th class="col-sm-1"><%= @year + idx %></th>
-            <% } %>
-          </tr>
-          <tr>
-            <td>Payroll</td>
-            <% 5.times { |idx| %>
-              <td><%= Contract.total_salary(@year + idx, @franchise_id) %></td>
-            <% } %>
-          </tr>
+        <table class='table table-condensed' id='totals'>
+          <%= render 'totals', locals: {year: @year, franchise_id: @franchise_id} %>
         </table>
       </div>
     </div>
