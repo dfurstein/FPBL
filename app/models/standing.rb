@@ -10,14 +10,14 @@ class Standing < ActiveRecord::Base
   def self.update(boxscore)
     unless boxscore.W == 0 && boxscore.L == 0
 
-      divisions = %w(Tinker Evers Chance Reulbach Brown Pfeister)
+      divisions = %w(Reese Robinson Grove Cochrane)
       leagues = %w(American National)
 
       standing = find_or_create_by_year_and_franchise_id(
         boxscore.year, boxscore.franchise_id)
 
       standing.league = leagues[(boxscore.franchise_id - 1) / 12]
-      standing.division = divisions[(boxscore.franchise_id - 1) / 4]
+      standing.division = divisions[(boxscore.franchise_id - 1) / 6]
       standing.wins += boxscore.W
       standing.losses += boxscore.L
 
