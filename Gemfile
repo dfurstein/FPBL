@@ -20,6 +20,8 @@ gem 'cancan'
 
 gem 'numbers_and_words', '0.10.0'
 
+gem 'fibonacci', '~> 0.1.8'
+
 group :development, :test do
   gem 'better_errors', '1.1.0'
   gem 'binding_of_caller'

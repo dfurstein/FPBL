@@ -74,30 +74,6 @@ class Standing < ActiveRecord::Base
     end
   end
 
-  def games_back_wildcard
-    divisions = []
-
-    records = records_by_league(year, league).map do |record|
-      if record.games_back_division == 0 && !divisions.include?(record.division)
-        divisions.push(record.division)
-        nil
-      else
-        record
-      end
-    end
-
-    wins_back = records.empty? ? 0 : records.compact.max_by { |standing| standing.wins }.wins - wins
-    losses_back = records.empty? ? 0 : losses - records.compact.max_by { |standing| standing.wins }.games_back_division
-
-    games_back = (wins_back + losses_back).to_f / 2.0
-
-    if games_back.to_i == games_back.to_f
-      games_back.to_i
-    else
-      games_back.to_f
-    end
-  end
-
   def record
     "#{wins} - #{losses}"
   end
@@ -119,5 +95,25 @@ class Standing < ActiveRecord::Base
     playoff_round = 0 if playoff_round.nil?
 
     (wins / 12.5) + (playoff_round * 8.0)
+  end
+
+  def self.waiver_wire_order
+    year = last.wins != 0 ? last.year : last.year - 1
+    teams = where(year: year).order(:wins, :streak).reverse
+    order = []
+
+    fib = Fibonacci.new
+    chances = fib.terms(26).slice(2, 24).map { |x| x - 1 }.cumulative_sum
+
+    random = Random.new(Date.today.cweek)
+    24.times do
+      selection = chances.max != 0 ? random.rand(chances.max) : 0
+      index = chances.select { |chance| chance < selection }.count
+      order.push teams[index]
+      teams.delete_at(index)
+      chances.delete_at(index)
+    end
+
+    order.map { |priority| priority.team }
   end
 end

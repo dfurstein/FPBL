@@ -51,54 +51,6 @@ class Transaction < ActiveRecord::Base
       .first || maximum(:transaction_group_id) + 1
   end
 
-  # Does not work correctly - DO NOT USE
-  def self.release_player(franchise_id, player_id)
-    group_id = last.transaction_group_id + 1
-
-    contracts = Contract.where(franchise_id: franchise_id,
-                               player_id: player_id,
-                               released: FALSE)
-                        .where('year >= ?', Team.last.year)
-
-    contracts.each do |contract|
-      contract.salary = (contract.salary / 2.0).round(1)
-      contract.released = TRUE
-      contract.save
-    end
-
-    transaction = Transaction.new
-    transaction.transaction_group_id = group_id
-    transaction.transaction_type = 'RELEASE'
-    transaction.year = Team.last.year
-    transaction.franchise_id_from = franchise_id
-    transaction.player_id = player_id
-    transaction.processed_at = DateTime.now
-    transaction.save
-  end
-
-  def self.draft_player(player_id)
-    draft = Draft.where(year: Team.year.last).where('player_id is null').first
-    draft.player_id = player_id
-    draft.save
-
-    contract = Contract.new
-    contract.player_id = player_id
-    contract.franchise_id = draft.franchise_id_current
-    contract.year = draft.year
-    contract.salary = 0.5 - ((draft.round - 1) * 0.1)
-    contract.released = false
-    contract.save
-
-    transaction = Transaction.new
-    transaction.transaction_group_id = Transaction.last.transaction_group_id + 1
-    transaction.transaction_type = 'DRAFT'
-    transaction.year = draft.year
-    transaction.franchise_id_from = draft.franchise_id_current
-    transaction.player_id = player_id
-    transaction.processed_at = DateTime.now
-    transaction.save
-  end
-
   def to_team
     Team.find(year, franchise_id_to)
   end
