@@ -60,8 +60,7 @@ class Contract < ActiveRecord::Base
   end
 
   def self.signing_period 
-    Time.zone = 'Pacific Time (US & Canada)'
-    now = Time.current.to_date
+    now = Time.current.in_time_zone('Pacific Time (US & Canada)').to_date
 
     if ((Date.today.beginning_of_year)..(Draft.draft_day - 2.weeks)).cover?(now)
       0

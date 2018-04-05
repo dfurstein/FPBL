@@ -1,6 +1,6 @@
 <div class="panel panel-info">
   <% team = nil %>
-  <div class="panel-heading"><%= @transaction.processed_at.to_date.to_formatted_s(:long_ordinal) %> &mdash; Contract Extension</div>
+  <div class="panel-heading"><%= @transaction.processed_at.in_time_zone('Pacific Time (US & Canada)').to_date.to_formatted_s(:long_ordinal) %> &mdash; Contract Extension</div>
   <% Transaction.where(transaction_group_id: @id).each do |extension| %>
     <% if team.nil? %>
       <% team = extension.to_team %>
