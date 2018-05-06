@@ -24,5 +24,7 @@ class PlayerController < ApplicationController
     @championship_series_stats = Statistic.where(player_id: id, playoff_round: 3).order(:year)
     @championship_series_hitting_totals = Statistic.player_career_hitting_totals(id, 3)
     @championship_series_pitching_totals = Statistic.player_career_pitching_totals(id, 3)
+
+    @transactions = @player.transactions
   end
 end

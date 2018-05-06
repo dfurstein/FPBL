@@ -51,6 +51,40 @@ class Transaction < ActiveRecord::Base
       .first || maximum(:transaction_group_id) + 1
   end
 
+  def other_involved_transactions
+    Transaction.where(transaction_group_id: transaction_group_id).select do |transaction| 
+      transaction[:player_id] != player_id
+    end
+  end
+
+  def other_players_coming
+    other_involved_transactions
+      .select { |transaction| transaction[:franchise_id_from] == franchise_id_from && transaction[:player_id] != nil }
+      .collect { |transaction| Player.find(transaction.year, transaction.player_id).name }
+  end
+
+  def other_picks_coming
+    other_involved_transactions
+      .select { |transaction| transaction[:franchise_id_from] == franchise_id_from }
+      .collect do |transaction| 
+        Draft.draft_selection_by_original_owner(transaction.draft_year, transaction.draft_round, transaction.draft_franchise_id_original)
+      end
+  end
+
+  def other_players_going
+    other_involved_transactions
+      .select { |transaction| transaction[:franchise_id_from] == franchise_id_to && transaction[:player_id] != nil }
+      .collect { |transaction| Player.find(transaction.year, transaction.player_id).name }
+  end
+
+  def other_picks_going
+    other_involved_transactions
+      .select { |transaction| transaction[:franchise_id_from] == franchise_id_to }
+      .collect do |transaction| 
+        Draft.draft_selection_by_original_owner(transaction.draft_year, transaction.draft_round, transaction.draft_franchise_id_original)
+      end
+  end
+
   def to_team
     Team.find(year, franchise_id_to)
   end
