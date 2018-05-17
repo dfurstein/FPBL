@@ -9,7 +9,7 @@
           <% date = transaction.processed_at.to_date %>
             <% if year != nil && date > Date.new(year, 11, 1) %>
               <div class="panel-heading"><%= Date.new(year, 11, 1).strftime('%B %d, %Y') %></div>
-              <p>Granted free agency.</p>
+              <p class="indent">Granted free agency.</p>
             <% end %>
 
             <% if date != previous_date %><div class="panel-heading"><%= date.strftime('%B %d, %Y') %></div><% end %>
@@ -18,15 +18,19 @@
   
             <% if transaction.transaction_type.eql? 'DRAFT' %>
               <% draft = Draft.find(transaction.player_id) %>
-              <p class="text-left">Drafted by the <%= transaction.to_team.name %> in the <%= draft.round.ordinalize %> round (<%= ((draft.round - 1) * 24 + draft.selection).ordinalize %> pick) in the <%= draft.year %> rookie draft.</p>
+              <p class="indent">Drafted by the <%= transaction.to_team.name %> in the <%= draft.round.ordinalize %> round (<%= ((draft.round - 1) * 24 + draft.selection).ordinalize %> pick) in the <%= draft.year %> rookie draft.</p>
               <% year = draft.year %>
 
             <% elsif transaction.transaction_type.eql? 'SIGN' %>
-              <p class="text-left">Signed as a Free Agent with the <%= transaction.to_team.name %>.</p>
+              <p class="indent">Signed as a Free Agent with the <%= transaction.to_team.name %>.</p>
               <% year = transaction.year %>
 
             <% elsif transaction.transaction_type.eql? 'EXTEND' %>
-              <p class="text-left">Signed a <%= (transaction.extension_year - year).to_words %> year contract extension with the <%= transaction.to_team.name %> through the <%= transaction.extension_year %> season.</p>
+              <% if year == nil %>
+                <% year = transaction.year %>
+              <% end %>
+
+              <p class="indent">Signed a <%= (transaction.extension_year - year).to_words %> year contract extension with the <%= transaction.to_team.name %> through the <%= transaction.extension_year %> season.</p>
               <% year = transaction.extension_year %>
 
             <% elsif transaction.transaction_type.eql? 'TRADE' %>
@@ -35,10 +39,10 @@
               <% going = transaction.other_players_going %>
               <% going.push('draft picks') if transaction.other_picks_going.any? %>
               <% going.push('cash considerations') if going.empty? %>
-              <p class="text-left">Traded by the <%= transaction.from_team.name %> <%= "with #{coming.to_sentence}" if coming.any? %> to the <%= transaction.to_team.name %> <%= "for #{going.to_sentence}" if going.any? %>.</p>
+              <p class="indent">Traded by the <%= transaction.from_team.name %> <%= "with #{coming.to_sentence}" if coming.any? %> to the <%= transaction.to_team.name %> <%= "for #{going.to_sentence}" if going.any? %>.</p>
 
             <% elsif transaction.transaction_type.eql? 'RELEASE' %>
-              <p class="text-left">Released by the <%= transaction.from_team.name %>.</p>
+              <p class="indent">Released by the <%= transaction.from_team.name %>.</p>
               <% year = transaction.year %>
             <% end %>
           </dl>
