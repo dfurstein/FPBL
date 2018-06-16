@@ -22,3 +22,7 @@
 every 1.day, at: '8:00pm' do
   rake 'import:boxscore', output: '~/web/FPBL/log/cron.log'
 end
+
+every :wednesday, at: '3:00am' do
+  runner 'Transaction.release_players'
+end

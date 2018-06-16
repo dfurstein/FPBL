@@ -1,0 +1,24 @@
+<% %w(C 1B 2B 3B SS LF CF RF DH).each do |position| %>
+	<% @position = position %>
+	<% contracts = Contract.under_contract_per_position(@year, @franchise_id, @position, false) %>
+	<% if contracts.size != 0 %>
+	  <div class="panel panel-info">
+	    <div class="panel-heading"><%= Player.position_name(@position).pluralize %></div>
+	    <table class='table table-condensed'>
+	      <tr>
+	        <th class="col-sm-4 col-sm-offset-2">Player</th>
+	        <% 5.times do |idx| %>
+	          <th class="col-sm-1"><%= @year + idx %></th>
+	        <% end %>
+	        <th class="col-sm-1">
+	      </tr>
+	      <% contracts.each do |player| %>
+	        <% @player = player %>
+	        <% unless @player.active? %><tr class='active'><% else %><tr><% end %>
+	          <%= render 'contracts', locals: { year: @year, franchise_id: @franchise_id, player: @player, active_players: @active_players } %>
+	        </tr>
+	      <% end %>
+	    </table>
+	  </div>
+	<% end %>
+<% end %>

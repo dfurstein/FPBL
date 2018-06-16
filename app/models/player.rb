@@ -119,4 +119,8 @@ class Player < ActiveRecord::Base
   def last_contract_before_release
     contracts.where(year: year, released: TRUE).order('updated_at desc').first
   end
+
+  def pending_release?
+    transactions.where(transaction_type: 'RELEASE', processed_at: nil).any?
+  end
 end
