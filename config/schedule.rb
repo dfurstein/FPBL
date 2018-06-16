@@ -24,5 +24,5 @@ every 1.day, at: '8:00pm' do
 end
 
 every :wednesday, at: '3:00am' do
-  runner 'Transaction.release_players'
+  runner 'Transaction.release_players', output: '~/web/FPBL/log/releases.log'
 end
