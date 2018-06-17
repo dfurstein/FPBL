@@ -1,0 +1,19 @@
+<tr>
+  <th class="col-sm-offset-7"><!-- No Value --></th>
+  <% 5.times { |idx| %>
+    <th class="col-sm-1"><%= @year + idx %></th>
+  <% } %>
+</tr>
+<% count = Transaction.future_releases_count(@franchise_id) %>
+<tr>
+  <td>Active Players</td>
+  <% 5.times { |idx| %>
+    <td><%= Contract.total_active_players(@year + idx, @franchise_id) - count[idx] %></td>
+  <% } %>
+</tr>
+<tr>
+  <td>Inactive Players</td>
+  <% 5.times { |idx| %>
+    <td><%= Contract.total_inactive_players(@year + idx, @franchise_id) %></td>
+  <% } %>
+</tr>

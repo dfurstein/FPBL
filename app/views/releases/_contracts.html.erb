@@ -1,0 +1,56 @@
+<td><%= link_to @player.name, player_path(id: @player.player_id) %></td>
+<% contract = @player.current_contract(@year, @franchise_id).select { |contract| contract.released == false} %>
+<% if @player.pending_release? %>
+  <% 5.times do |idx| %>
+    <% if contract[idx].nil? %>
+      <td><!-- No Salary --></td>
+    <% else %>
+      <td class='danger'>
+        <%= contract[idx].salary.div(2, 3).round(1) %>
+      </td>
+    <% end %>
+  <% end %>
+  <td class='text-center'>
+    <% message = "Cancelling release of #{@player.name}." %>
+    <%= button_to '&plus;'.html_safe,
+      delete_release_path(player_id: @player.player_id, franchise_id: @franchise_id, year: @year), 
+      data: { confirm: message, title: 'Are you sure?'}, 
+      remote: true, 
+      method: :delete,
+      class: 'btn btn-primary btn-xs' %>
+    </td>
+<% elsif @active_players <= 30 %>
+  <% 5.times do |idx| %>
+    <% if contract[idx].nil? %>
+      <td><!-- No Salary --></td>
+    <% else %>
+      <td>
+        <%= contract[idx].salary.round(1) %>
+      </td>
+    <% end %>
+  <% end %>
+  <td class='text-center'>
+    <%= button_to '&minus;'.html_safe,
+      nil, 
+      disabled: true,
+      class: 'btn btn-xs invisible' %>
+  </td>
+<% else %>
+  <% 5.times do |idx| %>
+    <% if contract[idx].nil? %>
+      <td><!-- No Salary --></td>
+    <% else %>
+      <td>
+        <%= contract[idx].salary.round(1) %>
+      </td>
+    <% end %>
+  <% end %>
+  <td class='text-center'>
+    <% message = "Releasing #{@player.name}." %>
+    <%= button_to '&minus;'.html_safe,
+      add_release_path(player_id: @player.player_id, franchise_id: @franchise_id, year: @year), 
+      data: { confirm: message, title: 'Are you sure?'}, 
+      remote: true, 
+      class: 'btn btn-danger btn-xs ' %>
+  </td>
+<% end %>

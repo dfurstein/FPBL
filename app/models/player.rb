@@ -7,6 +7,7 @@ class Player < ActiveRecord::Base
 
   has_many :contracts, primary_key: :player_id
   has_many :teams,  foreign_key: [:year, :franchise_id], through: :contracts
+  has_many :transactions, primary_key: :player_id
 
   def self.player_id_by_dmb_name(year, dmb_name)
     where(year: year, dmb_name: dmb_name).pluck(:player_id).first
@@ -117,5 +118,9 @@ class Player < ActiveRecord::Base
 
   def last_contract_before_release
     contracts.where(year: year, released: TRUE).order('updated_at desc').first
+  end
+
+  def pending_release?
+    transactions.where(transaction_type: 'RELEASE', processed_at: nil).any?
   end
 end

@@ -20,6 +20,10 @@ class Draft < ActiveRecord::Base
     where(year: year, round: round, selection: selection).first
   end
 
+  def self.draft_selection_by_original_owner(year, round, franchise_id_original)
+    where(year: year, round: round, franchise_id_original: franchise_id_original).first
+  end
+
   def self.draft_day
     # Find the third saturday of January
     if Date.today.month < 12
@@ -31,5 +35,9 @@ class Draft < ActiveRecord::Base
     until draft.saturday? do draft = draft.next end
 
     draft
+  end
+
+  def self.find(player_id)
+    where(player_id: player_id).first
   end
 end

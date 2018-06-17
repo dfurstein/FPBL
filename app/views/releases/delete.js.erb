@@ -1,0 +1,8 @@
+$('#pitchers')
+	.html("<%= escape_javascript(render 'pitchers', locals: {year: @year, franchise_id: @franchise_id, active_players: @active_players} )%>");
+$('#hitters')
+	.html("<%= escape_javascript(render 'hitters', locals: {year: @year, franchise_id: @franchise_id, active_players: @active_players} )%>");
+$('#salaries')
+	.html("<%= escape_javascript(render 'salaries', locals: {year: @year, franchise_id: @franchise_id} )%>");
+$('#totals')
+	.html("<%= escape_javascript(render 'totals', locals: {year: @year, franchise_id: @franchise_id} )%>");

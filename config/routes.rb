@@ -21,8 +21,13 @@ FPBL::Application.routes.draw do
   match '/leaders/career/', to: 'leaders#career', as: 'career_leaders'
   match '/leaders/season/', to: 'leaders#season', as: 'season_leaders'
   match '/extensions', to: 'extensions#index', as: 'extensions'
+  match '/releases', to: 'releases#index', as: 'releases'
 
   post 'extensions/add', to: 'extensions#add', as: 'add_extensions'
+  
+  post 'releases/add', to: 'releases#add', as: 'add_release'
+  delete 'releases/delete', to: 'releases#delete', as: 'delete_release'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
