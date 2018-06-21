@@ -32,7 +32,7 @@ class Transaction < ActiveRecord::Base
     contract.released = FALSE
     contract.save
 
-    group_id = extend_group_id(franchise_id, 'EXTEND')
+    group_id = extend_group_id(franchise_id)
     transaction = find_or_create_by_player_id_and_transaction_group_id(player_id, group_id) do |transaction|
       transaction.transaction_type = 'EXTEND'
       transaction.year = Team.last.year
@@ -61,15 +61,17 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.release_players
+    active = true
     where(transaction_type: 'RELEASE', processed_at: nil).each do |transaction|
       Contract.where(franchise_id: transaction.franchise_id_from, player_id: transaction.player_id, released: false)
         .where('year >= ?', transaction.year).each do |contract|
           active = contract.player.active if contract.year == transaction.year
-          unless active
-            contract.destroy
-          else
+          if active
+            contract.salary = contract.salary.div(2, 3).round(1)
             contract.released = true
             contract.save
+          else
+            contract.destroy
           end
       end
 
