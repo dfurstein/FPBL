@@ -64,9 +64,9 @@ class PagesController < ApplicationController
 
     @franchise_id ||= nil
     @transaction_type ||= nil
-    @from_date ||= Transaction.last.processed_at.prev_month.beginning_of_month
+    @from_date ||= Transaction.maximum(:processed_at).prev_month.beginning_of_month
       .to_date.to_formatted_s(:long)
-    @to_date ||= Transaction.last.processed_at.to_date.to_formatted_s(:long)
+    @to_date ||= Transaction.maximum(:processed_at).to_date.to_formatted_s(:long)
   end
 
   def rules
