@@ -1,27 +1,32 @@
-<div class="page-header">
-  <h1><%= @player.name %><small>&nbsp;&nbsp;&nbsp;<%= Player.position_name(@player.position) %></small></h1>
-</div>
+<% if @player.nil? %>
+   <div class="col-md-12">
+    <div class="alert alert-danger" role="alert">Player does not exist.</div>
+  </div>
+<% else %>
+  <div class="page-header">
+    <h1><%= @player.name %><small>&nbsp;&nbsp;&nbsp;<%= Player.position_name(@player.position) %></small></h1>
+  </div>
 
-<div class="tabbable" id="team-tabs">
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#statistics" data-toggle="tab">Statistics</a></li>
-    <li><a href="#transactions" data-toggle="tab">Transactions</a></li>
-  </ul>
-  <div class="tab-content">
-    <div id="statistics" class="tab-pane active">
-      <div class="row">
-        <div class="col-md-12">
-          <%= render 'statistics' %>
+  <div class="tabbable" id="team-tabs">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#statistics" data-toggle="tab">Statistics</a></li>
+      <li><a href="#transactions" data-toggle="tab">Transactions</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="statistics" class="tab-pane active">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render 'statistics' %>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="transactions" class="tab-pane">
-      <div class="row">
-        <div class="col-md-12">
-          <%= render 'transactions' %>
+      <div id="transactions" class="tab-pane">
+        <div class="row">
+          <div class="col-md-12">
+            <%= render 'transactions' %>
+          </div>
         </div>
       </div>
-    </div>
-  </div><!-- /.tab-content -->
-</div><!-- /.tabbable -->
-
+    </div><!-- /.tab-content -->
+  </div><!-- /.tabbable -->
+<% end %>
