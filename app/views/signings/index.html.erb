@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1><%= @team.name %><small>&nbsp;&nbsp;&nbsp;Free Agent Signings</small></h1>
+</div>
+
+<div class="col-md-offset-4 col-md-4">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Totals</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Salary</div>
+      <table class='table table-condensed' id='totals'>
+        <%= render 'totals' %>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Players</div>
+    <div class="panel panel-info">
+      <div class="panel-heading">Free Agents</div>
+      <table class='table table-bordered table-condensed tablesorter' id='free-agents'>
+        <thead>
+          <tr>
+            <th class="col-sm-3">Player</th>
+            <th class="col-sm-3">Primary Position</th>
+            <th class="col-sm-3">Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @free_agents.each { |player| %>
+        <tr>
+          <td sort-name='<%= "#{player.last_name.upcase}, #{player.first_name.upcase}" %>'><%= player.name %></td>
+          <td><%= Player.position_name(player.position) %></td>
+          <td><%= player.free_agent_salary %></td>
+        </tr>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

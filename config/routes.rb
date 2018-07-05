@@ -22,6 +22,7 @@ FPBL::Application.routes.draw do
   match '/leaders/season/', to: 'leaders#season', as: 'season_leaders'
   match '/extensions', to: 'extensions#index', as: 'extensions'
   match '/releases', to: 'releases#index', as: 'releases'
+  match '/signings', to: 'signings#index', as: 'signings'
 
   post 'extensions/add', to: 'extensions#add', as: 'add_extensions'
   

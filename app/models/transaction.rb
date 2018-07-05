@@ -67,7 +67,7 @@ class Transaction < ActiveRecord::Base
         .where('year >= ?', transaction.year).each do |contract|
           active = contract.player.active if contract.year == transaction.year
           if active
-            contract.salary = contract.salary.div(2, 3).round(1)
+            contract.salary = contract.salary.div(2, 3)
             contract.released = true
             contract.save
           else

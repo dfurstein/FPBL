@@ -1,0 +1,16 @@
+<tr>
+  <td>Active Players</td>
+  <td><%= @active_players %></td>
+</tr>
+<tr>
+  <td>Payroll</td>
+  <td><%= Contract.total_salary(@year, @franchise_id) %></td>
+</tr>
+<tr>
+  <td>Salary Cap</td>
+  <td><%= Contract.salary_cap(@year, @franchise_id) %></td>
+</tr>
+<tr>
+  <td>Available Salary Cap</td>
+  <td><%= @available_salary %></td>
+</tr>
