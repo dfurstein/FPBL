@@ -25,6 +25,6 @@ class PlayerController < ApplicationController
     @championship_series_hitting_totals = Statistic.player_career_hitting_totals(id, 3)
     @championship_series_pitching_totals = Statistic.player_career_pitching_totals(id, 3)
 
-    @transactions = @player.transactions
+    @transactions = @player.transactions unless @player.nil?
   end
 end
