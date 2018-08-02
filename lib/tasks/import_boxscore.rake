@@ -126,7 +126,7 @@ namespace :import do
   end
 
   def state_2(boxscores, line)
-    regexp = /([a-zA-Z][a-zA-Z ,'\.]*\s{3,})([\w\d]{1,2})\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\.\d]+)/
+    regexp = /([a-zA-Z][a-zA-Z ,'-\.]*\s{3,})([\w\d]{1,2})\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\.\d]+)/
 
     teams = line.scan(regexp).length
 
@@ -166,7 +166,7 @@ namespace :import do
   end
 
   def state_3(boxscores, line)
-    regexp = /([a-zA-Z ,'\.]+)\s{3,}([a-zA-Z]*)(\s[\d]+,*\s)*([a-zA-Z]*)(\s[\d]+-[\d]+)*\s+([\d\.]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d\.]+)/
+    regexp = /([a-zA-Z ,'-\.]+)\s{3,}([a-zA-Z]*)(\s[\d]+,*\s)*([a-zA-Z]*)(\s[\d]+-[\d]+)*\s+([\d\.]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d]+)\s+([\d\.]+)/
 
     line.scan(regexp).each do |stats|
       return if stats.nil?
