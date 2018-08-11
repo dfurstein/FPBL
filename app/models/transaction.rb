@@ -9,9 +9,10 @@ class Transaction < ActiveRecord::Base
 
   def self.all_ids(franchise_id, transaction_type, from_date, to_date)
     where(processed_at: from_date..to_date)
-    .where(from_franchise_id(franchise_id))
-    .where(from_transaction_type(transaction_type))
-    .pluck(:transaction_group_id).uniq
+      .where(from_franchise_id(franchise_id))
+      .where(from_transaction_type(transaction_type))
+      .order(:processed_at)
+      .pluck(:transaction_group_id).uniq
   end
 
   def self.from_franchise_id(franchise_id)
