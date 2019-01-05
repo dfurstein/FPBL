@@ -69,7 +69,7 @@ $(document).ready(
     $(".date-picker").datepicker({
       format: "MM d, yyyy",
       startDate: "<%= Transaction.first.processed_at.to_date.strftime('%m/%d/%Y') %>",
-      endDate: "12/31/2018",
+      endDate: "12/31/2019",
       autoclose: true,
       todayHighlight: true
     });
